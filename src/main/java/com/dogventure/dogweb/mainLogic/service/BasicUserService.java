@@ -1,8 +1,8 @@
 package com.dogventure.dogweb.mainLogic.service;
 
 import com.dogventure.dogweb.constant.UserType;
-import com.dogventure.dogweb.dto.request.SignupRequestDto;
-import com.dogventure.dogweb.dto.response.TokenResponseDto;
+import com.dogventure.dogweb.dto.mainLogic.request.SignupRequestDto;
+import com.dogventure.dogweb.dto.mainLogic.response.TokenResponseDto;
 import com.dogventure.dogweb.mainLogic.entity.User;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import com.dogventure.dogweb.security.auth.JwtAuthToken;

@@ -1,6 +1,6 @@
 package com.dogventure.dogweb.security.service;
 
-import com.dogventure.dogweb.dto.response.oauth2.*;
+import com.dogventure.dogweb.dto.oauth2.response.*;
 import com.dogventure.dogweb.constant.UserType;
 import com.dogventure.dogweb.mainLogic.entity.User;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;

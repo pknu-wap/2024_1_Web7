@@ -1,4 +1,4 @@
-package com.dogventure.dogweb.dto.response.oauth2;
+package com.dogventure.dogweb.dto.oauth2.response;
 
 import java.util.Map;
 

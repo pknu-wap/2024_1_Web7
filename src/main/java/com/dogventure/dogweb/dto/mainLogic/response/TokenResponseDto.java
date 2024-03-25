@@ -1,4 +1,4 @@
-package com.dogventure.dogweb.dto.response;
+package com.dogventure.dogweb.dto.mainLogic.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

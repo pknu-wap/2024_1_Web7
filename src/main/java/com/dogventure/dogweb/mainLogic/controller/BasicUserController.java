@@ -1,7 +1,7 @@
 package com.dogventure.dogweb.mainLogic.controller;
 
-import com.dogventure.dogweb.dto.request.SignupRequestDto;
-import com.dogventure.dogweb.dto.response.TokenResponseDto;
+import com.dogventure.dogweb.dto.mainLogic.request.SignupRequestDto;
+import com.dogventure.dogweb.dto.mainLogic.response.TokenResponseDto;
 import com.dogventure.dogweb.mainLogic.service.BasicUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

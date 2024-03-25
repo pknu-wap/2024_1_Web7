@@ -1,5 +1,6 @@
-package com.dogventure.dogweb.dto.response.oauth2;
+package com.dogventure.dogweb.dto.oauth2.response;
 
+import com.dogventure.dogweb.dto.oauth2.response.Oauth2UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;

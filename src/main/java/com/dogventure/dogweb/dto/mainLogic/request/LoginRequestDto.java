@@ -1,4 +1,4 @@
-package com.dogventure.dogweb.dto.request;
+package com.dogventure.dogweb.dto.mainLogic.request;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;

@@ -1,6 +1,6 @@
 package com.dogventure.dogweb.security.handler;
 
-import com.dogventure.dogweb.dto.response.oauth2.Oauth2UserResponseDto;
+import com.dogventure.dogweb.dto.oauth2.response.Oauth2UserResponseDto;
 import com.dogventure.dogweb.security.utils.JwtTokenProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
