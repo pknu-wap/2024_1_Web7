@@ -1,22 +1,23 @@
 package com.dogventure.dogweb.mainLogic.controller;
 
-import com.dogventure.dogweb.mainLogic.service.GptService;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@Slf4j
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/gpt/")
+@RequestMapping("/api/gpt")
 public class GptController {
 
     private final ChatgptService service;
 
-    @PostMapping("/send")
-    public String sendMessage(@RequestBody String message) {
-        return service.sendMessage(message);
+    @PostMapping("/question")
+    public String sendMessage(@RequestBody String prompt) {
+        return service.sendMessage(prompt).split("\n")[2];
     }
 }
