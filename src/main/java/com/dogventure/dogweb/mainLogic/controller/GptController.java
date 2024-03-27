@@ -1,5 +1,6 @@
 package com.dogventure.dogweb.mainLogic.controller;
 
+import com.dogventure.dogweb.mainLogic.service.GptService;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/gpt")
 public class GptController {
 
-    private final ChatgptService service;
+    private final GptService service;
 
     @PostMapping("/question")
     public String sendMessage(@RequestBody String prompt) {
-        return service.sendMessage(prompt).split("\n")[2];
+        return service.sendMessage(prompt);
     }
 }
