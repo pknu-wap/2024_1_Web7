@@ -8,10 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
-/**
- * ChatRequest is used to construct request body.
- * For descriptions of all fields, please refer to <a href="https://platform.openai.com/docs/api-reference/completions/create">Create completion</a>
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
