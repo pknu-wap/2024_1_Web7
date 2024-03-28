@@ -34,7 +34,7 @@ public class ChatRequest {
 
     private Integer n;
 
-    private Boolean stream;
+    private Boolean stream = true;
 
     private Integer logprobs;
 

@@ -15,5 +15,4 @@ public class ChatResponse {
     private String model;
     private List<Choice> choices;
     private Usage usage;
-
 }

@@ -21,12 +21,6 @@ public class ChatgptProperties {
 
     private Double topP = 1.0;
 
-    private MultiChatProperties multi;
-
-    public ChatgptProperties() {
-        this.multi = new MultiChatProperties();
-    }
-
     public String getApiKey() {
         return apiKey;
     }
@@ -73,14 +67,6 @@ public class ChatgptProperties {
 
     public void setTopP(Double topP) {
         this.topP = topP;
-    }
-
-    public MultiChatProperties getMulti() {
-        return multi;
-    }
-
-    public void setMulti(MultiChatProperties multi) {
-        this.multi = multi;
     }
 }
 

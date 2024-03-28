@@ -1,13 +1,20 @@
 package com.dogventure.dogweb.mainLogic.service;
 
-import com.dogventure.dogweb.dto.gpt.request.ChatRequest;
 import com.dogventure.dogweb.dto.gpt.ChatgptProperties;
-import com.dogventure.dogweb.dto.gpt.response.ChatResponse;
+import com.dogventure.dogweb.dto.gpt.request.ChatRequest;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Slf4j
 @Service
@@ -16,35 +23,51 @@ public class GptService {
 
     private final ChatgptProperties chatgptProperties;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final WebClient webClient;
 
-    public String sendMessage(String message) {
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-        ChatRequest chatRequest = new ChatRequest(chatgptProperties.getModel(), message, chatgptProperties.getMaxTokens(), chatgptProperties.getTemperature(), chatgptProperties.getTopP());
-        ChatResponse chatResponse = this.getResponse(this.buildHttpEntity(chatRequest), ChatResponse.class, chatgptProperties.getUrl());
-        try {
-            return chatResponse.getChoices().get(0).getText();
-        } catch (Exception e) {
-            log.error("parse chatgpt message error", e);
-            throw e;
-        }
-    }
+    public SseEmitter sendMessage(String message) {
+        SseEmitter emitter = new SseEmitter();
 
-    protected <T> HttpEntity<?> buildHttpEntity(T request) {
+        ChatRequest chatRequest = new ChatRequest(
+                chatgptProperties.getModel(),
+                message,
+                chatgptProperties.getMaxTokens(),
+                chatgptProperties.getTemperature(),
+                chatgptProperties.getTopP()
+        );
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/json; charset=UTF-8"));
-        headers.add("Authorization", "Bearer "+chatgptProperties.getApiKey());
-        return new HttpEntity<>(request, headers);
-    }
+        webClient.post()
+                .uri(chatgptProperties.getUrl())
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + chatgptProperties.getApiKey())
+                .body(BodyInserters.fromValue(chatRequest))
+                .retrieve()
+                .bodyToFlux(String.class)
+                .subscribe(data -> {
+                    try {
+                        if ("[DONE]".equals(data.trim())) {
+                            emitter.complete();
+                            return;
+                        }
 
-    private  <T> T getResponse(HttpEntity<?> httpEntity, Class<T> responseType, String url) {
+                        JsonNode rootNode = objectMapper.readTree(data);
+                        JsonNode choicesNode = rootNode.path("choices");
+                        if (choicesNode.isArray()) {
+                            for (JsonNode choice : choicesNode) {
+                                String text = choice.path("text").asText();
+                                for (char c : text.toCharArray()) {
+                                    emitter.send(SseEmitter.event().data(String.valueOf(c)));
+                                    Thread.sleep(50);
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        emitter.completeWithError(e);
+                    }
+                }, emitter::completeWithError);
 
-        ResponseEntity<T> responseEntity = restTemplate.postForEntity(url, httpEntity, responseType);
-        if (responseEntity.getStatusCodeValue() != HttpStatus.OK.value()) {
-            throw new RuntimeException();
-        }
-
-        return responseEntity.getBody();
+        return emitter;
     }
 }
