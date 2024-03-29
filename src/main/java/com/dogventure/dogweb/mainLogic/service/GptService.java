@@ -18,9 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 public class GptService {
 
     private final ChatgptProperties chatgptProperties;
-
-    private final WebClient webClient;
-
+    private final WebClient webClient = WebClient.builder().build();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public SseEmitter sendMessage(String message) {
