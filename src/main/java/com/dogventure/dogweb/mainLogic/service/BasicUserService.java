@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+// 토큰에 저장된 유저 정보 활용
 @Service
 @RequiredArgsConstructor
 @Slf4j

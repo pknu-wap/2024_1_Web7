@@ -25,6 +25,7 @@ public class User {
 
     private UserType authority;
 
+    // 일반 로그인
     public User(String username, String userId, String password, UserType authority) {
         this.username = username;
         this.email = userId;
@@ -32,7 +33,7 @@ public class User {
         this.authority = authority;
     }
 
-    // Oauth2 용도
+    // Oauth2 용도(소셜 로그인)
     public User(String username, String oauth2Key, UserType authority, String email) {
         this.username = username;
         this.oauth2Key = oauth2Key;

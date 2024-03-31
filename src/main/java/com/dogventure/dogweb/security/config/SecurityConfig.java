@@ -28,7 +28,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Collections;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity                  // Spring Security Filter Chain 사용 명시
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -44,6 +44,7 @@ public class SecurityConfig {
     private final Oauth2UserServiceImpl oauth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
 
+    // authenticationManager Bean 등록
     @Bean
     public AuthenticationManager authManagerProvider(HttpSecurity http) throws Exception {
 
@@ -93,7 +94,7 @@ public class SecurityConfig {
                                 .userService(oauth2UserService))
                         .successHandler(customSuccessHandler)
                 )
-
+                // 요청에 대한 사용권한 체크
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/basic/signup", "/api/gpt/question").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")

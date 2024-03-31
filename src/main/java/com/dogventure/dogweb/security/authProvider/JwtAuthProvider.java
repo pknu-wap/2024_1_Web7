@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthProvider implements AuthenticationProvider {
 
+    // 설정파일에 설정한 내용을 주입시켜주는 어노테이션 @Value
     @Value("${jwt.secret}")
     private String secretKey;
 

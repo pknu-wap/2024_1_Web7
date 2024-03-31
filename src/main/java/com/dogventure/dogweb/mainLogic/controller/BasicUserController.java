@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/basic")
 public class BasicUserController {
 
+    // BasicUserService 클래스에서 service 객체를 만든다.
     private final BasicUserService service;
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponseDto> login() {
 
         TokenResponseDto tokenDto = service.login();
+        // 로그인 토큰을 http로 넘겨줌, ok 상태를 반환
         return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }
 
@@ -30,6 +32,7 @@ public class BasicUserController {
     public ResponseEntity signup(@RequestBody @Valid SignupRequestDto request) {
 
         service.signup(request);
+        // created 상태를 반환
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

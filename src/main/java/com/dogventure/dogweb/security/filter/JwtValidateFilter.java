@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+// 필터부분
 @RequiredArgsConstructor
 public class JwtValidateFilter extends OncePerRequestFilter {
 
