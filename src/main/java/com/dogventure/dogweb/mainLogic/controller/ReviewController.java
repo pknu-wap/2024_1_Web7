@@ -30,7 +30,7 @@ public class ReviewController {
             reviewService.createReview(review);
         }
         ReviewCreateResponseDto reviewCreateResponseDto = new ReviewCreateResponseDto(review, "리뷰 등록 성공");
-        log.info("Controller user : {}", authentication.getName());
+
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
