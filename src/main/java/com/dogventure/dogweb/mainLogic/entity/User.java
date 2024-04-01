@@ -25,6 +25,8 @@ public class User {
 
     private UserType authority;
 
+    private String image;
+
     public User(String username, String userId, String password, UserType authority) {
         this.username = username;
         this.email = userId;
