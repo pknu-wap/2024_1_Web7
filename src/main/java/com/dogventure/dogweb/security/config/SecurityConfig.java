@@ -95,7 +95,7 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/basic/signup", "/api/gpt/question").permitAll()
+                        .requestMatchers("/api/basic/signup").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/basic/login","/api/user/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())

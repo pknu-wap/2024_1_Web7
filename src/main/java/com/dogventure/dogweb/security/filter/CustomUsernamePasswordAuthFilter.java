@@ -1,6 +1,6 @@
 package com.dogventure.dogweb.security.filter;
 
-import com.dogventure.dogweb.dto.mainLogic.request.LoginRequestDto;
+import com.dogventure.dogweb.dto.mainLogic.login.request.LoginRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

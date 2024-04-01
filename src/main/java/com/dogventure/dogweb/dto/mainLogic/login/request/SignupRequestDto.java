@@ -1,14 +1,21 @@
-package com.dogventure.dogweb.dto.mainLogic.request;
+package com.dogventure.dogweb.dto.mainLogic.login.request;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LoginRequestDto {
+public class SignupRequestDto {
+
+//    @NotEmpty
+    @Column(length = 10)
+    private String username;
 
     @NotEmpty
     @Email
