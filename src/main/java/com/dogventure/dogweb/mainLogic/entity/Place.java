@@ -40,4 +40,14 @@ public class Place {
     @OneToMany(mappedBy = "place")
     private List<Review> reviews = new ArrayList<>();
 
+//    public Place(String name, Double x, Double y, Image image, String detailContent, DogSize dogSize, PlaceType placeType, Double rate) {
+//        this.name = name;
+//        this.x = x;
+//        this.y = y;
+//        this.image = image;
+//        this.detailContent = detailContent;
+//        this.dogSize = dogSize;
+//        this.placeType = placeType;
+//        this.rate = rate;
+//    }
 }
