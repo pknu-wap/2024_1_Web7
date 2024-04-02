@@ -97,7 +97,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/basic/signup").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/basic/login","/api/user/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/basic/login","/api/map/**", "/api/gpt/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())
 
                 .addFilterBefore(new CustomUsernamePasswordAuthFilter(objectMapper, authManager), UsernamePasswordAuthenticationFilter.class)

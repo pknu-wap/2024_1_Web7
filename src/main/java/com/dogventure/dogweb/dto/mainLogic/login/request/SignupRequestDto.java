@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignupRequestDto {
 
-//    @NotEmpty
+    @NotEmpty
     @Column(length = 10)
     private String username;
 
