@@ -30,7 +30,7 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -48,7 +48,7 @@ public class NaverMapService {
             reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
         }
 
-        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getDogSize(), place.getRate(), reviewDtos);
+        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
     }
 
     public List<SimplePlaceDto> searchPlace(String word) {
@@ -62,7 +62,7 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -87,7 +87,7 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;

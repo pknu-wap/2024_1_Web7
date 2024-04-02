@@ -3,7 +3,6 @@ package com.dogventure.dogweb.mainLogic.controller;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.NaverMapCategoryDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.DetailPlaceDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.SimplePlaceDto;
-import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.service.NaverMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +33,7 @@ public class NaverMapController {
     }
 
     @GetMapping("/search/{word}")
-    public ResponseEntity<List<SimplePlaceDto>> searchPlace(@PathVariable String word) {
+    public ResponseEntity<List<SimplePlaceDto>> searchPlace(@PathVariable("word") String word) {
 
         List<SimplePlaceDto> simplePlaceDtos = service.searchPlace(word);
         return new ResponseEntity<>(simplePlaceDtos, HttpStatus.FOUND);

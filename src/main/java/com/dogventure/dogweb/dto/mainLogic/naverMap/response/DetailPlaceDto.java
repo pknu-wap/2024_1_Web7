@@ -1,6 +1,7 @@
 package com.dogventure.dogweb.dto.mainLogic.naverMap.response;
 
 import com.dogventure.dogweb.constant.DogSize;
+import com.dogventure.dogweb.constant.PlaceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,6 +22,8 @@ public class DetailPlaceDto {
     private String image;
 
     private String detailContent;
+
+    private PlaceType placeType;
 
     private DogSize dogSize;
 
