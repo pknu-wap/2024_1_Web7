@@ -19,7 +19,7 @@ public class DetailPlaceDto {
 
     private String name;
 
-    private String image;
+    private ImageDto image;
 
     private String detailContent;
 

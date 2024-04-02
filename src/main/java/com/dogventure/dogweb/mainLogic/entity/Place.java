@@ -25,7 +25,9 @@ public class Place {
 
     private Double y;
 
-    private String image;
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     private String detailContent;
 

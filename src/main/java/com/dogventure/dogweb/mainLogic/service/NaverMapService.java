@@ -3,10 +3,7 @@ package com.dogventure.dogweb.mainLogic.service;
 import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.NaverMapCategoryDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.DetailPlaceDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ReviewDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.SimplePlaceDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.UserDto;
+import com.dogventure.dogweb.dto.mainLogic.naverMap.response.*;
 import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.entity.Review;
 import com.dogventure.dogweb.mainLogic.entity.User;
@@ -30,7 +27,8 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -48,7 +46,9 @@ public class NaverMapService {
             reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
         }
 
-        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
+        ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
     }
 
     public List<SimplePlaceDto> searchPlace(String word) {
@@ -62,7 +62,8 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -87,7 +88,8 @@ public class NaverMapService {
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), place.getImage(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;

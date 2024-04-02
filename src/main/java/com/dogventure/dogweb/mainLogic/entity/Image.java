@@ -8,21 +8,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double rate;
+    private String filename;
 
-    private String content;
+    @Lob
+    private byte[] data;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
+    public Image(String filename, byte[] data) {
+        this.filename = filename;
+        this.data = data;
+    }
 }
