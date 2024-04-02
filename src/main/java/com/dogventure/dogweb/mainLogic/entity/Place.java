@@ -1,6 +1,7 @@
 package com.dogventure.dogweb.mainLogic.entity;
 
 import com.dogventure.dogweb.constant.DogSize;
+import com.dogventure.dogweb.constant.PlaceType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public class Place {
     private String detailContent;
 
     private DogSize dogSize;
+
+    private PlaceType placeType;
 
     private Double rate;
 
