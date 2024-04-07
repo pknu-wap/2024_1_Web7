@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Container as MapDiv, Marker, NaverMap } from "react-naver-maps";
+import { Marker, NaverMap } from "react-naver-maps";
 
 const DEFAULT_LAT = "35.1339";
 const DEFAULT_LNG = "129.1055";
