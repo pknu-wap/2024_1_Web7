@@ -1,3 +1,4 @@
+// import MapWithCurrentLocation from "../components/MapWithCurrentLocation";
 import NaverMapApi from "../components/NaverMapApi";
 // import Map from "../components/Map";
 import { Container as MapDiv } from "react-naver-maps";
@@ -11,6 +12,7 @@ function HomePage() {
           height: "600px",
         }}
       >
+        {/* <MapWithCurrentLocation /> */}
         <NaverMapApi />
       </MapDiv>
       {/* <Map /> */}
