@@ -94,9 +94,10 @@ function Map() {
       // 정보창 사이드에서 뜨도록 css 수정 필요
       const placeInfoWindow = new InfoWindow({
         content: `<div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;">
-        <div style="font-weight: bold; margin-bottom: 5px;">${place.name}</div>
-        <div style="font-size: 13px;">${place.description}</div>
-        </div>`,
+            <div style="font-weight: bold; margin-bottom: 5px;">${place.name}</div>
+            <div style="font-size: 13px;">${place.detailContent}</div>
+            <div>${place.image}</div>
+          </div>`,
         maxWidth: 300,
         anchorSize: { width: 12, height: 14 },
         borderColor: "#cecdc7",
