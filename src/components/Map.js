@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 
 function Map() {
@@ -6,10 +6,29 @@ function Map() {
   const { naver } = window;
   const { currentMyLocation } = useGeolocation();
   const { LatLng, Map, Marker, InfoWindow } = naver.maps; // 필요한 객체를 비구조화 할당
+  const [places, setPlaces] = useState([]);
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 네이버 지도 옵션 선택
+
+      // 백엔드 장소 GET 코드
+      const fetchLocation = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:8080/api/map/naver/place/all"
+          );
+          if (!response.ok) {
+            throw new Error("장소를 불러오는 데 실패했습니다.");
+          }
+          const data = await response.json();
+          setPlaces(data);
+        } catch (error) {
+          console.error("장소를 불러오는 데 실패했습니다.", error);
+        }
+      };
+
+      fetchLocation();
 
       const mapOptions = {
         // 지도의 초기 중심 좌표
@@ -26,7 +45,7 @@ function Map() {
       mapRef.current = new Map("map", mapOptions);
 
       // 현재 내 위치에 마커 표시
-      const marker = new Marker({
+      const myLocationMarker = new Marker({
         // 생성될 마커의 위치
         position: LatLng(currentMyLocation.lat, currentMyLocation.lng),
         // 마커를 표시할 Map 객체
@@ -48,7 +67,7 @@ function Map() {
         borderColor: "#cecdc7",
       });
 
-      naver.maps.Event.addListener(marker, "click", () => {
+      naver.maps.Event.addListener(myLocationMarker, "click", () => {
         if (infoWindow.getMap()) {
           // 정보창이 닫힐 때 이벤트 발생
           infoWindow.close();
@@ -56,11 +75,42 @@ function Map() {
           // 정보창이 켜진 후 다른 곳 아무데나 눌러도 닫히도록
         } else if (mapRef.current !== null) {
           // 정보창이 열릴 때 이벤트 발생
-          infoWindow.open(mapRef.current, marker);
+          infoWindow.open(mapRef.current, myLocationMarker);
         }
       });
     }
   }, [currentMyLocation]);
+
+  // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
+  useEffect(() => {
+    places.forEach((place) => {
+      const placeMarker = new Marker({
+        key: place.id,
+        title: place.name,
+        position: new LatLng(place.x, place.y),
+        map: mapRef.current,
+      });
+
+      // 정보창 사이드에서 뜨도록 css 수정 필요
+      const placeInfoWindow = new InfoWindow({
+        content: `<div style="padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;">
+        <div style="font-weight: bold; margin-bottom: 5px;">${place.name}</div>
+        <div style="font-size: 13px;">${place.description}</div>
+        </div>`,
+        maxWidth: 300,
+        anchorSize: { width: 12, height: 14 },
+        borderColor: "#cecdc7",
+      });
+
+      naver.maps.Event.addListener(placeMarker, "click", () => {
+        if (placeInfoWindow.getMap()) {
+          placeInfoWindow.close();
+        } else {
+          placeInfoWindow.open(mapRef.current, placeMarker);
+        }
+      });
+    });
+  }, [places, currentMyLocation]);
 
   return <div id="map" style={{ width: "100%", height: "400px" }} />;
 }
