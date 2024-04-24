@@ -90,7 +90,7 @@ function SignUp() {
           {errors.email && <span className="errorMsg">{errors.email}</span>}
         </li>
         <li>
-          <label htmlFor="password">패스워드</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
             name="password"

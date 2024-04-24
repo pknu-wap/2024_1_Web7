@@ -1,7 +1,6 @@
 import { useState } from "react";
-// CSS는 하경이가
 
-const Chatbot = () => {
+const ChatAction = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -84,4 +83,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default ChatAction;
