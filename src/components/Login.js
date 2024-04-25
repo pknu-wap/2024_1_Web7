@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Login.css";
 
 function Login() {
   const [values, setValues] = useState({
@@ -38,19 +39,21 @@ function Login() {
       <ul>
         <li>
           <input
+            placeholder="아이디"
             type="email"
             name="email"
             value={values.email}
             onChange={handleChange}
-          ></input>
+          />
         </li>
         <li>
           <input
+            placeholder="비밀번호"
             type="password"
             name="password"
             value={values.password}
             onChange={handleChange}
-          ></input>
+          />
         </li>
         <li>
           <button type="submit">로그인</button>

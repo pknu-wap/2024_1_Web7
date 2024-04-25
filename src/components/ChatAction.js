@@ -1,13 +1,12 @@
 import { useState } from "react";
-// CSS는 하경이가
 
-const Chatbot = () => {
+const ChatAction = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
 
   const apiKey = ""; // 여기 키 받기
-  const apiEndpoint = "https://api.openai.com/v1/chat/completions"; // 주소 수정 필요
+  const apiEndpoint = "http://localhost:8080/api/gpt/question"; // 주소 확인
 
   const addMessage = (sender, message) => {
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
@@ -84,4 +83,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default ChatAction;
