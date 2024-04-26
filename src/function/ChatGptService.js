@@ -12,6 +12,7 @@ const ChatGptService = async (message) => {
         prompt: message,
         max_tokens: 150,
       }),
+      credentials: "include", // 클라이언트와 서버가 통신할때 쿠키 값을 공유하겠다는 설정
     });
 
     const data = await response.json();

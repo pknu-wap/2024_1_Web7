@@ -16,6 +16,9 @@ function Nav() {
           <li>
             <NavLink to="signup">회원가입</NavLink>
           </li>
+          <li>
+            <NavLink to="chatbot">챗봇</NavLink>
+          </li>
         </ul>
       </Container>
     </div>

@@ -3,7 +3,7 @@ import Chatbot from "react-chatbot-kit";
 import ActionProvider from "../function/ActionProvider";
 import MessageParser from "../function/MessageParser";
 import ChatGptService from "../function/ChatGptService";
-import "./Chatbot.css";
+import "./ChatbotApp.css";
 
 function ChatbotApp() {
   const [messages, setMessages] = useState([
