@@ -74,6 +74,8 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 
         if (Arrays.stream(skipUrls).anyMatch(url -> url.equals(request.getRequestURI()))) {
             return true;
+        } else if (request.getRequestURI().contains("/api/map/naver/guest/place")) {
+            return true;
         }
 
         return false;
