@@ -19,6 +19,8 @@ public class SimplePlaceDto {
 
     private ImageDto image;
 
+    private boolean isOpen;
+
     private String detailContent;
 
     private PlaceType placeType;

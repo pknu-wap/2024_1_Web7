@@ -21,6 +21,12 @@ public class DetailPlaceDto {
 
     private ImageDto image;
 
+    private boolean isOpen;
+
+    private String address;
+
+    private String phoneNumber;
+
     private String detailContent;
 
     private PlaceType placeType;

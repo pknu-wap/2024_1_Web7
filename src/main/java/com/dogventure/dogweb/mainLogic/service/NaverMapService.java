@@ -13,6 +13,7 @@ import lombok.ToString;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,11 @@ public class NaverMapService {
 
         for (Place place : places) {
             ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+
+            LocalTime now = LocalTime.now();
+            boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
+
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -51,7 +56,10 @@ public class NaverMapService {
 
         ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
 
-        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
+        LocalTime now = LocalTime.now();
+        boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
+
+        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
     }
 
     public List<SimplePlaceDto> searchPlace(String word) {
@@ -66,7 +74,11 @@ public class NaverMapService {
 
         for (Place place : places) {
             ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+
+            LocalTime now = LocalTime.now();
+            boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
+
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -92,7 +104,11 @@ public class NaverMapService {
 
         for (Place place : places) {
             ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+
+            LocalTime now = LocalTime.now();
+            boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
+
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;

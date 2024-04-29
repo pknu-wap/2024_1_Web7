@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,14 @@ public class Place {
     @OneToOne
     @JoinColumn(name = "image_id")
     private Image image;
+
+    private LocalTime startTime;
+
+    private LocalTime endTime;
+
+    private String address;
+
+    private String phoneNumber;
 
     private String detailContent;
 
