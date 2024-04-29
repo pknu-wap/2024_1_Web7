@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
@@ -24,6 +26,12 @@ public class User {
     private String password;
 
     private UserType authority;
+
+    private String description;
+
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     public User(String username, String userId, String password, UserType authority) {
         this.username = username;

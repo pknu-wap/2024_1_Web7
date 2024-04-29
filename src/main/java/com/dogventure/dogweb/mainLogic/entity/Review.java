@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review {
 
@@ -25,4 +27,11 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "place_id")
     private Place place;
+
+    public Review(Double rate, String content, User user, Place place) {
+        this.rate = rate;
+        this.content = content;
+        this.user = user;
+        this.place = place;
+    }
 }

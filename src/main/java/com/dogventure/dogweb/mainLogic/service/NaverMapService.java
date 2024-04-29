@@ -9,13 +9,16 @@ import com.dogventure.dogweb.mainLogic.entity.Review;
 import com.dogventure.dogweb.mainLogic.entity.User;
 import com.dogventure.dogweb.mainLogic.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class NaverMapService {
 
     private final PlaceRepository repository;
@@ -42,7 +45,7 @@ public class NaverMapService {
 
         for (Review review : place.getReviews()) {
             User user = review.getUser();
-            UserDto userDto = new UserDto(user.getId(), user.getUsername(), user.getImage());
+            UserDto userDto = new UserDto(user.getId(), user.getUsername());
             reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
         }
 
