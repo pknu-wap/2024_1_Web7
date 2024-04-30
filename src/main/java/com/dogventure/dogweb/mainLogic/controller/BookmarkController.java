@@ -32,7 +32,9 @@ public class BookmarkController {
 
     @GetMapping("/all")
     public ResponseEntity<List<SimplePlaceDto>> getAllBookmarks() {
-        ///
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        List<SimplePlaceDto> simplePlaceDtoList = service.getBookmarkedPlaces();
+
+        return new ResponseEntity<>(simplePlaceDtoList, HttpStatus.OK);
     }
 }
