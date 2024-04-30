@@ -28,4 +28,7 @@ public class SimplePlaceDto {
     private DogSize dogSize;
 
     private Double rate;
+
+    private boolean bookmark;
+
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class DetailPlaceDto {
+public class GuestDetailPlaceDto {
 
     private Long id;
 
@@ -34,8 +34,6 @@ public class DetailPlaceDto {
     private DogSize dogSize;
 
     private Double rate;
-
-    private boolean bookmark;
 
     private List<ReviewDto> reviews;
 }

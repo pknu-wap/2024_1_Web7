@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -32,6 +35,10 @@ public class User {
     @OneToOne
     @JoinColumn(name = "image_id")
     private Image image;
+
+    @OneToMany
+    @JoinColumn(name = "place_id")
+    private List<Place> bookmarkPlaces = new ArrayList<>();
 
     public User(String username, String userId, String password, UserType authority) {
         this.username = username;

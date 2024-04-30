@@ -5,11 +5,9 @@ import com.dogventure.dogweb.constant.PlaceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 @AllArgsConstructor
-public class DetailPlaceDto {
+public class GuestSimplePlaceDto {
 
     private Long id;
 
@@ -23,10 +21,6 @@ public class DetailPlaceDto {
 
     private boolean isOpen;
 
-    private String address;
-
-    private String phoneNumber;
-
     private String detailContent;
 
     private PlaceType placeType;
@@ -34,8 +28,5 @@ public class DetailPlaceDto {
     private DogSize dogSize;
 
     private Double rate;
-
-    private boolean bookmark;
-
-    private List<ReviewDto> reviews;
 }
+
