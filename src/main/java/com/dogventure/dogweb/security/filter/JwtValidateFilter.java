@@ -38,6 +38,10 @@ public class JwtValidateFilter extends OncePerRequestFilter {
         String email = jwtUtils.getUserEmail(token);
         String authority = jwtUtils.getUserAuthority(token);
 
+        if (jwtUtils.isTokenExpired(token)) {
+            filterChain.doFilter(request, response);
+        }
+
         Authentication authentication = authenticationManager.authenticate(
                 new JwtAuthToken(email, List.of(new SimpleGrantedAuthority(authority)), token)
         );

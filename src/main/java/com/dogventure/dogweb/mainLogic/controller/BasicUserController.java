@@ -3,6 +3,7 @@ package com.dogventure.dogweb.mainLogic.controller;
 import com.dogventure.dogweb.dto.mainLogic.login.request.SignupRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.login.response.TokenResponseDto;
 import com.dogventure.dogweb.mainLogic.service.BasicUserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,12 @@ public class BasicUserController {
 
         service.signup(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logout(HttpServletRequest request) {
+
+        service.logout(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
