@@ -97,7 +97,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/basic/signup", "/api/map/naver/guest/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/basic/login","/api/map/naver/place/**", "/api/gpt/**", "/api/test/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/basic/login",
+                                "/api/basic/logout",
+                                "/api/map/naver/place/**",
+                                "/api/gpt/**",
+                                "/api/place/review/**",
+                                "/api/mypage/**",
+                                "/api/bookemark/**",
+                                "/api/test/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())
 
                 .addFilterBefore(new CustomUsernamePasswordAuthFilter(objectMapper, authManager), UsernamePasswordAuthenticationFilter.class)

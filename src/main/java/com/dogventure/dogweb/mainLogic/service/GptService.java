@@ -26,7 +26,7 @@ public class GptService {
 
         ChatRequest chatRequest = new ChatRequest(
                 chatgptProperties.getModel(),
-                message,
+                convertMessage(message),
                 chatgptProperties.getMaxTokens(),
                 chatgptProperties.getTemperature(),
                 chatgptProperties.getTopP()
@@ -63,5 +63,12 @@ public class GptService {
                 }, emitter::completeWithError);
 
         return emitter;
+    }
+
+    private String convertMessage(String message) {
+
+        String baseMessage = "아래의 메시지에 대한 답변을 할 때, 강아지 말투를 사용해서 답변해줘. 예를 들면 말 끝마다 '멍!'을 붙이는 식으로.\n\n";
+
+        return baseMessage + message;
     }
 }
