@@ -1,7 +1,5 @@
+import ChatbotApp from "../components/ChatbotApp";
 import Map from "../components/Map";
-// import MapWithCurrentLocation from "../components/MapWithCurrentLocation";
-// import NaverMapApi from "../components/NaverMapApi";
-// import Map from "../components/Map";
 import { Container as MapDiv } from "react-naver-maps";
 
 function HomePage() {
@@ -13,11 +11,10 @@ function HomePage() {
           height: "600px",
         }}
       >
-        {/* <MapWithCurrentLocation /> */}
-        {/* <NaverMapApi /> */}
         <Map />
       </MapDiv>
-      {/* <Map /> */}
+
+      {/* <ChatbotApp /> */}
     </>
   );
 }
