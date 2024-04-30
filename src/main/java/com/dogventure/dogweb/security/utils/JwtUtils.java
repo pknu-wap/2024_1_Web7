@@ -38,9 +38,9 @@ public class JwtUtils {
     public boolean isTokenExpired(String token) {
 
         if (repository.existsByToken(token)) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

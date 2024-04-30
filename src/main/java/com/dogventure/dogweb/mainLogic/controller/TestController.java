@@ -7,6 +7,7 @@ import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.repository.ImageRepository;
 import com.dogventure.dogweb.mainLogic.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/test")
@@ -31,5 +33,10 @@ public class TestController {
 //        imageRepo.save(image);
 //        Place place = new Place("재미있는카페", 1.3542, 2.9882, image, "재밌는 애견카페입니다", DogSize.BIG, PlaceType.CAFE, 4.6);
 //        placeRepo.save(place);
+    }
+
+    @PostMapping("/t")
+    public String test() {
+        return "ok";
     }
 }
