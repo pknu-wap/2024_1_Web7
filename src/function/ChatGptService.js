@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY";
+const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"; // 로그인 토큰
 
 const ChatGptService = async (message) => {
   try {
@@ -6,7 +6,7 @@ const ChatGptService = async (message) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        // 로그인 토큰
       },
       body: JSON.stringify({
         prompt: message,
