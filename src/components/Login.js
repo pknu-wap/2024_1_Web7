@@ -7,6 +7,14 @@ function Login() {
     password: "",
   });
 
+  const onNaverLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+  };
+
+  const onGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((preValues) => ({
@@ -57,6 +65,12 @@ function Login() {
         </li>
         <li>
           <button type="submit">로그인</button>
+        </li>
+        <li>
+          <button onClick={onNaverLogin}>Naver Login</button>
+        </li>
+        <li>
+          <button onClick={onGoogleLogin}>Google Login</button>
         </li>
       </ul>
     </form>
