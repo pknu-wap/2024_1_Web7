@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# 1. 프로젝트 소개
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 반려견 지도 웹 개발
+    1. 반려견 관련 장소(숙소, 식당, 산책 등) 정보 제공
+    2. 대형견 출입 가능 여부 및 견종 필터링
+    3. 인증된 견주의 생생한 리뷰
 
-## Available Scripts
+# 2. 기능
 
-In the project directory, you can run:
+### 1) 역할
 
-### `npm start`
+- 디자이너 : 강연우
+- 프론트엔드 : 유하경, 임가은
+- 백엔드 : 권형일, 윤상연
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2) 개발 환경
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 디자인 : Ai, Figma, Ps, Ae
+- 프론트엔드 : HTML, CSS, JS, React
+- 백엔드 : JAVA, OAUTH, spring, AWS, MySQL, JWT
+- 협업 : Notion, GitHub, Figma
 
-### `npm test`
+### 3) 구현 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. ***애견 관련 장소 추천 지도***
+    1. 위치 기반
+    2. 지도 내 아이콘 표시 기능 → 클릭 시 상세 정보
+    3. 대형, 중형, 소형견 필터 기능
+    4. 카테고리
+        1. 미용, 애견 용품, 병원, 카페
+                
+    5. 장소 평점 및 리뷰
+        1. 리뷰(300자) + 별점(0.5 단위)
+                
+    6. 즐겨찾기
+    7. 검색 (후순위)
+        1. 검색어 포함 장소가 거리순으로 나열
+        2. 상세정보 리스트 나열
+        3. 지도에 마커 표현
+    
+2. ***마이 페이지***
+    1. 회원 정보 수정
+        1. 프로필 사진 설정
+            1. 직접 넣기 or 일러스트
+    2. 즐겨찾기(찜)
+        1. 지도에 별표 표시
+    3. 강아지 정보
+    
+3. ***회원가입 / 로그인***
+    1. 간편 로그인 (구글, 네이버)
+    2. 회원가입 입력 받을 정보
+        1. 아이디 (이메일)
+        2. 비밀번호
+        3. 닉네임
