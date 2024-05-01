@@ -72,7 +72,7 @@ function Map() {
           // 정보창이 닫힐 때 이벤트 발생
           infoWindow.close();
           // 추가해야 하는 코드
-          // 정보창이 켜진 후 다른 곳 아무데나 눌러도 닫히도록
+          // -> 정보창이 켜진 후 다른 곳 아무데나 눌러도 닫히도록
         } else if (mapRef.current !== null) {
           // 정보창이 열릴 때 이벤트 발생
           infoWindow.open(mapRef.current, myLocationMarker);
