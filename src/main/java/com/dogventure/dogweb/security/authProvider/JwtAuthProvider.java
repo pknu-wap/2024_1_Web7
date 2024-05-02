@@ -11,6 +11,9 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+/*
+ * 토큰 발급용 Provider
+ */
 @Slf4j
 @Component
 public class JwtAuthProvider implements AuthenticationProvider {

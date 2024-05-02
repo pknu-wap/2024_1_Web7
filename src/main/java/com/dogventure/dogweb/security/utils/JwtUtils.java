@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/*
+ * 토큰 관련 유틸 클래스
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtUtils {

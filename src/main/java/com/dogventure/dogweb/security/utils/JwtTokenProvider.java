@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/*
+ * 토큰 생성 클래스
+ */
 @Component
 public class JwtTokenProvider {
 

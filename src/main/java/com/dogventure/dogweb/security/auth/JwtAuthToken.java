@@ -6,6 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+/*
+ * JWT 검증에 사용할 직접 구현한 토큰
+ */
 @Getter
 public class JwtAuthToken extends AbstractAuthenticationToken {
 

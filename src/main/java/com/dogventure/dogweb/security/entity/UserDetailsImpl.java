@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/*
+ * 시큐리티 내부에서 사용하는 User 객체
+ */
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 

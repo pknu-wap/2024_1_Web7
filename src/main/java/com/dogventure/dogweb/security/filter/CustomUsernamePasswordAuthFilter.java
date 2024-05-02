@@ -16,6 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/*
+ * 비밀번호 검증 필터 (이 필터가 비밀번호 검증 Provider를 실행)
+ */
 @RequiredArgsConstructor
 public class CustomUsernamePasswordAuthFilter extends OncePerRequestFilter {
 

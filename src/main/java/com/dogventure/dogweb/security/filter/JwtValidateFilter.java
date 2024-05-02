@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * 모든 요청에서 JWT 토큰 검증하는 필터
+ */
 @RequiredArgsConstructor
 public class JwtValidateFilter extends OncePerRequestFilter {
 

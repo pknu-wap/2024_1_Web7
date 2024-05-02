@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/*
+ * 로그인시 이메일, 비밀번호를 검증해서 토큰을 발급하는 Provider
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor

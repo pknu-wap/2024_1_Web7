@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*
+ * 기존의 사용자 객체에서 UserDetails로 변환시켜주는 Service
+ */
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {

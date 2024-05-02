@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/*
+ * 소셜 로그인을 성공적으로 수행할 경우 토큰 발행
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor
