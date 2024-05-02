@@ -53,7 +53,7 @@ public class GptService {
                                 String text = choice.path("text").asText();
                                 for (char c : text.toCharArray()) {
                                     emitter.send(SseEmitter.event().data(String.valueOf(c)));
-                                    Thread.sleep(50);
+                                    Thread.sleep(10);
                                 }
                             }
                         }
