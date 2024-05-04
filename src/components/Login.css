@@ -1,47 +1,98 @@
-/* styles.css */
-
-.LoginForm {
-  max-width: 300px;
+.login-form {
+  width: 40%;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border: 1px solid #0075ff;
+  border-radius: 15px;
 }
 
-.LoginForm h2 {
+.login-form h2 {
+  font-family: Pretendard;
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.LoginForm ul {
+.login-form ul {
   list-style-type: none;
-  padding: 0;
+  padding: 2% 10%;
+  margin: 0;
 }
 
-.LoginForm li {
-  margin-bottom: 10px;
+.input-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.LoginForm input[type="email"],
-.LoginForm input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 80%;
+  padding: 13px 10px;
+  border: 1px solid #0075ff;
+  border-radius: 30px;
 }
 
-.LoginForm button {
-  width: 100%;
-  padding: 10px;
+.login-btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.login-btn {
+  width: 50%;
   border: none;
-  border-radius: 3px;
+  border-radius: 30px;
   background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
+
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+
+  padding: 11px 10px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-.LoginForm button:hover {
+.login-btn:hover {
   background-color: #0056b3;
+}
+
+hr {
+  margin: 8% 0;
+}
+
+.social-login-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 50%;
+  border: none;
+  border-radius: 30px;
+  background-color: #04c75b;
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 9px 8px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.social-btn img {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 20px;
+}
+
+.social-btn span {
 }

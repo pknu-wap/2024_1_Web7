@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import naver_logo from "../img/naver_logo.png";
 
 function Login() {
   const [values, setValues] = useState({
@@ -42,19 +43,18 @@ function Login() {
   };
 
   return (
-    <form className="LoginForm" onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <h2>로그인</h2>
       <ul>
-        <li>
+        <div className="input-box">
           <input
-            placeholder="아이디"
+            placeholder="아이디 (이메일)"
             type="email"
             name="email"
             value={values.email}
             onChange={handleChange}
           />
-        </li>
-        <li>
+
           <input
             placeholder="비밀번호"
             type="password"
@@ -62,16 +62,25 @@ function Login() {
             value={values.password}
             onChange={handleChange}
           />
+        </div>
+        <li className="login-btn-box">
+          <button type="submit" className="login-btn">
+            로그인
+          </button>
         </li>
-        <li>
-          <button type="submit">로그인</button>
-        </li>
-        <li>
-          <button onClick={onNaverLogin}>Naver Login</button>
-        </li>
-        <li>
-          <button onClick={onGoogleLogin}>Google Login</button>
-        </li>
+
+        <hr />
+
+        <div className="social-login-box">
+          <button className="social-btn" onClick={onNaverLogin}>
+            <img src={naver_logo} />
+            <span>네이버 로그인</span>
+          </button>
+
+          <button className="social-btn google-btn" onClick={onGoogleLogin}>
+            구글 로그인
+          </button>
+        </div>
       </ul>
     </form>
   );
