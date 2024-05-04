@@ -2,7 +2,7 @@
   width: 40%;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #0075ff;
+  border: 2px solid #0075ff;
   border-radius: 15px;
 }
 
@@ -30,7 +30,7 @@
 .login-form input[type="password"] {
   width: 80%;
   padding: 13px 10px;
-  border: 1px solid #0075ff;
+  border: 1.5px solid #0075ff;
   border-radius: 30px;
 }
 
@@ -52,7 +52,7 @@
 
   padding: 11px 10px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .login-btn:hover {
