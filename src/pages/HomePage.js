@@ -2,7 +2,7 @@ import ChatbotApp from "../components/ChatbotApp";
 import Map from "../components/Map";
 import { Container as MapDiv } from "react-naver-maps";
 
-function HomePage() {
+function MainPage() {
   return (
     <>
       <MapDiv
@@ -19,4 +19,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default MainPage;

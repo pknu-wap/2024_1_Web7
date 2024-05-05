@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
+import placeData from "../place.json";
 
 function Map() {
   const mapRef = useRef(null);
@@ -83,7 +84,8 @@ function Map() {
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
-    places.forEach((place) => {
+    placeData.forEach((place) => {
+      // placeData를 나중에 places로 변경하기
       const placeMarker = new Marker({
         key: place.id,
         title: place.name,
