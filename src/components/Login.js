@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Login.css";
 import naver_logo from "../img/naver_logo.png";
+import google_logo from "../img/google_logo.png";
 
 function Login() {
   const [values, setValues] = useState({
@@ -78,7 +79,8 @@ function Login() {
           </button>
 
           <button className="social-btn google-btn" onClick={onGoogleLogin}>
-            구글 로그인
+            <img src={google_logo} />
+            <span>구글 로그인</span>
           </button>
         </div>
       </ul>
