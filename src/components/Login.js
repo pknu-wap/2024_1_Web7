@@ -46,7 +46,7 @@ function Login() {
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <h2>로그인</h2>
-      <ul>
+      <div>
         <div className="input-box">
           <input
             placeholder="아이디 (이메일)"
@@ -73,17 +73,16 @@ function Login() {
         <hr />
 
         <div className="social-login-box">
-          <button className="social-btn" onClick={onNaverLogin}>
-            <img src={naver_logo} />
-            <span>네이버 로그인</span>
-          </button>
-
           <button className="social-btn google-btn" onClick={onGoogleLogin}>
             <img src={google_logo} />
             <span>구글 로그인</span>
           </button>
+          <button className="social-btn" onClick={onNaverLogin}>
+            <img src={naver_logo} />
+            <span>네이버 로그인</span>
+          </button>
         </div>
-      </ul>
+      </div>
     </form>
   );
 }

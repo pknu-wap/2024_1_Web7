@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SignUp.css";
+import dogventure_logo from "../img/dogventure_logo.png";
 
 const validate = (input) => {
   const { username, email, password } = input;
@@ -76,44 +77,56 @@ function SignUp() {
   }, [errors]);
 
   return (
-    <form className="SignUpForm" onSubmit={handleSubmit}>
-      <h2>회원가입</h2>
-      <ul>
-        <li>
-          <label htmlFor="email">아이디</label>
-          <input
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="errorMsg">{errors.email}</span>}
-        </li>
-        <li>
-          <label htmlFor="password">비밀번호</label>
-          <input
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
-          {errors.password && <div className="errorMsg">{errors.password}</div>}
-        </li>
-        <li>
-          <label htmlFor="username">닉네임</label>
-          <input
-            type="text"
-            name="username"
-            value={values.username}
-            onChange={handleChange}
-          />
-          {errors.username && <div className="errorMsg">{errors.username}</div>}
-        </li>
-        <li>
+    <>
+      <div className="logo-box">
+        <img className="logo" src={dogventure_logo} />
+      </div>
+      <form className="sign-form" onSubmit={handleSubmit}>
+        <h2>회원가입</h2>
+        <div className="input-box">
+          <span className="input-box">
+            <input
+              placeholder="아이디 (이메일)"
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+            {errors.email && <span className="errorMsg">{errors.email}</span>}
+          </span>
+
+          <span className="input-box">
+            <input
+              placeholder="비밀번호"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <span className="errorMsg">{errors.password}</span>
+            )}
+          </span>
+
+          <span className="input-box">
+            <input
+              placeholder="닉네임"
+              type="text"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+            />
+            {errors.username && (
+              <span className="errorMsg">{errors.username}</span>
+            )}
+          </span>
+        </div>
+
+        <div className="signup-btn-box">
           <button type="submit">회원가입</button>
-        </li>
-      </ul>
-    </form>
+        </div>
+      </form>
+    </>
   );
 }
 

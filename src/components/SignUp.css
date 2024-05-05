@@ -1,56 +1,85 @@
-.SignUpForm {
-  max-width: 300px;
+.logo-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 15%;
+  margin-top: 3%;
+}
+
+.sign-form {
+  width: 40%;
   margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 25px 30px;
+  border: 2px solid #0075ff;
+  border-radius: 15px;
 }
 
-.SignUpForm h2 {
+.sign-form h2 {
+  font-family: Pretendard;
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.SignUpForm ul {
-  list-style-type: none;
-  padding: 0;
+.input-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.SignUpForm li {
-  margin-bottom: 10px;
+.sign-form input[type="text"],
+.sign-form input[type="email"],
+.sign-form input[type="password"] {
+  width: 80%;
+  padding: 13px 10px;
+  border: 1.7px solid #0075ff;
+  border-radius: 30px;
 }
 
-.SignUpForm label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.SignUpForm input[type="text"],
-.SignUpForm input[type="email"],
-.SignUpForm input[type="password"] {
+.input-box {
+  position: relative;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-.SignUpForm button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 3px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.SignUpForm button:hover {
-  background-color: #0056b3;
 }
 
 .errorMsg {
   margin: 4px 0;
+  font-size: 13px;
   color: red;
+  position: absolute;
+  right: 14%;
+  top: 22%;
+}
+
+/* .sign-form input:focus {
+  background-color: #0075ff;
+  opacity: 20%;
+} */
+
+.signup-btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.sign-form button {
+  width: 50%;
+  border: none;
+  border-radius: 30px;
+  background-color: #007bff;
+
+  text-align: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+
+  padding: 11px 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.sign-form button:hover {
+  background-color: #0056b3;
 }
