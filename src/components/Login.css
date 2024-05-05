@@ -2,7 +2,7 @@
   width: 40%;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #0075ff;
+  border: 2px solid #0075ff;
   border-radius: 15px;
 }
 
@@ -13,9 +13,8 @@
   font-weight: 700;
 }
 
-.login-form ul {
-  list-style-type: none;
-  padding: 2% 10%;
+.login-form div {
+  padding: 2% 5%;
   margin: 0;
 }
 
@@ -30,7 +29,7 @@
 .login-form input[type="password"] {
   width: 80%;
   padding: 13px 10px;
-  border: 1px solid #0075ff;
+  border: 1.7px solid #0075ff;
   border-radius: 30px;
 }
 
@@ -50,9 +49,9 @@
   font-size: 12px;
   font-weight: 400;
 
-  padding: 11px 10px;
+  padding: 12px 10px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .login-btn:hover {
@@ -60,7 +59,7 @@
 }
 
 hr {
-  margin: 8% 0;
+  margin: 6% 0;
 }
 
 .social-login-box {
@@ -71,14 +70,14 @@ hr {
 }
 
 .social-btn {
-  width: 50%;
+  width: 57%;
   border: none;
   border-radius: 30px;
   background-color: #04c75b;
   text-align: center;
   color: #ffffff;
   font-size: 12px;
-  padding: 9px 8px;
+  padding: 11px 8px;
   cursor: pointer;
 
   display: flex;
@@ -94,5 +93,7 @@ hr {
   left: 20px;
 }
 
-.social-btn span {
+.google-btn {
+  background-color: #ededed;
+  color: #3b1e1e;
 }

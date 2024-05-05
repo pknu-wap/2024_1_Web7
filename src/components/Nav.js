@@ -1,21 +1,28 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "./Container";
-import styles from "./Nav.module.css";
+import "./Nav.css";
+import nav_logo from "../img/dogventure_logo_white.png";
 
 function Nav() {
   return (
-    <div className={styles.nav}>
-      <Container className={styles.container}>
+    <div className="nav-box">
+      <Container className="container">
         <Link to="/">
-          <img alt="Dogventure Logo" />
+          <img src={nav_logo} alt="Dogventure Logo" />
         </Link>
-        <ul className={styles.menu}>
-          <li>
-            <NavLink to="login">로그인</NavLink>
-          </li>
-          <li>
-            <NavLink to="signup">회원가입</NavLink>
-          </li>
+        <ul className="menu-box">
+          <div className="login-signup-box">
+            <li>
+              <NavLink className="NavLink-style" to="login">
+                로그인
+              </NavLink>
+            </li>
+            <span>/</span>
+            <li>
+              <NavLink to="signup">회원가입</NavLink>
+            </li>
+          </div>
+
           <li>
             <NavLink to="chatbot">챗봇</NavLink>
           </li>
