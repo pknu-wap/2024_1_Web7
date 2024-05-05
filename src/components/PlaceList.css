@@ -1,0 +1,42 @@
+.PlaceList {
+  list-style: none;
+  padding: 0;
+}
+
+.PlaceListItem {
+  display: flex;
+  align-items: center;
+  margin: 2% 20%;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+}
+
+.PlaceListItem-info {
+  flex: 1;
+}
+
+.name-type-rate {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.place-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.place-type {
+  color: #7b7b7b;
+}
+
+.inopen-add {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.place-img {
+  margin-top: 5px;
+}
