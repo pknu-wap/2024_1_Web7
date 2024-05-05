@@ -1,0 +1,39 @@
+.nav-box {
+  position: relative;
+  z-index: 1;
+  padding: 10px 0;
+  background-color: #0075ff;
+}
+
+img {
+  width: 15%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-box {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: #ffffff;
+}
+
+.login-signup-box {
+  display: flex;
+  margin-right: 8px;
+}
+
+.login-signup-box li {
+  padding: 0 5px;
+}
+
+.menu-box a {
+  color: #ffffff;
+  font-size: 15px;
+}
