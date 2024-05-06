@@ -24,21 +24,21 @@ public class BasicUserController {
     private final BasicUserService service;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponseDto> login(HttpServletResponse response) throws IOException {
+    public ResponseEntity<TokenResponseDto> login() {
 
         TokenResponseDto tokenDto = service.login();
         return new ResponseEntity<>(tokenDto, HttpStatus.OK);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity signup(@RequestBody @Valid SignupRequestDto request, HttpServletResponse response) throws IOException {
+    public ResponseEntity signup(@RequestBody @Valid SignupRequestDto request) {
 
         service.signup(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity logout(HttpServletRequest request) {
 
         service.logout(request);
         return new ResponseEntity<>(HttpStatus.OK);
