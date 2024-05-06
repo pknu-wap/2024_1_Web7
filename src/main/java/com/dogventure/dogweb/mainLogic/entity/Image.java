@@ -16,6 +16,7 @@ public class Image {
 
     private String filename;
 
+    @Lob
     private byte[] data;
 
     public Image(String filename, byte[] data) {

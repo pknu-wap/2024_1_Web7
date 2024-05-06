@@ -4,6 +4,7 @@ import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Place {
 
     @Id
@@ -49,14 +50,18 @@ public class Place {
     @OneToMany(mappedBy = "place")
     private List<Review> reviews = new ArrayList<>();
 
-//    public Place(String name, Double x, Double y, Image image, String detailContent, DogSize dogSize, PlaceType placeType, Double rate) {
-//        this.name = name;
-//        this.x = x;
-//        this.y = y;
-//        this.image = image;
-//        this.detailContent = detailContent;
-//        this.dogSize = dogSize;
-//        this.placeType = placeType;
-//        this.rate = rate;
-//    }
+    public Place(String name, Double x, Double y, Image image, LocalTime startTime, LocalTime endTime, String address, String phoneNumber, String detailContent, DogSize dogSize, PlaceType placeType, Double rate) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.image = image;
+        this.detailContent = detailContent;
+        this.dogSize = dogSize;
+        this.placeType = placeType;
+        this.rate = rate;
+    }
 }
