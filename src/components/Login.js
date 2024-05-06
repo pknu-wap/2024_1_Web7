@@ -2,8 +2,10 @@ import { useState } from "react";
 import "./Login.css";
 import naver_logo from "../img/naver_logo.png";
 import google_logo from "../img/google_logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -25,22 +27,36 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(values);
 
-    fetch("http://localhost:8080/api/basic/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: values.email,
-        password: values.password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        localStorage.setItem("Authorization", res.access_token);
+    try {
+      const response = await fetch("http://localhost:8080/api/basic/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
       });
+
+      if (!response.ok) {
+        alert("로그인에 실패했습니다.");
+      }
+
+      const data = await response.json();
+
+      if (data.ACCESS_TOKEN) {
+        localStorage.setItem("Authorization", data.ACCESS_TOKEN);
+        navigate("/");
+      } else {
+        alert("유효한 토큰을 받지 못했습니다.");
+      }
+    } catch (error) {
+      console.error("로그인 실패:", error.message);
+      alert("로그인 실패");
+    }
   };
 
   return (
