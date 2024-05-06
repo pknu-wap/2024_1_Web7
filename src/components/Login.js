@@ -47,8 +47,8 @@ function Login() {
 
       const data = await response.json();
 
-      if (data.ACCESS_TOKEN) {
-        localStorage.setItem("Authorization", data.ACCESS_TOKEN);
+      if (data.token) {
+        localStorage.setItem("Authorization", data.token);
         navigate("/");
       } else {
         alert("유효한 토큰을 받지 못했습니다.");
