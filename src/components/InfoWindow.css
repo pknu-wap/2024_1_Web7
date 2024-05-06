@@ -1,0 +1,17 @@
+.custom-info-window {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 16px 0px;
+}
+
+.custom-info-window .title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.custom-info-window .content {
+  font-size: 13px;
+}
+
+.custom-info-window .image {
+  /* 이미지 스타일링 */
+}

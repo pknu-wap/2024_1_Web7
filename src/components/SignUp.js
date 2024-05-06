@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./SignUp.css";
 import dogventure_logo from "../img/dogventure_logo.png";
+import { useNavigate } from "react-router-dom";
 
 const validate = (input) => {
   const { username, email, password } = input;
@@ -26,6 +27,8 @@ const validate = (input) => {
 };
 
 function SignUp() {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -71,6 +74,7 @@ function SignUp() {
     if (submit) {
       if (Object.keys(errors).length === 0) {
         alert("회원가입이 완료되었습니다.");
+        navigate("/");
       }
       setSubmit(false);
     }
