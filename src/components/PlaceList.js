@@ -2,6 +2,8 @@ import "./PlaceList.css";
 
 function PlaceListItem({ item }) {
   const { name, image, isOpen, placeType, dogSize, rate } = item;
+  const base64URL = image.data;
+  const imageURL = `data:image/jpeg;base64,${base64URL}`;
 
   return (
     <div className="PlaceListItem">
@@ -14,7 +16,7 @@ function PlaceListItem({ item }) {
         <div className="inopen-add">
           {{ isOpen } ? "영업 중" : "금일 영업 마감"}
         </div>
-        <img className="place-img" src={image.data} alt={name} />
+        <img className="place-img" src={imageURL} alt={name} />
       </div>
     </div>
   );
@@ -24,7 +26,7 @@ function PlaceList({ className = "", items }) {
   return (
     <ul className={`PlaceList ${className}`}>
       {items.map((item) => {
-        const { id, image, name, placeType, rate } = item;
+        // const { id, image, name, placeType, rate } = item;
 
         return (
           <li key={item.id}>

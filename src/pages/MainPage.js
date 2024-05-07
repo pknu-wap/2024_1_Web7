@@ -1,22 +1,36 @@
-// import Map from "../components/Map";
-import { Container as MapDiv } from "react-naver-maps";
+import { useState, useEffect } from "react";
+import { getPlaces } from "../api";
 import dog from "../img/dog.jpg";
 import "./MainPage.css";
 import PlaceList from "../components/PlaceList";
-import { useState } from "react";
-import placeData from "../place.json";
+import { Container as MapDiv } from "react-naver-maps";
 import Map from "../components/Map";
+import placeData from "../place.json";
 
 function MainPage() {
-  const [itmes, setItems] = useState([]);
+  const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadingError, setLoadingError] = useState(null);
+
+  const handleLoad = async () => {
+    let result;
+    try {
+      result = await getPlaces();
+      setItems(result);
+    } catch (error) {
+      console.log("에러");
+    }
+  };
 
   const handleSearchSubmit = (e) => {
-    e.prevetnDefault();
-    setSearch(e.target["search"].value);
+    e.preventDefault();
+    // setSearch(e.target["search"].value);
+    const searchTerm = e.target.elements.search.value;
+    setSearch(searchTerm);
   };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
 
   return (
     <>
@@ -31,7 +45,11 @@ function MainPage() {
       <div className="bg-box">
         <img className="bg-img" src={dog} />
       </div>
-      <PlaceList items={placeData} />
+      <form onSubmit={handleSearchSubmit}>
+        <input name="search" />
+        <button type="submit">검색</button>
+      </form>
+      <PlaceList items={items} />
     </>
   );
 }

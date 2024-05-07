@@ -19,9 +19,9 @@ function Map() {
           const response = await fetch(
             `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/all`
           );
-          if (!response.ok) {
-            throw new Error("장소를 불러오는 데 실패했습니다.");
-          }
+          // if (!response.ok) {
+          //   throw new Error("장소를 불러오는 데 실패했습니다.");
+          // }
           const data = await response.json();
           setPlaces(data);
         } catch (error) {
