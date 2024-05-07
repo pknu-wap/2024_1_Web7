@@ -5,6 +5,7 @@ import "./MainPage.css";
 import PlaceList from "../components/PlaceList";
 import { useState } from "react";
 import placeData from "../place.json";
+import Map from "../components/Map";
 
 function MainPage() {
   const [itmes, setItems] = useState([]);

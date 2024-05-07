@@ -17,7 +17,7 @@ function Map() {
       const fetchLocation = async () => {
         try {
           const response = await fetch(
-            "http://localhost:8080/api/map/naver/place/all"
+            `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/all`
           );
           if (!response.ok) {
             throw new Error("장소를 불러오는 데 실패했습니다.");
@@ -84,7 +84,7 @@ function Map() {
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
-    placeData.forEach((place) => {
+    places.forEach((place) => {
       // placeData를 나중에 places로 변경하기
       const placeMarker = new Marker({
         key: place.id,
