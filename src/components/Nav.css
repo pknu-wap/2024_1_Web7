@@ -24,6 +24,15 @@ img {
   color: #ffffff;
 }
 
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 .login-signup-box {
   display: flex;
   margin-right: 8px;

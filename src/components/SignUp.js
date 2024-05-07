@@ -49,7 +49,7 @@ function SignUp() {
     e.preventDefault();
     setSubmit(true);
 
-    fetch("http://localhost:8080/api/basic/signup", {
+    fetch(`${process.env.REACT_APP_API_URL}api/basic/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -74,7 +74,9 @@ function SignUp() {
     if (submit) {
       if (Object.keys(errors).length === 0) {
         alert("회원가입이 완료되었습니다.");
-        navigate("/");
+        navigate("/login");
+      } else {
+        alert("회원가입에 실패하였습니다.");
       }
       setSubmit(false);
     }

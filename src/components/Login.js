@@ -12,11 +12,11 @@ function Login() {
   });
 
   const onNaverLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/naver";
+    window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
   };
 
   const onGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/google`;
   };
 
   const handleChange = (e) => {
@@ -32,14 +32,17 @@ function Login() {
     console.log(values);
 
     try {
-      const response = await fetch("http://localhost:8080/api/basic/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}api/basic/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        }
+      );
 
       if (!response.ok) {
         alert("로그인에 실패했습니다.");
