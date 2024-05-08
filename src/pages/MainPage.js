@@ -3,6 +3,7 @@ import { getPlaces, searchPlaces } from "../api";
 import dog from "../img/dog.jpg";
 import "./MainPage.css";
 import PlaceList from "../components/PlaceList";
+import searchImg from "../img/search.png";
 import { Container as MapDiv } from "react-naver-maps";
 import Map from "../components/Map";
 import placeData from "../place.json";
@@ -82,10 +83,20 @@ function MainPage() {
       <div className="bg-box">
         <img className="bg-img" src={dog} />
       </div>
-      <form onSubmit={handleSearchSubmit}>
-        <input name="search" />
-        <button type="submit">검색</button>
-      </form>
+      <div className="search-box">
+        <form className="search-form" onSubmit={handleSearchSubmit}>
+          <input
+            className="search-input"
+            name="search"
+            placeholder="상호명을 입력해보세요!"
+            autocomplete="off"
+          />
+          <button className="search-btn" type="submit">
+            <img src={searchImg} alt="검색 이미지" />
+          </button>
+        </form>
+      </div>
+
       <div>
         <AppFilterButton selected={type === "all"} onClick={handleAllClick}>
           전체
