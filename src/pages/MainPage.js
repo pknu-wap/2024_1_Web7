@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getPlaces } from "../api";
+import { getPlaces, searchPlaces } from "../api";
 import dog from "../img/dog.jpg";
 import "./MainPage.css";
 import PlaceList from "../components/PlaceList";
@@ -7,30 +7,67 @@ import { Container as MapDiv } from "react-naver-maps";
 import Map from "../components/Map";
 import placeData from "../place.json";
 
+function AppFilterButton({ selected, children, onClick }) {
+  return (
+    <button
+      disabled={selected}
+      className={`AppFilterButton ${selected ? "selected" : ""}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
 function MainPage() {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
+  const [type, setType] = useState("");
+
+  const handleAllClick = () => {
+    setType("all");
+    setSearch("");
+  };
+
+  const handleCafeClick = () => {
+    setType("CAFE");
+    setSearch("");
+  };
+
+  const handleHospitalClick = () => {
+    setType("HOSPITAL");
+    setSearch("");
+  };
 
   const handleLoad = async () => {
     let result;
+
     try {
-      result = await getPlaces();
-      setItems(result);
+      if (search) {
+        result = await searchPlaces({ word: search });
+      } else {
+        result = await getPlaces({ type });
+      }
+
+      if (result) {
+        setItems(result);
+      } else {
+        console.log("로드할 항목을 찾을 수 없습니다.");
+      }
     } catch (error) {
-      console.log("에러");
+      console.log("로드 중 오류가 발생했습니다.");
     }
   };
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    // setSearch(e.target["search"].value);
-    const searchTerm = e.target.elements.search.value;
+    const searchTerm = e.target["search"].value;
     setSearch(searchTerm);
   };
 
   useEffect(() => {
     handleLoad();
-  }, []);
+  }, [search, type]);
 
   return (
     <>
@@ -49,6 +86,26 @@ function MainPage() {
         <input name="search" />
         <button type="submit">검색</button>
       </form>
+      <div>
+        <AppFilterButton selected={type === "all"} onClick={handleAllClick}>
+          전체
+        </AppFilterButton>
+        <AppFilterButton selected={type === ""} onClick={handleAllClick}>
+          애견용품
+        </AppFilterButton>
+        <AppFilterButton selected={type === ""} onClick={handleAllClick}>
+          미용
+        </AppFilterButton>
+        <AppFilterButton selected={type === "CAFE"} onClick={handleCafeClick}>
+          카페
+        </AppFilterButton>
+        <AppFilterButton
+          selected={type === "HOSPITAL"}
+          onClick={handleHospitalClick}
+        >
+          병원
+        </AppFilterButton>
+      </div>
       <PlaceList items={items} />
     </>
   );
