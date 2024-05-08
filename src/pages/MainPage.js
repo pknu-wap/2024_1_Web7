@@ -11,8 +11,7 @@ import placeData from "../place.json";
 function AppFilterButton({ selected, children, onClick }) {
   return (
     <button
-      disabled={selected}
-      className={`AppFilterButton ${selected ? "selected" : ""}`}
+      className={`filter-btn ${selected ? "selected-btn" : ""}`}
       onClick={onClick}
     >
       {children}
@@ -28,16 +27,19 @@ function MainPage() {
   const handleAllClick = () => {
     setType("all");
     setSearch("");
+    document.querySelector(".search-input").value = "";
   };
 
   const handleCafeClick = () => {
     setType("CAFE");
     setSearch("");
+    document.querySelector(".search-input").value = "";
   };
 
   const handleHospitalClick = () => {
     setType("HOSPITAL");
     setSearch("");
+    document.querySelector(".search-input").value = "";
   };
 
   const handleLoad = async () => {
@@ -72,14 +74,6 @@ function MainPage() {
 
   return (
     <>
-      {/* <MapDiv
-        style={{
-          width: "100%",
-          height: "600px",
-        }}
-      >
-        <Map />
-      </MapDiv> */}
       <div className="bg-box">
         <img className="bg-img" src={dog} />
       </div>
@@ -96,28 +90,38 @@ function MainPage() {
           </button>
         </form>
       </div>
+      <div className="mainPage">
+        {/* <MapDiv
+        style={{
+          width: "100%",
+          height: "600px",
+        }}
+      >
+        <Map />
+      </MapDiv> */}
 
-      <div>
-        <AppFilterButton selected={type === "all"} onClick={handleAllClick}>
-          전체
-        </AppFilterButton>
-        <AppFilterButton selected={type === ""} onClick={handleAllClick}>
-          애견용품
-        </AppFilterButton>
-        <AppFilterButton selected={type === ""} onClick={handleAllClick}>
-          미용
-        </AppFilterButton>
-        <AppFilterButton selected={type === "CAFE"} onClick={handleCafeClick}>
-          카페
-        </AppFilterButton>
-        <AppFilterButton
-          selected={type === "HOSPITAL"}
-          onClick={handleHospitalClick}
-        >
-          병원
-        </AppFilterButton>
+        <div className="filter-btn-box">
+          <AppFilterButton selected={type === "all"} onClick={handleAllClick}>
+            전체
+          </AppFilterButton>
+          <AppFilterButton selected={type === ""} onClick={handleAllClick}>
+            애견용품
+          </AppFilterButton>
+          <AppFilterButton selected={type === ""} onClick={handleAllClick}>
+            미용
+          </AppFilterButton>
+          <AppFilterButton selected={type === "CAFE"} onClick={handleCafeClick}>
+            카페
+          </AppFilterButton>
+          <AppFilterButton
+            selected={type === "HOSPITAL"}
+            onClick={handleHospitalClick}
+          >
+            병원
+          </AppFilterButton>
+        </div>
+        <PlaceList items={items} />
       </div>
-      <PlaceList items={items} />
     </>
   );
 }
