@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom"; 
 import Container from "./Container";
 import styles from "./Nav.module.css";
 
@@ -17,7 +17,7 @@ function Nav() {
             <NavLink to="signup">회원가입</NavLink>
           </li>
           <li>
-            <NavLink to="chatbot">챗봇</NavLink>
+            {/* <NavLink to="chatbot">챗봇</NavLink> */}
           </li>
         </ul>
       </Container>

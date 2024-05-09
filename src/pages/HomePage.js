@@ -1,4 +1,4 @@
-import ChatbotApp from "../components/ChatbotApp";
+import ChatbotHG from "../components/ChatbotHG";
 import Map from "../components/Map";
 import { Container as MapDiv } from "react-naver-maps";
 
@@ -13,8 +13,8 @@ function HomePage() {
       >
         <Map />
       </MapDiv>
-
-      {/* <ChatbotApp /> */}
+      
+      <ChatbotHG />
     </>
   );
 }

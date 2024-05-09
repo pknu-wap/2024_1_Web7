@@ -3,7 +3,7 @@ import App from "./components/App";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import HomePage from "./pages/HomePage";
-import ChatbotApp from "./components/ChatbotApp";
+import ChatbotHG from "./components/ChatbotHG";
 
 function Main() {
   return (
@@ -13,7 +13,7 @@ function Main() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="chatbot" element={<ChatbotApp />} />
+          <Route path="chatbot" element={<ChatbotHG />} />
         </Route>
       </Routes>
     </BrowserRouter>
