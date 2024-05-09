@@ -7,6 +7,7 @@ import searchImg from "../img/search.png";
 import { Container as MapDiv } from "react-naver-maps";
 import Map from "../components/Map";
 import placeData from "../place.json";
+import ChatbotHG from "../components/ChatbotHG";
 
 function AppFilterButton({ selected, children, onClick }) {
   return (
@@ -83,7 +84,7 @@ function MainPage() {
             className="search-input"
             name="search"
             placeholder="상호명을 입력해보세요!"
-            autocomplete="off"
+            autoComplete="off"
           />
           <button className="search-btn" type="submit">
             <img src={searchImg} alt="검색 이미지" />
@@ -120,8 +121,10 @@ function MainPage() {
             병원
           </AppFilterButton>
         </div>
+
         <PlaceList items={items} />
       </div>
+      <ChatbotHG />
     </>
   );
 }

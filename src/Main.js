@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./components/App";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
-import ChatbotApp from "./components/ChatbotApp";
+import ChatbotHG from "./components/ChatbotHG";
 import MainPage from "./pages/MainPage";
 
 function Main() {
@@ -13,7 +13,7 @@ function Main() {
           <Route index element={<MainPage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="chatbot" element={<ChatbotApp />} />
+          <Route path="chatbot" element={<ChatbotHG />} />
         </Route>
       </Routes>
     </BrowserRouter>
