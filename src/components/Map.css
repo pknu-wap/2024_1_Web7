@@ -1,0 +1,19 @@
+.name-type-rate {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.place-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.place-type {
+  color: #7b7b7b;
+}
+
+.info-window-line {
+  margin: 0;
+  padding: 0;
+}

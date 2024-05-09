@@ -22,6 +22,19 @@ export async function getPlaces({ type = "", dogSize = null }) {
   }
 }
 
+export async function getPlaceInfo({ id = "" }) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/search/${id}`
+    );
+    const body = await response.json();
+    return body;
+  } catch (error) {
+    console.error("검색 장소를 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
 export async function searchPlaces({ word = "" }) {
   try {
     const response = await fetch(
