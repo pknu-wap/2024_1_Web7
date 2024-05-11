@@ -8,6 +8,7 @@
   z-index: 1000; /* 모달이 화면 위에 나타나도록 */
   padding: 10px 20%;
   border-radius: 15px;
+  overflow: auto; /* 내용이 넘칠 경우 스크롤 표시 */
 }
 
 .modal {

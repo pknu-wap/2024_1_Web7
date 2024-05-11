@@ -18,7 +18,7 @@ function Nav() {
     <div className="nav-box">
       <Container className="container">
         <Link to="/">
-          <img src={nav_logo} alt="Dogventure Logo" />
+          <img className="logo-img" src={nav_logo} alt="Dogventure Logo" />
         </Link>
         <ul className="menu-box">
           {token ? (

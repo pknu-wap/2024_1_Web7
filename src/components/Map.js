@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import { getPlaces, getPlaceInfo } from "../api";
 import Modal from "./Modal";
+import clockImg from "../img/clock.png";
+import addImg from "../img/location.png";
+import phoneImg from "../img/phone.png";
+import "./Map.css";
 
 function Map() {
   const mapRef = useRef(null);
@@ -12,7 +16,7 @@ function Map() {
   const { type, setType } = useState("");
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [placeId, setPlaceId] = useState(""); // id 받는 거 type처럼 적용해서 따로 정보창에 넣을 거 받아오기!!!
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
@@ -47,16 +51,24 @@ function Map() {
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
     const createMarker = (place) => {
+      const { id, name, x, y } = place;
+
       return new Marker({
-        key: place.id,
-        title: place.name,
-        position: new LatLng(place.x, place.y),
+        key: id,
+        title: name,
+        position: new LatLng(x, y),
         map: mapRef.current,
       });
     };
 
-    const handleMarkerClick = (place) => {
-      setSelectedPlace(place);
+    const handleMarkerClick = async (place) => {
+      try {
+        const response = await getPlaceInfo({ id: place.id });
+        setSelectedPlace(response);
+      } catch (error) {
+        console.error("장소 정보를 불러오는 데 실패했습니다.", error);
+      }
+      setIsOpen(place.isOpen);
       openModal();
     };
 
@@ -74,19 +86,54 @@ function Map() {
     setSelectedPlace(null);
   };
 
+  const handleOverlayClick = (e) => {
+    if (e.target !== e.currentTarget) {
+      closeModal();
+    }
+  };
+
   return (
     <div className="map-box">
-      <div id="map" style={{ width: "100%", height: "800px" }} />
+      <div
+        id="map"
+        style={{ width: "100%", height: "800px" }}
+        onClick={handleOverlayClick}
+      />
       {selectedPlace && (
         <Modal isOpen={isModalOpen} closeModal={closeModal}>
           <div className="name-type-rate">
             <h2 className="place-name">{selectedPlace.name}</h2>
-            <span className="place-type">{selectedPlace.placeType}</span>
+            <span className="place-type">{selectedPlace.placeType} |</span>
             <span className="place-rate">{selectedPlace.rate}</span>
           </div>
           <hr className="info-window-line" />
-          <div className="inopen-add">
-            {selectedPlace.isOpen ? "영업 중" : "금일 영업 마감"}
+          <div className="isOpen-add">
+            <div className="isOpen-box">
+              <img className="info-img" src={clockImg} alt="시계 이미지" />
+              {{ isOpen } ? "영업 중" : "금일 영업 마감"}
+            </div>
+            <div className="place-add">
+              <img className="info-img" src={addImg} alt="위치 이미지" />
+              {selectedPlace.address}
+            </div>
+            <div className="place-call">
+              <img className="info-img" src={phoneImg} alt="전화 이미지" />
+              {selectedPlace.phoneNumber}
+            </div>
+          </div>
+          <div>
+            <img
+              className="place-img"
+              src={`data:image/jpeg;base64,${selectedPlace.image.data}`}
+            />
+          </div>
+          <hr className="info-window-line" />
+          <div className="review-box">
+            <div>
+              <span>리뷰 |</span>
+              <span className="place-rate">{selectedPlace.rate}</span>
+            </div>
+            <button>리뷰 쓰기</button>
           </div>
         </Modal>
       )}

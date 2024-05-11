@@ -14,6 +14,54 @@
 }
 
 .info-window-line {
-  margin: 0;
+  margin-top: 2%;
   padding: 0;
+}
+
+.isOpen-add {
+  display: flex;
+  flex-direction: column;
+}
+
+.isOpen-box {
+  display: flex;
+  align-items: center;
+  padding: 1%;
+  margin-top: 1%;
+}
+
+.info-img {
+  width: 15px;
+  padding: 2px;
+  margin-right: 5px;
+}
+
+.place-add {
+  display: flex;
+  align-items: center;
+  padding: 0 1%;
+}
+
+.place-call {
+  display: flex;
+  align-items: center;
+  padding: 1%;
+}
+
+.place-img {
+  width: 40%;
+  padding: 1%;
+  border-radius: 30px;
+}
+
+.review-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5%;
+}
+
+.review-box button {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
 }
