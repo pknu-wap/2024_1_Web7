@@ -89,7 +89,7 @@ function Login() {
           </button>
         </li>
 
-        <hr />
+        <hr className="login-line" />
 
         <div className="social-login-box">
           <button className="social-btn google-btn" onClick={onGoogleLogin}>

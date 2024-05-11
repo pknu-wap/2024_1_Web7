@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getPlaces, searchPlaces } from "../api";
 import dog from "../img/dog.jpg";
+import mapBtn from "../img/dogventure_logo_white.png";
 import "./MainPage.css";
 import PlaceList from "../components/PlaceList";
 import searchImg from "../img/search.png";
-import { Container as MapDiv } from "react-naver-maps";
-import Map from "../components/Map";
-import placeData from "../place.json";
+import ChatbotHG from "../components/ChatbotHG";
 
 function AppFilterButton({ selected, children, onClick }) {
   return (
@@ -76,6 +76,10 @@ function MainPage() {
     <>
       <div className="bg-box">
         <img className="bg-img" src={dog} />
+        <Link to="/map">
+          <button>맵 이동</button>
+          {/* <img src={mapBtn} alt="맵 이동 버튼" /> */}
+        </Link>
       </div>
       <div className="search-box">
         <form className="search-form" onSubmit={handleSearchSubmit}>
@@ -83,7 +87,7 @@ function MainPage() {
             className="search-input"
             name="search"
             placeholder="상호명을 입력해보세요!"
-            autocomplete="off"
+            autoComplete="off"
           />
           <button className="search-btn" type="submit">
             <img src={searchImg} alt="검색 이미지" />
@@ -91,15 +95,6 @@ function MainPage() {
         </form>
       </div>
       <div className="mainPage">
-        {/* <MapDiv
-        style={{
-          width: "100%",
-          height: "600px",
-        }}
-      >
-        <Map />
-      </MapDiv> */}
-
         <div className="filter-btn-box">
           <AppFilterButton selected={type === "all"} onClick={handleAllClick}>
             전체
@@ -120,8 +115,10 @@ function MainPage() {
             병원
           </AppFilterButton>
         </div>
+
         <PlaceList items={items} />
       </div>
+      {/* <ChatbotHG /> */}
     </>
   );
 }
