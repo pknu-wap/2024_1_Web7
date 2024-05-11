@@ -2,6 +2,8 @@
   position: relative;
 }
 
+/* 상단 타입 필터 박스 */
+
 .type-filter-container {
   display: flex;
   justify-content: center;
@@ -11,9 +13,40 @@
   display: flex;
   gap: 5%;
   position: absolute;
-  top: 10%;
+  top: 5%;
 }
 
+/* 우측 사이즈 필터, 검색, 북마크 박스*/
+
+.dogSize-filter-container {
+  height: 100%;
+}
+
+.dogSize-filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+
+  position: absolute;
+  top: 25%;
+  right: 3%;
+}
+
+.dogSize-filter-box button {
+  margin: 10%;
+}
+
+/* 사이즈 필터 모달 */
+
+.filter-btn-box {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* 상세 정보창 */
 .name-type-rate {
   display: flex;
   align-items: center;

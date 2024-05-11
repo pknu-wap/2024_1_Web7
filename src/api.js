@@ -1,32 +1,50 @@
 import { type } from "@testing-library/user-event/dist/type";
 
-// 비로그인 상태 접속 시 장소 리스트 및 필터
-export async function getPlaces({ type = "", dogSize = null }) {
+// 비 로그인시 장소만 필터
+export async function getTypePlaces({ type = "" }) {
   try {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/all`
     );
 
     const body = await response.json();
-    let typeFilterPlaces = body;
 
-    if (type === "CAFE") {
-      typeFilterPlaces = body.filter((place) => place.placeType === "CAFE");
-    } else if (type === "HOSPITAL") {
-      typeFilterPlaces = body.filter((place) => place.placeType === "HOSPITAL");
+    const filteredPlaces = body.filter((place) => {
+      if (type !== "all" && place.placeType !== type) {
+        return false;
+      }
+      return true;
+    });
+
+    return filteredPlaces;
+  } catch (error) {
+    console.error("장소를 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
+// 비로그인 상태 접속 시 타입, 사이즈 필터
+export async function getPlaces({ type = "all", dogSizes = [] }) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/all`
+    );
+
+    const body = await response.json();
+
+    if (type === "all" && dogSizes.length === 0) {
+      return body;
     }
 
-    let dogSizeFilterPlaces = typeFilterPlaces;
+    const filteredPlaces = body.filter((place) => {
+      if (type !== "all" && place.placeType !== type) return false;
+      if (dogSizes.length === 0) return true;
 
-    if (dogSize === "SMALL") {
-      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "SMALL");
-    } else if (dogSize === "MEDIUM") {
-      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "MEDIUM");
-    } else if (dogSize === "BIG") {
-      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "BIG");
-    }
+      // 강아지 사이즈가 하나 이상 선택된 경우, 장소의 강아지 사이즈가 선택된 사이즈 중 하나 이상을 포함하면 반환
+      return dogSizes.some((size) => place.dogSize.includes(size));
+    });
 
-    return dogSizeFilterPlaces;
+    return filteredPlaces;
   } catch (error) {
     console.error("장소를 불러오는 데 실패했습니다.", error);
     throw error;

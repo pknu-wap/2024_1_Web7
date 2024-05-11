@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getPlaces, searchPlaces } from "../api";
+import { getTypePlaces, searchPlaces } from "../api";
 import dog from "../img/dog.jpg";
 import mapBtn from "../img/dogventure_logo_white.png";
 import "./MainPage.css";
@@ -49,7 +49,7 @@ function MainPage() {
       if (search) {
         result = await searchPlaces({ word: search });
       } else {
-        result = await getPlaces({ type });
+        result = await getTypePlaces({ type });
       }
 
       if (result) {

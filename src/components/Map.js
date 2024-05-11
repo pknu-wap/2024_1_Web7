@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import { getPlaces, getPlaceInfo } from "../api";
 import Modal from "./Modal";
+import PopupModal from "./PopupModal";
+
 import clockImg from "../img/clock.png";
 import addImg from "../img/location.png";
 import phoneImg from "../img/phone.png";
@@ -12,30 +14,31 @@ function Map() {
   const { naver } = window;
   const { currentMyLocation } = useGeolocation();
   const { LatLng, Map, Marker } = naver.maps; // 필요한 객체를 비구조화 할당
+
   const [places, setPlaces] = useState([]);
   const [type, setType] = useState("all");
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+  const [dogSize, setDogSize] = useState(null);
+  const [selectedDogSizes, setSelectedDogSizes] = useState([]);
 
-  const handleAllClick = () => {
-    setType("all");
-  };
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
-  const handleCafeClick = () => {
-    setType("CAFE");
-  };
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleHospitalClick = () => {
-    setType("HOSPITAL");
-  };
+  const handleAllClick = () => setType("all");
+  const handleCafeClick = () => setType("CAFE");
+  const handleHospitalClick = () => setType("HOSPITAL");
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
       const fetchLocation = async () => {
         try {
-          const response = await getPlaces({ type: type });
+          const response = await getPlaces({
+            type: type,
+            dogSizes: selectedDogSizes,
+          });
           setPlaces(response);
         } catch (error) {
           console.error("장소를 불러오는 데 실패했습니다.", error);
@@ -58,7 +61,7 @@ function Map() {
       };
       mapRef.current = new Map("map", mapOptions);
     }
-  }, [currentMyLocation, type]);
+  }, [currentMyLocation, type, selectedDogSizes]);
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
@@ -96,6 +99,7 @@ function Map() {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPlace(null);
+    setIsFilterModalOpen(false);
   };
 
   const handleOverlayClick = (e) => {
@@ -104,11 +108,33 @@ function Map() {
     }
   };
 
+  const openFilterModal = () => setIsFilterModalOpen(true);
+  const closeFilterModal = () => setIsFilterModalOpen(false);
+
+  const handleFilterButtonClick = () => {
+    openFilterModal();
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      setSelectedDogSizes((prev) => {
+        if (prev.includes(name)) {
+          return prev; // 이미 선택된 사이즈일 경우 이전 배열 그대로 반환
+        } else {
+          return [...prev, name]; // 선택된 사이즈 배열에 추가
+        }
+      });
+    } else {
+      setSelectedDogSizes((prev) => prev.filter((size) => size !== name)); // 선택 해제된 사이즈를 배열에서 제거
+    }
+  };
+
   return (
     <div className="map-box">
       <div
         id="map"
-        style={{ width: "100%", height: "800px" }}
+        style={{ width: "100%", height: "710px" }}
         onClick={handleOverlayClick}
       />
       <div className="type-filter-container">
@@ -120,6 +146,52 @@ function Map() {
           <button onClick={handleCafeClick}>카페</button>
         </div>
       </div>
+
+      <div className="dogSize-filter-container">
+        <div className="dogSize-filter-box">
+          <button onClick={handleFilterButtonClick}>필터</button>
+          <button>검색</button>
+          <button>내 장소</button>
+        </div>
+      </div>
+
+      {isFilterModalOpen && (
+        <PopupModal
+          className="filter-modal"
+          isOpen={isFilterModalOpen}
+          closeModal={closeFilterModal}
+        >
+          <div className="filter-btn-box">
+            <label>
+              <input
+                type="checkbox"
+                name="SMALL"
+                onChange={handleCheckboxChange}
+                checked={selectedDogSizes.includes("SMALL")}
+              />
+              소형
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="MEDIUM"
+                onChange={handleCheckboxChange}
+                checked={selectedDogSizes.includes("MEDIUM")}
+              />
+              중형
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="BIG"
+                onChange={handleCheckboxChange}
+                checked={selectedDogSizes.includes("BIG")}
+              />
+              대형
+            </label>
+          </div>
+        </PopupModal>
+      )}
 
       {selectedPlace && (
         <Modal isOpen={isModalOpen} closeModal={closeModal}>
