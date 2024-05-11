@@ -1,3 +1,19 @@
+.map-box {
+  position: relative;
+}
+
+.type-filter-container {
+  display: flex;
+  justify-content: center;
+}
+
+.type-filter-box {
+  display: flex;
+  gap: 5%;
+  position: absolute;
+  top: 10%;
+}
+
 .name-type-rate {
   display: flex;
   align-items: center;

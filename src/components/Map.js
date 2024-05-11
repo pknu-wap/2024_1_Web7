@@ -11,19 +11,31 @@ function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
   const { currentMyLocation } = useGeolocation();
-  const { LatLng, Map, Marker, InfoWindow } = naver.maps; // 필요한 객체를 비구조화 할당
+  const { LatLng, Map, Marker } = naver.maps; // 필요한 객체를 비구조화 할당
   const [places, setPlaces] = useState([]);
-  const { type, setType } = useState("");
+  const [type, setType] = useState("all");
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+
+  const handleAllClick = () => {
+    setType("all");
+  };
+
+  const handleCafeClick = () => {
+    setType("CAFE");
+  };
+
+  const handleHospitalClick = () => {
+    setType("HOSPITAL");
+  };
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
       const fetchLocation = async () => {
         try {
-          const response = await getPlaces({ type });
+          const response = await getPlaces({ type: type });
           setPlaces(response);
         } catch (error) {
           console.error("장소를 불러오는 데 실패했습니다.", error);
@@ -46,7 +58,7 @@ function Map() {
       };
       mapRef.current = new Map("map", mapOptions);
     }
-  }, [currentMyLocation]);
+  }, [currentMyLocation, type]);
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
@@ -99,6 +111,16 @@ function Map() {
         style={{ width: "100%", height: "800px" }}
         onClick={handleOverlayClick}
       />
+      <div className="type-filter-container">
+        <div className="type-filter-box">
+          <button onClick={handleAllClick}>ALL</button>
+          <button>미용</button>
+          <button>애견용품</button>
+          <button onClick={handleHospitalClick}>병원</button>
+          <button onClick={handleCafeClick}>카페</button>
+        </div>
+      </div>
+
       {selectedPlace && (
         <Modal isOpen={isModalOpen} closeModal={closeModal}>
           <div className="name-type-rate">

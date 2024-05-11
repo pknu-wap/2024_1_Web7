@@ -6,16 +6,27 @@ export async function getPlaces({ type = "", dogSize = null }) {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/map/naver/guest/place/all`
     );
+
     const body = await response.json();
-    let filterPlaces = body;
+    let typeFilterPlaces = body;
 
     if (type === "CAFE") {
-      filterPlaces = body.filter((place) => place.placeType === "CAFE");
+      typeFilterPlaces = body.filter((place) => place.placeType === "CAFE");
     } else if (type === "HOSPITAL") {
-      filterPlaces = body.filter((place) => place.placeType === "HOSPITAL");
+      typeFilterPlaces = body.filter((place) => place.placeType === "HOSPITAL");
     }
 
-    return filterPlaces;
+    let dogSizeFilterPlaces = typeFilterPlaces;
+
+    if (dogSize === "SMALL") {
+      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "SMALL");
+    } else if (dogSize === "MEDIUM") {
+      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "MEDIUM");
+    } else if (dogSize === "BIG") {
+      dogSizeFilterPlaces = body.filter((place) => place.dogSize === "BIG");
+    }
+
+    return dogSizeFilterPlaces;
   } catch (error) {
     console.error("장소를 불러오는 데 실패했습니다.", error);
     throw error;
