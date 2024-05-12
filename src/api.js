@@ -79,18 +79,42 @@ export async function searchPlaces({ word = "" }) {
   }
 }
 
-export async function createReviewform(formData) {
+// export async function createReview(formData) {
+//   try {
+//     const response = await fetch(
+//       `${process.env.REACT_APP_API_URL}api/place/review/write`,
+//       {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData),
+//       }
+//     );
+//     const body = await response.json();
+//     return body;
+//   } catch (error) {
+//     console.error("리뷰를 작성하는 데 실패했습니다.", error);
+//     throw error;
+//   }
+// }
+
+export async function createReview(formData, token) {
   try {
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/place/review/write`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(formData),
       }
     );
     const body = await response.json();
-    return body;
+    return body.id;
   } catch (error) {
     console.error("리뷰를 작성하는 데 실패했습니다.", error);
     throw error;

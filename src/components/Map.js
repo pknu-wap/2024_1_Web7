@@ -37,7 +37,6 @@ function Map() {
   const [isReview, setIsReview] = useState(false);
 
   const token = localStorage.getItem("Authorization");
-  const [editingId, setEditingId] = useState(null);
 
   const handleAllClick = () => setType("all");
   const handleCafeClick = () => setType("CAFE");
@@ -144,7 +143,7 @@ function Map() {
     }
   };
 
-  const handleClickReivew = () => {
+  const handleClickReview = () => {
     if (token) {
       setIsReview(true);
     } else {
@@ -251,12 +250,12 @@ function Map() {
                 <span>리뷰 |</span>
                 <span className="place-rate">{selectedPlace.rate}</span>
               </div>
-              <button onClick={handleClickReivew}>리뷰 쓰기</button>
+              <button onClick={handleClickReview}>리뷰 쓰기</button>
             </div>
 
             {isReview && (
               <div className="review-form-box">
-                <ReviewForm />
+                <ReviewForm placeId={selectedPlace.id} token={token} />
               </div>
             )}
             <ul>

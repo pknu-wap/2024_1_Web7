@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createReviewform } from "../api";
+import { createReview } from "../api";
 import "./ReviewForm.css";
 
 function sanitize(type, value) {
@@ -14,9 +14,11 @@ function sanitize(type, value) {
 
 const INITIAL_VALUES = {
   content: "",
+  rate: 5,
+  placeId: null,
 };
 
-function ReviewForm({ onSubmitSuccess, review }) {
+function ReviewForm({ onSubmitSuccess, placeId, token }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
@@ -24,13 +26,15 @@ function ReviewForm({ onSubmitSuccess, review }) {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("rate", INITIAL_VALUES.rate);
     formData.append("content", values.content);
+    formData.append("placeId", placeId);
 
     let result;
 
     try {
       setIsSubmitting(true);
-      result = await createReviewform(formData);
+      result = await createReview(formData, token);
     } catch (error) {
       console.log(error);
       return;
