@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../function/AuthContext";
+
 import useGeolocation from "../hooks/useGeolocation";
 import { getPlaces, getPlaceInfo } from "../api";
+
 import Modal from "./Modal";
 import PopupModal from "./PopupModal";
+import ReviewForm from "./ReviewForm";
 
 import clockImg from "../img/clock.png";
 import addImg from "../img/location.png";
 import phoneImg from "../img/phone.png";
+
 import "./Map.css";
 
 function Map() {
@@ -14,17 +20,24 @@ function Map() {
   const { naver } = window;
   const { currentMyLocation } = useGeolocation();
   const { LatLng, Map, Marker } = naver.maps; // 필요한 객체를 비구조화 할당
+  // const { currentUser } = useAuth();
+
+  const navigate = useNavigate();
 
   const [places, setPlaces] = useState([]);
   const [type, setType] = useState("all");
   const [isOpen, setIsOpen] = useState(true);
-  const [dogSize, setDogSize] = useState(null);
   const [selectedDogSizes, setSelectedDogSizes] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReview, setIsReview] = useState(false);
+
+  const token = localStorage.getItem("Authorization");
+  const [editingId, setEditingId] = useState(null);
 
   const handleAllClick = () => setType("all");
   const handleCafeClick = () => setType("CAFE");
@@ -80,6 +93,7 @@ function Map() {
       try {
         const response = await getPlaceInfo({ id: place.id });
         setSelectedPlace(response);
+        setReviews(response.reviews);
       } catch (error) {
         console.error("장소 정보를 불러오는 데 실패했습니다.", error);
       }
@@ -127,6 +141,15 @@ function Map() {
       });
     } else {
       setSelectedDogSizes((prev) => prev.filter((size) => size !== name)); // 선택 해제된 사이즈를 배열에서 제거
+    }
+  };
+
+  const handleClickReivew = () => {
+    if (token) {
+      setIsReview(true);
+    } else {
+      alert("로그인이 필요한 서비스 입니다.");
+      navigate("/login");
     }
   };
 
@@ -223,11 +246,35 @@ function Map() {
           </div>
           <hr className="info-window-line" />
           <div className="review-box">
-            <div>
-              <span>리뷰 |</span>
-              <span className="place-rate">{selectedPlace.rate}</span>
+            <div className="review-info-box">
+              <div className="review-info">
+                <span>리뷰 |</span>
+                <span className="place-rate">{selectedPlace.rate}</span>
+              </div>
+              <button onClick={handleClickReivew}>리뷰 쓰기</button>
             </div>
-            <button>리뷰 쓰기</button>
+
+            {isReview && (
+              <div className="review-form-box">
+                <ReviewForm />
+              </div>
+            )}
+            <ul>
+              {reviews.map((review) => {
+                return (
+                  <li key={review.id}>
+                    <div className="profile-img">
+                      <div>프로필 이미지</div>
+                    </div>
+                    <div>
+                      <span>{review.User.username}</span>
+                      <span>{review.rate}</span>
+                      <div className="reivew-content">{review.content}</div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </Modal>
       )}

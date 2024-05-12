@@ -78,3 +78,21 @@ export async function searchPlaces({ word = "" }) {
     throw error;
   }
 }
+
+export async function createReviewform(formData) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/place/review/write`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+    const body = await response.json();
+    return body;
+  } catch (error) {
+    console.error("리뷰를 작성하는 데 실패했습니다.", error);
+    throw error;
+  }
+}

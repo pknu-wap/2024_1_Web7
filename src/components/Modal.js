@@ -8,7 +8,7 @@ function Modal({ isOpen, closeModal, children }) {
         <div className={`modal-overlay`}>
           <>{children}</>
           <button className="close-btn" onClick={closeModal}>
-            Close
+            X
           </button>
         </div>
       )}

@@ -1,0 +1,24 @@
+.ReviewForm {
+  padding: 3%;
+  width: 100%;
+  position: relative;
+}
+
+.ReviewForm-rating {
+  color: #7b7b7b;
+}
+
+.ReviewForm-content {
+  padding: 2% 0;
+  font-family: "Pretandard";
+  resize: none;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.ReviewForm-submit-btn {
+  position: absolute;
+  right: 2%;
+  bottom: 10%;
+}

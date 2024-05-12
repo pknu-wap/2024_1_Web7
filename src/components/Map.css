@@ -114,3 +114,23 @@
   cursor: pointer;
   border: none;
 }
+
+/* 리뷰 작성 폼 */
+
+.review-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+}
+
+.review-info-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.review-form-box {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 15px;
+}
