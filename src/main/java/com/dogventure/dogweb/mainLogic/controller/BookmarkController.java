@@ -6,10 +6,7 @@ import com.dogventure.dogweb.mainLogic.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,12 +17,12 @@ public class BookmarkController {
 
     private final BookmarkService service;
 
-    @GetMapping("/")
+    @PostMapping("/")
     public void bookmark(@RequestBody PlaceIdRequestDto requestDto) {
         service.bookmark(requestDto);
     }
 
-    @GetMapping("/cancel")
+    @PostMapping("/cancel")
     public void unBookmark(@RequestBody PlaceIdRequestDto requestDto) {
         service.unBookmark(requestDto);
     }
