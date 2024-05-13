@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { createReview } from "../api";
 import "./ReviewForm.css";
 
 function sanitize(type, value) {
@@ -18,7 +17,7 @@ const INITIAL_VALUES = {
   placeId: null,
 };
 
-function ReviewForm({ onSubmitSuccess, placeId, token }) {
+function ReviewForm({ placeId, token, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
@@ -34,16 +33,14 @@ function ReviewForm({ onSubmitSuccess, placeId, token }) {
 
     try {
       setIsSubmitting(true);
-      result = await createReview(formData, token);
+      result = await onSubmit(formData, token);
     } catch (error) {
       console.log(error);
       return;
     } finally {
       setIsSubmitting(false);
     }
-    const { content } = result;
     setValues(INITIAL_VALUES);
-    onSubmitSuccess(content);
   };
 
   const handleChange = (name, value) => {

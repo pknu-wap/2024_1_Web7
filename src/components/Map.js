@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../function/AuthContext";
 
 import useGeolocation from "../hooks/useGeolocation";
-import { getPlaces, getPlaceInfo, addBookmark } from "../api";
+import { getPlaces, getPlaceInfo, addBookmark, createReview } from "../api";
 
 import Modal from "./Modal";
 import PopupModal from "./PopupModal";
@@ -37,7 +37,7 @@ function Map() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReview, setIsReview] = useState(false);
 
-  const token = localStorage.getItem("Authorization");
+  let token = localStorage.getItem("Authorization");
 
   const handleAllClick = () => setType("all");
   const handleCafeClick = () => setType("CAFE");
@@ -146,7 +146,11 @@ function Map() {
 
   const handleClickReview = () => {
     if (token) {
-      setIsReview(true);
+      if (isReview) {
+        setIsReview(false);
+      } else {
+        setIsReview(true);
+      }
     } else {
       alert("로그인이 필요한 서비스 입니다.");
       navigate("/login");
@@ -276,7 +280,11 @@ function Map() {
 
             {isReview && (
               <div className="review-form-box">
-                <ReviewForm placeId={selectedPlace.id} token={token} />
+                <ReviewForm
+                  placeId={selectedPlace.id}
+                  token={token}
+                  onSubmit={createReview}
+                />
               </div>
             )}
             <ul>
