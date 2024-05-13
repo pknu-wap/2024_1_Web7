@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../function/AuthContext";
 
 import useGeolocation from "../hooks/useGeolocation";
-import { getPlaces, getPlaceInfo } from "../api";
+import { getPlaces, getPlaceInfo, addBookmark } from "../api";
 
 import Modal from "./Modal";
 import PopupModal from "./PopupModal";
 import ReviewForm from "./ReviewForm";
 
+import footImg from "../img/foot_green.png";
 import clockImg from "../img/clock.png";
 import addImg from "../img/location.png";
 import phoneImg from "../img/phone.png";
@@ -152,6 +153,20 @@ function Map() {
     }
   };
 
+  const handleClickBookmark = async () => {
+    try {
+      if (selectedPlace && token) {
+        await addBookmark(selectedPlace.id, token);
+        alert("북마크가 추가되었습니다.");
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    } catch (error) {
+      console.error("북마크 추가에 실패했습니다.", error);
+      alert("북마크 추가에 실패했습니다.");
+    }
+  };
+
   return (
     <div className="map-box">
       <div
@@ -217,10 +232,16 @@ function Map() {
 
       {selectedPlace && (
         <Modal isOpen={isModalOpen} closeModal={closeModal}>
-          <div className="name-type-rate">
-            <h2 className="place-name">{selectedPlace.name}</h2>
-            <span className="place-type">{selectedPlace.placeType} |</span>
-            <span className="place-rate">{selectedPlace.rate}</span>
+          <div className="name-type-rate-bookmark">
+            <div className="name-type-rate">
+              <h2 className="place-name">{selectedPlace.name}</h2>
+              <span className="place-type">{selectedPlace.placeType} |</span>
+              <span className="place-rate">{selectedPlace.rate}</span>
+            </div>
+            <button className="bookmark-btn" onClick={handleClickBookmark}>
+              <img src={footImg} />
+              <span>저장</span>
+            </button>
           </div>
           <hr className="info-window-line" />
           <div className="isOpen-add">

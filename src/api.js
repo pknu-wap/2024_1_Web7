@@ -120,3 +120,24 @@ export async function createReview(formData, token) {
     throw error;
   }
 }
+
+export async function addBookmark(id, token) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/bookmark`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(id),
+      }
+    );
+    const body = await response.json();
+    return body.id;
+  } catch (error) {
+    console.error("즐겨찾기에 실패했습니다.", error);
+    throw error;
+  }
+}

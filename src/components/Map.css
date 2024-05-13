@@ -47,10 +47,34 @@
 }
 
 /* 상세 정보창 */
+
+.name-type-rate-bookmark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .name-type-rate {
   display: flex;
   align-items: center;
   gap: 2%;
+  width: 100%;
+}
+
+.bookmark-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15%;
+  background-color: transparent;
+  border: 1px solid #0075ff;
+  border-radius: 30px;
+  padding: 1.5% 3%;
+  cursor: pointer;
+}
+
+.bookmark-btn img {
+  width: 20px;
 }
 
 .place-name {
@@ -63,7 +87,6 @@
 }
 
 .info-window-line {
-  margin-top: 2%;
   padding: 0;
 }
 
