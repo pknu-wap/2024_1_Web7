@@ -95,7 +95,7 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/basic/signup", "/api/map/naver/guest/**", "/api/test/**").permitAll()
+                        .requestMatchers("/api/basic/signup", "/api/map/naver/guest/**", "/api/test/**", "/api/test", "/api/place/review/write").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/basic/login",
                                 "/api/basic/logout",

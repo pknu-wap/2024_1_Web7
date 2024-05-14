@@ -8,6 +8,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,7 @@ import java.util.List;
 /*
  * 모든 요청에서 JWT 토큰 검증하는 필터
  */
+@Slf4j
 @RequiredArgsConstructor
 public class JwtValidateFilter extends OncePerRequestFilter {
 
@@ -31,6 +33,7 @@ public class JwtValidateFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        log.info(request.getHeader(HttpHeaders.AUTHORIZATION));
         if (isSkip(request)) {
             filterChain.doFilter(request, response);
             return;
@@ -77,7 +80,7 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 
     private boolean isSkip(HttpServletRequest request){
 
-        String[] skipUrls = {"/api/basic/signup", "/api/basic/login", "/api/test/place/add"};
+        String[] skipUrls = {"/api/basic/signup", "/api/basic/login", "/api/test/place/add", "/api/place/review/write"};
 
         if (Arrays.stream(skipUrls).anyMatch(url -> url.equals(request.getRequestURI()))) {
             return true;
