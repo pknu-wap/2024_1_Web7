@@ -103,7 +103,8 @@ public class SecurityConfig {
                                 "/api/test/",
                                 "/api/gpt/**",
                                 "/api/mypage/**",
-                                "/api/bookemark/**").hasAnyAuthority("USER", "ADMIN")
+                                "/api/bookemark/**",
+                                "/api/place/review/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())
 
                 .addFilterBefore(new CustomUsernamePasswordAuthFilter(objectMapper, authManager), UsernamePasswordAuthenticationFilter.class)

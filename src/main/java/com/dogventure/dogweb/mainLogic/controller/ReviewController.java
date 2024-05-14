@@ -5,6 +5,7 @@ import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestD
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ReviewIdResponseDto;
 import com.dogventure.dogweb.mainLogic.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +21,10 @@ public class ReviewController {
     private final ReviewService service;
 
     @PostMapping("/write")
-    public ResponseEntity<ReviewIdResponseDto> write(@RequestBody ReviewRequestDto requestDto) {
+    public ResponseEntity write(@RequestBody ReviewRequestDto requestDto) {
 
-        ReviewIdResponseDto responseDto = service.save(requestDto);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        service.save(requestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/update")
