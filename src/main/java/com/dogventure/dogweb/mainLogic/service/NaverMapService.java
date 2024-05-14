@@ -79,7 +79,7 @@ public class NaverMapService {
             bookmark = true;
         }
 
-        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark, reviewDtos);
+        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark, reviewDtos);
     }
 
     public List<SimplePlaceDto> searchPlace(String word) {

@@ -23,6 +23,10 @@ public class GuestDetailPlaceDto {
 
     private boolean isOpen;
 
+    private String openTime;
+
+    private String endTime;
+
     private String address;
 
     private String phoneNumber;

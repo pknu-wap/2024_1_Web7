@@ -61,7 +61,7 @@ public class GuestNaverMapService {
         LocalTime now = LocalTime.now();
         boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-        return new GuestDetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
+        return new GuestDetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
     }
 
     public List<GuestSimplePlaceDto> searchPlace(String word) {
