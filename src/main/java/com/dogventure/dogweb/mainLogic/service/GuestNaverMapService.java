@@ -52,7 +52,8 @@ public class GuestNaverMapService {
 
         for (Review review : place.getReviews()) {
             User user = review.getUser();
-            UserDto userDto = new UserDto(user.getId(), user.getUsername());
+            ImageDto userImageDto = new ImageDto(user.getImage().getFilename(), user.getImage().getData());
+            UserDto userDto = new UserDto(user.getId(), userImageDto, user.getUsername());
             reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
         }
 
