@@ -3,10 +3,7 @@ package com.dogventure.dogweb.mainLogic.entity;
 import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -45,6 +42,7 @@ public class Place {
 
     private PlaceType placeType;
 
+    @Setter
     private Double rate;
 
     @OneToMany(mappedBy = "place")

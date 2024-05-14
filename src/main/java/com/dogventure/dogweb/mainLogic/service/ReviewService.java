@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -35,6 +37,12 @@ public class ReviewService {
         Review review = new Review(requestDto.getRate(), requestDto.getContent(), user, place);
 
         reviewRepository.save(review);
+
+        Double averageRate = place.getReviews().stream().mapToDouble(Review::getRate).average().getAsDouble();
+
+        place.setRate(averageRate);
+
+        placeRepository.save(place);
     }
 
     public void update(ReviewUpdateRequestDto requestDto) {
@@ -45,5 +53,13 @@ public class ReviewService {
         review.setContent(requestDto.getContent());
 
         reviewRepository.save(review);
+
+        Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
+
+        Double averageRate = place.getReviews().stream().mapToDouble(Review::getRate).average().getAsDouble();
+
+        place.setRate(averageRate);
+
+        placeRepository.save(place);
     }
 }
