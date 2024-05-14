@@ -9,8 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MypageResponseDto {
 
-    private ImageDto image;
-
     private String name;
 
     private String description;

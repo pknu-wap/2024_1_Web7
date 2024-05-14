@@ -30,10 +30,7 @@ public class MypageService {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = repository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
-        Image image = user.getImage();
-        ImageDto imageDto = new ImageDto(image.getFilename(), image.getData());
-
-        MypageResponseDto responseDto = new MypageResponseDto(imageDto, user.getUsername(), user.getDescription());
+        MypageResponseDto responseDto = new MypageResponseDto(user.getUsername(), user.getDescription());
 
         return responseDto;
     }
@@ -46,17 +43,6 @@ public class MypageService {
         user.setUsername(requestDto.getName());
         user.setDescription(requestDto.getDescription());
 
-        repository.save(user);
-    }
-
-    public void setImage(MultipartFile file) throws IOException {
-
-        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = repository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
-
-        Image image = new Image(file.getOriginalFilename(), file.getBytes());
-        imageRepository.save(image);
-        user.setImage(image);
         repository.save(user);
     }
 }

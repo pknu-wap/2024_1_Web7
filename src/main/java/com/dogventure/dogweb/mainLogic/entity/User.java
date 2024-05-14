@@ -33,10 +33,6 @@ public class User {
 
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "image_id")
-    private Image image;
-
     @OneToMany
     @JoinColumn(name = "place_id")
     private List<Place> bookmarkPlaces = new ArrayList<>();

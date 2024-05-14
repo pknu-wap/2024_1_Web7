@@ -4,6 +4,7 @@ import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.NaverMapCategoryDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.*;
+import com.dogventure.dogweb.mainLogic.entity.Dog;
 import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.entity.Review;
 import com.dogventure.dogweb.mainLogic.entity.User;
@@ -62,9 +63,16 @@ public class NaverMapService {
 
         for (Review review : place.getReviews()) {
             User user = review.getUser();
-            ImageDto userImageDto = new ImageDto(user.getImage().getFilename(), user.getImage().getData());
-            UserDto userDto = new UserDto(user.getId(), userImageDto, user.getUsername());
-            reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
+
+            if (user.getDog() == null) {
+                UserDto userDto = new UserDto(user.getId(), null, user.getUsername());
+                reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
+            } else {
+                Dog dog = user.getDog();
+                ImageDto userImageDto = new ImageDto(dog.getImage().getFilename(), dog.getImage().getData());
+                UserDto userDto = new UserDto(user.getId(), userImageDto, user.getUsername());
+                reviewDtos.add(new ReviewDto(review.getId(), review.getRate(), userDto, review.getContent()));
+            }
         }
 
         ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());

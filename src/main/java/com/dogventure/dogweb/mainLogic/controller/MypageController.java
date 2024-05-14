@@ -35,13 +35,6 @@ public class MypageController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/image")
-    public ResponseEntity setImage(@RequestParam("image") MultipartFile file) throws IOException {
-
-        service.setImage(file);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/dog/image")
     public ResponseEntity setDogImage(@RequestParam("image") MultipartFile file) throws IOException {
 
