@@ -41,6 +41,10 @@ public class User {
     @JoinColumn(name = "place_id")
     private List<Place> bookmarkPlaces = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "dog_id")
+    private Dog dog;
+
     public User(String username, String userId, String password, UserType authority) {
         this.username = username;
         this.email = userId;
