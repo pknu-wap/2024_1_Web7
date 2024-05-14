@@ -42,6 +42,8 @@ function Map() {
   const handleAllClick = () => setType("all");
   const handleCafeClick = () => setType("CAFE");
   const handleHospitalClick = () => setType("HOSPITAL");
+  const handleBeautyClick = () => setType("BEAUTY");
+  const handleGoddsClick = () => setType("GOODS");
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
@@ -51,6 +53,7 @@ function Map() {
           const response = await getPlaces({
             type: type,
             dogSizes: selectedDogSizes,
+            // token: token,
           });
           setPlaces(response);
         } catch (error) {
@@ -181,8 +184,8 @@ function Map() {
       <div className="type-filter-container">
         <div className="type-filter-box">
           <button onClick={handleAllClick}>ALL</button>
-          <button>미용</button>
-          <button>애견용품</button>
+          <button onClick={handleBeautyClick}>미용</button>
+          <button onClick={handleGoddsClick}>애견용품</button>
           <button onClick={handleHospitalClick}>병원</button>
           <button onClick={handleCafeClick}>카페</button>
         </div>
