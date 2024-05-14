@@ -95,13 +95,13 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/basic/signup", "/api/map/naver/guest/**", "/api/test/**", "/api/test", "/api/place/review/write").permitAll()
+                        .requestMatchers("/api/basic/signup", "/api/map/naver/guest/**", "/api/test/place/add").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/basic/login",
                                 "/api/basic/logout",
                                 "/api/map/naver/place/**",
+                                "/api/test/",
                                 "/api/gpt/**",
-                                "/api/place/review/**",
                                 "/api/mypage/**",
                                 "/api/bookemark/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())

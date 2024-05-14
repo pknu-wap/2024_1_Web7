@@ -80,7 +80,7 @@ public class JwtValidateFilter extends OncePerRequestFilter {
 
     private boolean isSkip(HttpServletRequest request){
 
-        String[] skipUrls = {"/api/basic/signup", "/api/basic/login", "/api/test/place/add", "/api/place/review/write"};
+        String[] skipUrls = {"/api/basic/signup", "/api/basic/login", "/api/test/place/add"};
 
         if (Arrays.stream(skipUrls).anyMatch(url -> url.equals(request.getRequestURI()))) {
             return true;
