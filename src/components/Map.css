@@ -120,8 +120,15 @@
   padding: 1%;
 }
 
+.place-imgs {
+  display: flex;
+  gap: 2%;
+  overflow-x: auto; /* 내용이 요소의 크기를 벗어날 때 가로 스크롤을 표시합니다. */
+  white-space: nowrap;
+}
+
 .place-img {
-  width: 40%;
+  width: 30%;
   padding: 1%;
   border-radius: 30px;
 }

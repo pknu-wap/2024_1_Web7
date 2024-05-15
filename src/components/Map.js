@@ -30,6 +30,7 @@ function Map() {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedDogSizes, setSelectedDogSizes] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [images, setImages] = useState([]);
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -81,21 +82,32 @@ function Map() {
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
-    const createMarker = (place) => {
+    const createMarker = async (place) => {
       const { id, name, x, y } = place;
 
-      return new Marker({
+      const placeMarker = new Marker({
         key: id,
         title: name,
         position: new LatLng(x, y),
         map: mapRef.current,
       });
+
+      naver.maps.Event.addListener(placeMarker, "click", () => {
+        handleMarkerClick(place);
+      });
+
+      return placeMarker;
     };
+
+    places.forEach((place) => {
+      createMarker(place);
+    });
 
     const handleMarkerClick = async (place) => {
       try {
         const response = await getPlaceInfo({ id: place.id });
         setSelectedPlace(response);
+        setImages(response.images);
         setReviews(response.reviews);
       } catch (error) {
         console.error("장소 정보를 불러오는 데 실패했습니다.", error);
@@ -103,16 +115,11 @@ function Map() {
       setIsOpen(place.isOpen);
       openModal();
     };
-
-    places.forEach((place) => {
-      const placeMarker = createMarker(place);
-      naver.maps.Event.addListener(placeMarker, "click", () => {
-        handleMarkerClick(place);
-      });
-    });
   }, [places]);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPlace(null);
@@ -265,11 +272,20 @@ function Map() {
               {selectedPlace.phoneNumber}
             </div>
           </div>
-          <div>
-            <img
-              className="place-img"
-              src={`data:image/jpeg;base64,${selectedPlace.image.data}`}
-            />
+          <div className="place-imgs">
+            {images.map((image, index) => {
+              const base64URL = image.data;
+              const imageURL = `data:image/jpeg;base64,${base64URL}`;
+
+              return (
+                <img
+                  key={index}
+                  className="place-img"
+                  src={imageURL}
+                  alt={"장소 이미지"}
+                />
+              );
+            })}
           </div>
           <hr className="info-window-line" />
           <div className="review-box">

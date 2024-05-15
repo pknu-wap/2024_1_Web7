@@ -1,42 +1,62 @@
 .PlaceList {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .PlaceListItem {
   display: flex;
   align-items: center;
   margin: 2% 4%;
-  padding: 15px;
+  padding: 3%;
   border: 2px solid #ccc;
   border-radius: 15px;
+  width: 80%;
 }
 
 .PlaceListItem-info {
   flex: 1;
 }
 
-.name-type-rate {
+.PlaceListItem-name-type-rate {
   display: flex;
   align-items: center;
   gap: 2%;
 }
 
-.place-name {
+.PlaceListItem-place-name {
   font-size: 20px;
   font-weight: 700;
 }
 
-.place-type {
+.PlaceListItem-place-type {
   color: #7b7b7b;
 }
 
-.inopen-add {
+.PlaceListItem-inopen-add {
   display: flex;
   align-items: center;
   gap: 2%;
 }
 
-.place-img {
+.PlaceListItem-image-container {
+  display: flex;
+  gap: 2%;
+  justify-content: space-between;
+  overflow-x: auto; /* 내용이 요소의 크기를 벗어날 때 가로 스크롤을 표시합니다. */
+  white-space: nowrap; /* 요소 내의 텍스트가 줄 바꿈되지 않고 한 줄로 유지됩니다. */
+  padding-top: 3%;
+}
+
+.PlaceListItem-place-img {
   margin-top: 5px;
+  border-radius: 15px;
+  width: 30%;
+}
+
+.PlaceList-list {
+  display: flex;
+  justify-content: center;
 }
