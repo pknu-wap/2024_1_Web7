@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTypePlaces, searchPlaces, tokenApi } from "../api";
+import { getTypePlaces, searchPlaces } from "../api";
 import dog from "../img/dog.jpg";
 import mapBtn from "../img/dogventure_logo_white.png";
 import "./MainPage.css";
@@ -73,9 +73,9 @@ function MainPage() {
     handleLoad();
   }, [search, type]);
 
-  const handleClickToken = (token) => {
-    tokenApi(token);
-  };
+  // const handleClickToken = (token) => {
+  //   tokenApi(token);
+  // };
 
   return (
     <>
@@ -85,7 +85,7 @@ function MainPage() {
           <button>맵 이동</button>
           {/* <img src={mapBtn} alt="맵 이동 버튼" /> */}
         </Link>
-        <button onClick={handleClickToken(token)}>토큰</button>
+        {/* <button onClick={handleClickToken(token)}>토큰</button> */}
       </div>
       <div className="search-box">
         <form className="search-form" onSubmit={handleSearchSubmit}>

@@ -1,5 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 // 비 로그인시 장소만 필터
 export async function getTypePlaces({ type = "" }) {
   try {
@@ -112,18 +110,18 @@ export async function searchPlaces({ word = "" }) {
   }
 }
 
-export async function tokenApi(token) {
-  try {
-    await fetch(`${process.env.REACT_APP_API_URL}api/test/`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.log("토큰 오류");
-  }
-}
+// export async function tokenApi(token) {
+//   try {
+//     await fetch(`${process.env.REACT_APP_API_URL}api/test/`, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//   } catch (error) {
+//     console.log("토큰 오류");
+//   }
+// }
 
 export async function createReview(formData, token) {
   try {
