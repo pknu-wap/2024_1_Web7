@@ -38,6 +38,10 @@ public class ReviewService {
 
         reviewRepository.save(review);
 
+        place.addReview(review);
+
+        placeRepository.save(place);
+
         Double averageRate = place.getReviews().stream().mapToDouble(Review::getRate).average().getAsDouble();
 
         place.setRate(averageRate);

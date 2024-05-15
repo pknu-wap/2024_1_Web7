@@ -19,7 +19,7 @@ public class GuestDetailPlaceDto {
 
     private String name;
 
-    private ImageDto image;
+    private List<ImageDto> images;
 
     private boolean isOpen;
 

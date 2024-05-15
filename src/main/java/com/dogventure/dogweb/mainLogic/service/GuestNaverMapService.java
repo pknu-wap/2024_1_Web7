@@ -4,14 +4,12 @@ import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.NaverMapCategoryDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.*;
-import com.dogventure.dogweb.mainLogic.entity.Dog;
-import com.dogventure.dogweb.mainLogic.entity.Place;
-import com.dogventure.dogweb.mainLogic.entity.Review;
-import com.dogventure.dogweb.mainLogic.entity.User;
+import com.dogventure.dogweb.mainLogic.entity.*;
 import com.dogventure.dogweb.mainLogic.repository.PlaceRepository;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +18,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -34,12 +33,18 @@ public class GuestNaverMapService {
         List<GuestSimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -65,12 +70,17 @@ public class GuestNaverMapService {
             }
         }
 
-        ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+        List<Image> images = place.getImages();
+        List<ImageDto> imageDtos = new ArrayList<>();
+
+        for (Image image : images) {
+            imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+        }
 
         LocalTime now = LocalTime.now();
         boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-        return new GuestDetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
+        return new GuestDetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
     }
 
     public List<GuestSimplePlaceDto> searchPlace(String word) {
@@ -84,12 +94,18 @@ public class GuestNaverMapService {
         List<GuestSimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;
@@ -114,12 +130,18 @@ public class GuestNaverMapService {
         List<GuestSimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
+            simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
         }
 
         return simplePlaceDtos;

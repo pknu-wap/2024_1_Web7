@@ -4,10 +4,7 @@ import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.NaverMapCategoryDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.*;
-import com.dogventure.dogweb.mainLogic.entity.Dog;
-import com.dogventure.dogweb.mainLogic.entity.Place;
-import com.dogventure.dogweb.mainLogic.entity.Review;
-import com.dogventure.dogweb.mainLogic.entity.User;
+import com.dogventure.dogweb.mainLogic.entity.*;
 import com.dogventure.dogweb.mainLogic.repository.PlaceRepository;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -39,7 +36,13 @@ public class NaverMapService {
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
@@ -49,7 +52,7 @@ public class NaverMapService {
                 bookmark = true;
             }
 
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
         }
 
         return simplePlaceDtos;
@@ -75,7 +78,12 @@ public class NaverMapService {
             }
         }
 
-        ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+        List<Image> images = place.getImages();
+        List<ImageDto> imageDtos = new ArrayList<>();
+
+        for (Image image : images) {
+            imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+        }
 
         LocalTime now = LocalTime.now();
         boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
@@ -88,7 +96,7 @@ public class NaverMapService {
             bookmark = true;
         }
 
-        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark, reviewDtos);
+        return new DetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark, reviewDtos);
     }
 
     public List<SimplePlaceDto> searchPlace(String word) {
@@ -105,7 +113,13 @@ public class NaverMapService {
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
@@ -115,7 +129,7 @@ public class NaverMapService {
                 bookmark = true;
             }
 
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
         }
 
         return simplePlaceDtos;
@@ -143,7 +157,13 @@ public class NaverMapService {
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
         for (Place place : places) {
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
@@ -153,7 +173,7 @@ public class NaverMapService {
                 bookmark = true;
             }
 
-            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
+            simplePlaceDtos.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), bookmark));
         }
 
         return simplePlaceDtos;

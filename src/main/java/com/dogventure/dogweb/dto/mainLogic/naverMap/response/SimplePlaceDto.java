@@ -5,6 +5,8 @@ import com.dogventure.dogweb.constant.PlaceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class SimplePlaceDto {
@@ -17,7 +19,7 @@ public class SimplePlaceDto {
 
     private String name;
 
-    private ImageDto image;
+    private List<ImageDto> images;
 
     private boolean isOpen;
 

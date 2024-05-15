@@ -3,6 +3,7 @@ package com.dogventure.dogweb.mainLogic.service;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.PlaceIdRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ImageDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.SimplePlaceDto;
+import com.dogventure.dogweb.mainLogic.entity.Image;
 import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.entity.User;
 import com.dogventure.dogweb.mainLogic.repository.PlaceRepository;
@@ -59,12 +60,17 @@ public class BookmarkService {
 
         for (Place place : user.getBookmarkPlaces()) {
 
-            ImageDto imageDto = new ImageDto(place.getImage().getFilename(), place.getImage().getData());
+            List<Image> images = place.getImages();
+            List<ImageDto> imageDtos = new ArrayList<>();
+
+            for (Image image : images) {
+                imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
+            }
 
             LocalTime now = LocalTime.now();
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
-            bookmarkedPlaces.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDto, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), true));
+            bookmarkedPlaces.add(new SimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), true));
         }
 
         return bookmarkedPlaces;
