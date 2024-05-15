@@ -1,7 +1,7 @@
 import "./PlaceList.css";
 
 function PlaceListItem({ item }) {
-  const { name, images, isOpen, placeType, rate, address } = item;
+  const { name, images, isOpen, placeType, rate } = item;
 
   return (
     <div className="PlaceListItem">

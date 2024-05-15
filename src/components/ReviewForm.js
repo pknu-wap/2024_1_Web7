@@ -1,58 +1,48 @@
 import { useState } from "react";
 import "./ReviewForm.css";
-
-function sanitize(type, value) {
-  switch (type) {
-    case "number":
-      return Number(value) || 0;
-
-    default:
-      return value;
-  }
-}
+import { createReview } from "../api";
 
 const INITIAL_VALUES = {
   content: "",
-  rate: 5,
-  placeId: null,
+  rate: "5.0",
+  placeId: "",
 };
 
-function ReviewForm({ placeId, token, onSubmit }) {
+function ReviewForm(id) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
+  const token = localStorage.getItem("Authorization");
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("rate", INITIAL_VALUES.rate);
-    formData.append("content", values.content);
-    formData.append("placeId", placeId);
 
     let result;
 
     try {
       setIsSubmitting(true);
-      result = await onSubmit(formData, token);
+      result = await createReview(
+        {
+          rate: "5.0",
+          content: values.content,
+          placeId: id,
+        },
+        token
+      );
     } catch (error) {
       console.log(error);
-      return;
     } finally {
       setIsSubmitting(false);
     }
     setValues(INITIAL_VALUES);
   };
 
-  const handleChange = (name, value) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setValues((preValues) => ({
       ...preValues,
       [name]: value,
     }));
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
-    handleChange(name, sanitize(type, value));
   };
 
   return (
@@ -64,7 +54,7 @@ function ReviewForm({ placeId, token, onSubmit }) {
         name="content"
         value={values.content}
         placeholder="100자 이내 리뷰를 작성해주세요!"
-        onChange={handleInputChange}
+        onChange={handleChange}
         maxLength={100}
       />
 

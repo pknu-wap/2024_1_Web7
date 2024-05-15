@@ -15,6 +15,7 @@ import addImg from "../img/location.png";
 import phoneImg from "../img/phone.png";
 
 import "./Map.css";
+import ReviewTest from "./ReviewTest";
 
 function Map() {
   const mapRef = useRef(null);
@@ -115,7 +116,7 @@ function Map() {
       setIsOpen(place.isOpen);
       openModal();
     };
-  }, [places]);
+  }, [places, reviews]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -168,16 +169,16 @@ function Map() {
   };
 
   const handleClickBookmark = async () => {
+    const id = selectedPlace.id;
     try {
       if (selectedPlace && token) {
-        await addBookmark(selectedPlace.id, token);
+        await addBookmark(id, token);
         alert("북마크가 추가되었습니다.");
       } else {
         alert("로그인이 필요합니다.");
       }
     } catch (error) {
       console.error("북마크 추가에 실패했습니다.", error);
-      alert("북마크 추가에 실패했습니다.");
     }
   };
 
@@ -296,13 +297,14 @@ function Map() {
               </div>
               <button onClick={handleClickReview}>리뷰 쓰기</button>
             </div>
+            <ReviewTest />
 
             {isReview && (
               <div className="review-form-box">
                 <ReviewForm
                   placeId={selectedPlace.id}
                   token={token}
-                  onSubmit={createReview}
+                  // onSubmit={createReview}
                 />
               </div>
             )}
@@ -314,7 +316,7 @@ function Map() {
                       <div>프로필 이미지</div>
                     </div>
                     <div>
-                      <span>{review.User.username}</span>
+                      {/* <span>{review.User.username}</span> */}
                       <span>{review.rate}</span>
                       <div className="reivew-content">{review.content}</div>
                     </div>

@@ -115,7 +115,7 @@ export async function searchPlaces({ word = "" }) {
 //     await fetch(`${process.env.REACT_APP_API_URL}api/test/`, {
 //       method: "POST",
 //       headers: {
-//         Authorization: `Bearer ${token}`,
+//         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3Q0QHRlc3QuY29tIiwiYXV0aG9yaXR5IjoiVVNFUiIsImlhdCI6MTcxNTc3Njg4MSwiZXhwIjoxNzE1NzgwNDgxfQ.fREcAoZ07rv2dMeAtNHDv0kwzUk9RdjpAkADaWXDLAg`,
 //       },
 //     });
 //   } catch (error) {
@@ -123,21 +123,25 @@ export async function searchPlaces({ word = "" }) {
 //   }
 // }
 
-export async function createReview(formData, token) {
+export async function createReview({ rate, content, placeId }, token) {
   try {
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/place/review/write`,
       {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: formData,
+        body: JSON.stringify({
+          rate: rate,
+          content: content,
+          placeId: placeId,
+        }),
       }
     );
+    const data = await response.json();
+    console.log(data);
   } catch (error) {
     console.error("리뷰를 작성하는 데 실패했습니다.", error);
     throw error;
@@ -149,7 +153,7 @@ export async function addBookmark(id, token) {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/bookmark`,
       {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
