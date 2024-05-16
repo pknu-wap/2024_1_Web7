@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getTypePlaces, searchPlaces } from "../api";
-import dog from "../img/dog.jpg";
-import mapBtn from "../img/dogventure_logo_white.png";
 import "./MainPage.css";
-import PlaceList from "../components/PlaceList";
+
+import mainImg from "../img/mainBg.png";
 import searchImg from "../img/search.png";
+
+import mapBtn from "../img/dogventure_logo_white.png";
+import PlaceList from "../components/PlaceList";
 import ChatbotHG from "../components/ChatbotHG";
 
 function AppFilterButton({ selected, children, onClick }) {
@@ -75,7 +77,7 @@ function MainPage() {
   return (
     <>
       <div className="bg-box">
-        <img className="bg-img" src={dog} />
+        <img className="bg-img" src={mainImg} />
         <Link to="/map">
           <button>맵 이동</button>
           {/* <img src={mapBtn} alt="맵 이동 버튼" /> */}
