@@ -1,6 +1,7 @@
 .PlaceList {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +11,7 @@
   display: flex;
   align-items: center;
   margin: 2% 4%;
-  padding: 3%;
+  padding: 2.5% 5%;
   border: 2px solid #ccc;
   border-radius: 15px;
   width: 80%;
@@ -23,37 +24,48 @@
 .PlaceListItem-name-type-rate {
   display: flex;
   align-items: center;
-  gap: 2%;
+  gap: 1.2%;
 }
 
 .PlaceListItem-place-name {
   font-size: 20px;
   font-weight: 700;
+  margin: 0;
 }
 
 .PlaceListItem-place-type {
   color: #7b7b7b;
 }
 
+.PlaceListItem-rateImg {
+  width: 13px;
+  margin-right: 4px;
+}
+
 .PlaceListItem-inopen-add {
   display: flex;
   align-items: center;
-  gap: 2%;
+  gap: 1%;
+  margin-top: 10px;
+}
+
+.PlaceListItem-inopen-img {
+  width: 13px;
 }
 
 .PlaceListItem-image-container {
   display: flex;
-  gap: 2%;
+  gap: 1%;
   justify-content: space-between;
   overflow-x: auto; /* 내용이 요소의 크기를 벗어날 때 가로 스크롤을 표시합니다. */
   white-space: nowrap; /* 요소 내의 텍스트가 줄 바꿈되지 않고 한 줄로 유지됩니다. */
-  padding-top: 3%;
+  padding-top: 1%;
 }
 
 .PlaceListItem-place-img {
   margin-top: 5px;
   border-radius: 15px;
-  width: 30%;
+  width: 32%;
 }
 
 .PlaceList-list {

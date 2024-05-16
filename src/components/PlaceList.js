@@ -1,4 +1,6 @@
 import "./PlaceList.css";
+import inOpenImg from "../img/inOpen.png";
+import rateImg from "../img/rateImg.png";
 
 function PlaceListItem({ item }) {
   const { name, images, isOpen, placeType, rate } = item;
@@ -8,10 +10,14 @@ function PlaceListItem({ item }) {
       <div className="PlaceListItem-info">
         <div className="PlaceListItem-name-type-rate">
           <h1 className="PlaceListItem-place-name">{name}</h1>
-          <span className="PlaceListItem-place-type">{placeType}</span>
-          <span className="PlaceListItem-place-rate">{rate}</span>
+          <span className="PlaceListItem-place-type">{placeType} |</span>
+          <span className="PlaceListItem-place-rate">
+            <img className="PlaceListItem-rateImg" src={rateImg} />
+            {rate}
+          </span>
         </div>
         <div className="PlaceListItem-inopen-add">
+          <img className="PlaceListItem-inopen-img" src={inOpenImg} />
           {{ isOpen } ? "영업 중" : "금일 영업 마감"}
         </div>
         <div className="PlaceListItem-image-container">

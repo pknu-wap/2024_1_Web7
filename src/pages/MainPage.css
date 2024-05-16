@@ -1,7 +1,40 @@
+/* 메인 배경 이미지 */
+.bg-box {
+  position: relative;
+}
+
 .bg-img {
   width: 100%;
   height: 550px;
-  position: relative;
+}
+
+.map-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+
+  background-color: #0075ff;
+  color: #ffffff;
+  font-family: "Pretendard";
+  border: none;
+  border-radius: 30px;
+
+  cursor: pointer;
+}
+
+.map-btn-img {
+  width: 10px;
+  height: auto;
+}
+
+.map-btn-text {
+  white-space: nowrap;
 }
 
 .mainPage {
@@ -14,27 +47,31 @@
   background-repeat: no-repeat;
 }
 
-.search-box {
+.place-nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
 }
+
+/* 검색 */
 
 .search-form {
   border: 1.5px solid #0075ff;
   border-radius: 30px;
   display: flex;
-  width: 70%;
-  padding: 2px 0px 2px 15px;
+  align-items: center;
+  width: 100%;
+  padding: 1px 0px 1px 15px;
 }
 
 .search-input {
   width: 80%;
-  height: 100%;
   flex-grow: 1;
   border: none;
   background-color: transparent;
 
-  font-size: 18px;
+  font-size: 15px;
   font-family: "Pretendard";
   font-weight: 600;
 }
@@ -44,12 +81,13 @@
 }
 
 .search-btn {
-  display: block;
+  display: flex;
   background-color: transparent;
   border: none;
-  width: 55px;
-  height: 55px;
-  padding: 15px;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  padding: 0;
   cursor: pointer;
 }
 
@@ -57,11 +95,13 @@
   width: 100%;
 }
 
-.filter-btn-box {
+/* 필터바 */
+
+.mainPage-filter-btn-box {
   display: flex;
   justify-content: start;
   gap: 8px;
-  padding: 2% 3%;
+  padding: 2% 3% 0 0;
 }
 
 .filter-btn {
@@ -69,7 +109,7 @@
   background-color: transparent;
   cursor: pointer;
   font-size: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 
 .filter-btn:hover {
@@ -78,4 +118,11 @@
 
 .filter-btn.selected-btn {
   border-bottom: 2px solid #0075ff;
+}
+
+.place-nav-line {
+  border: #9d9d9d 0.7px solid;
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
 }
