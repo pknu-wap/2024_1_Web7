@@ -11,9 +11,21 @@
 
 .type-filter-box {
   display: flex;
-  gap: 5%;
+  flex-direction: row;
+  gap: 65%;
+
   position: absolute;
-  top: 5%;
+  top: 10%;
+  right: 53%;
+  transform: translate(-50%, -50%);
+}
+
+.type-filter-btn {
+  width: 15px;
+}
+
+.type-filter-btn img {
+  width: 65px;
 }
 
 /* 우측 사이즈 필터, 검색, 북마크 박스*/

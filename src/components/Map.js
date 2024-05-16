@@ -13,6 +13,16 @@ import footImg from "../img/foot_green.png";
 import clockImg from "../img/clock.png";
 import addImg from "../img/location.png";
 import phoneImg from "../img/phone.png";
+import allNone from "../img/all_none.png";
+import allSelec from "../img/all_selec.png";
+import beautyNone from "../img/beauty_none.png";
+import beautySelec from "../img/beauty_selec.png";
+import cafeNone from "../img/cafe_none.png";
+import cafeSelec from "../img/cafe_selec.png";
+import goodsNone from "../img/goods_none.png";
+import goodsSelec from "../img/goods_selec.png";
+import hosNone from "../img/hos_none.png";
+import hosSelec from "../img/hos_selec.png";
 
 import "./Map.css";
 import ReviewTest from "./ReviewTest";
@@ -45,7 +55,7 @@ function Map() {
   const handleCafeClick = () => setType("CAFE");
   const handleHospitalClick = () => setType("HOSPITAL");
   const handleBeautyClick = () => setType("BEAUTY");
-  const handleGoddsClick = () => setType("GOODS");
+  const handleGoodsClick = () => setType("GOODS");
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
@@ -191,11 +201,33 @@ function Map() {
       />
       <div className="type-filter-container">
         <div className="type-filter-box">
-          <button onClick={handleAllClick}>ALL</button>
-          <button onClick={handleBeautyClick}>미용</button>
-          <button onClick={handleGoddsClick}>애견용품</button>
-          <button onClick={handleHospitalClick}>병원</button>
-          <button onClick={handleCafeClick}>카페</button>
+          <div className="type-filter-btn" onClick={handleAllClick}>
+            {type === "all" ? <img src={allSelec} /> : <img src={allNone} />}
+          </div>
+          <div className="type-filter-btn" onClick={handleBeautyClick}>
+            {type === "BEAUTY" ? (
+              <img src={beautySelec} />
+            ) : (
+              <img src={beautyNone} />
+            )}
+          </div>
+          <div className="type-filter-btn" onClick={handleGoodsClick}>
+            {type === "GOODS" ? (
+              <img src={goodsSelec} />
+            ) : (
+              <img src={goodsNone} />
+            )}
+          </div>
+          <div className="type-filter-btn" onClick={handleHospitalClick}>
+            {type === "HOSPITAL" ? (
+              <img src={hosSelec} />
+            ) : (
+              <img src={hosNone} />
+            )}
+          </div>
+          <div className="type-filter-btn" onClick={handleCafeClick}>
+            {type === "CAFE" ? <img src={cafeSelec} /> : <img src={cafeNone} />}
+          </div>
         </div>
       </div>
 
