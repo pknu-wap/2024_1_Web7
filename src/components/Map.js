@@ -23,6 +23,7 @@ import goodsNone from "../img/goods_none.png";
 import goodsSelec from "../img/goods_selec.png";
 import hosNone from "../img/hos_none.png";
 import hosSelec from "../img/hos_selec.png";
+import rateImg from "../img/rateImg.png";
 
 import "./Map.css";
 
@@ -125,7 +126,7 @@ function Map() {
       setIsOpen(place.isOpen);
       openModal();
     };
-  }, [places, reviews]);
+  }, [places]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -323,7 +324,8 @@ function Map() {
           <div className="review-box">
             <div className="review-info-box">
               <div className="review-info">
-                <span>리뷰 |</span>
+                <span>리뷰 | </span>
+                <img className="rate-img" src={rateImg} />
                 <span className="place-rate">{selectedPlace.rate}</span>
               </div>
               <button onClick={handleClickReview}>리뷰 쓰기</button>
@@ -334,16 +336,19 @@ function Map() {
                 <ReviewForm id={selectedPlace.id} currentToken={token} />
               </div>
             )}
-            <ul>
+            <ul className="review-ul">
               {reviews.map((review) => {
                 return (
-                  <li key={review.id}>
-                    <div className="profile-img">
-                      <div>프로필 이미지</div>
-                    </div>
-                    <div>
-                      {/* <span>{review.User.username}</span> */}
-                      <span>{review.rate}</span>
+                  <li className="review-list" key={review.id}>
+                    <img className="review-profile-img" src={footImg} />
+                    <div className="review-content-box">
+                      <div>
+                        <span className="review-username">
+                          {review.user.username}
+                        </span>
+                        <span className="review-rate">{review.rate}</span>
+                      </div>
+
                       <div className="reivew-content">{review.content}</div>
                     </div>
                   </li>

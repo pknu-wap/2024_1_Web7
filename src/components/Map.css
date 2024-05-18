@@ -171,8 +171,58 @@
   margin-bottom: 2%;
 }
 
+.review-info {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.rate-img {
+  width: 13px;
+  margin: 0 4px;
+  padding-bottom: 2px;
+}
+
 .review-form-box {
   display: flex;
   border: 1px solid black;
   border-radius: 15px;
+}
+
+.review-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-list {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  font-family: "Pretendard";
+  padding: 2% 3%;
+  border: 1px solid #7b7b7b;
+  border-radius: 15px;
+  margin: 2% 0;
+}
+
+.review-profile-img {
+  width: 50px;
+  padding: 5px;
+}
+
+.review-content-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-rate {
+  margin-left: 10px;
+}
+
+.reivew-content {
+  color: #7b7b7b;
+  padding-top: 5px;
+  width: 400px;
+  word-wrap: break-word;
 }
