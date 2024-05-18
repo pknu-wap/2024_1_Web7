@@ -25,7 +25,6 @@ import hosNone from "../img/hos_none.png";
 import hosSelec from "../img/hos_selec.png";
 
 import "./Map.css";
-import ReviewTest from "./ReviewTest";
 
 function Map() {
   const mapRef = useRef(null);
@@ -329,15 +328,10 @@ function Map() {
               </div>
               <button onClick={handleClickReview}>리뷰 쓰기</button>
             </div>
-            <ReviewTest />
 
             {isReview && (
               <div className="review-form-box">
-                <ReviewForm
-                  placeId={selectedPlace.id}
-                  token={token}
-                  // onSubmit={createReview}
-                />
+                <ReviewForm id={selectedPlace.id} currentToken={token} />
               </div>
             )}
             <ul>

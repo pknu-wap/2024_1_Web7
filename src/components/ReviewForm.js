@@ -8,11 +8,9 @@ const INITIAL_VALUES = {
   placeId: "",
 };
 
-function ReviewForm(id) {
+function ReviewForm({ id, currentToken }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
-
-  const token = localStorage.getItem("Authorization");
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +25,7 @@ function ReviewForm(id) {
           content: values.content,
           placeId: id,
         },
-        token
+        currentToken
       );
     } catch (error) {
       console.log(error);

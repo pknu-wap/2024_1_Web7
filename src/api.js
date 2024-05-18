@@ -54,7 +54,7 @@ export async function getPlaces({ type = "all", dogSizes = [] }) {
   }
 }
 
-// 비로그인 상태 접속 시 타입, 사이즈 필터
+// 로그인 상태 접속 시 타입, 사이즈 필터
 // export async function getPlaces({ type = "all", dogSizes = [], token }) {
 //   try {
 //     const response = await fetch(
