@@ -8,31 +8,32 @@ const INITIAL_VALUES = {
   placeId: "",
 };
 
-function ReviewForm({ id, currentToken }) {
+function ReviewForm({ id, currentToken, onSubmitSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
 
+    const body = {
+      rate: values.rate,
+      content: values.content,
+      placeId: id,
+    };
+
     let result;
 
     try {
       setIsSubmitting(true);
-      result = await createReview(
-        {
-          rate: "5.0",
-          content: values.content,
-          placeId: id,
-        },
-        currentToken
-      );
+      result = await createReview(body, currentToken);
     } catch (error) {
       console.log(error);
     } finally {
       setIsSubmitting(false);
     }
+    // const { content } = result;
     setValues(INITIAL_VALUES);
+    // onSubmitSuccess(content);
   };
 
   const handleChange = (e) => {
@@ -45,7 +46,18 @@ function ReviewForm({ id, currentToken }) {
 
   return (
     <form className="ReviewForm" onSubmit={handleReviewSubmit}>
-      <div className="ReviewForm-rating">별점을 등록해주세요!</div>
+      <div className="ReviewForm-rating-box">
+        <span>별점을 등록해주세요!</span>
+        <input
+          className="ReviewForm-rate"
+          type="number"
+          name="rate"
+          value={values.rate}
+          min={0}
+          max={5}
+          onChange={handleChange}
+        />
+      </div>
 
       <textarea
         className="ReviewForm-content"

@@ -57,6 +57,25 @@ function Map() {
   const handleBeautyClick = () => setType("BEAUTY");
   const handleGoodsClick = () => setType("GOODS");
 
+  function ReviewList({ reviews, footImg }) {
+    return (
+      <ul className="review-ul">
+        {reviews.map((review) => (
+          <li className="review-list" key={review.id}>
+            <img className="review-profile-img" src={footImg} alt="Profile" />
+            <div className="review-content-box">
+              <div>
+                <span className="review-username">{review.user.username}</span>
+                <span className="review-rate">{review.rate}</span>
+              </div>
+              <div className="review-content">{review.content}</div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
@@ -127,6 +146,15 @@ function Map() {
       openModal();
     };
   }, [places]);
+
+  const handleReviewUpdate = async (place) => {
+    try {
+      const response = await getPlaceInfo({ id: place.id });
+      setReviews(response.reviews);
+    } catch (error) {
+      console.error("리뷰 업데이트에 실패하였습니다.");
+    }
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -333,28 +361,14 @@ function Map() {
 
             {isReview && (
               <div className="review-form-box">
-                <ReviewForm id={selectedPlace.id} currentToken={token} />
+                <ReviewForm
+                  id={selectedPlace.id}
+                  currentToken={token}
+                  onClick={handleReviewUpdate}
+                />
               </div>
             )}
-            <ul className="review-ul">
-              {reviews.map((review) => {
-                return (
-                  <li className="review-list" key={review.id}>
-                    <img className="review-profile-img" src={footImg} />
-                    <div className="review-content-box">
-                      <div>
-                        <span className="review-username">
-                          {review.user.username}
-                        </span>
-                        <span className="review-rate">{review.rate}</span>
-                      </div>
-
-                      <div className="reivew-content">{review.content}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+            <ReviewList reviews={reviews} footImg={footImg} />
           </div>
         </Modal>
       )}

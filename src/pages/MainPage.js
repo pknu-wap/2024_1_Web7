@@ -98,7 +98,6 @@ function MainPage() {
             <div className="map-btn-text">지도로 이동하기</div>
           </button>
         </Link>
-        {/* <button onClick={tokenApi}>토큰</button> */}
       </div>
       <div className="mainPage">
         <div className="place-nav">
