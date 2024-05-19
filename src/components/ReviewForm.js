@@ -8,7 +8,7 @@ const INITIAL_VALUES = {
   placeId: "",
 };
 
-function ReviewForm({ id, currentToken, onSubmitSuccess }) {
+function ReviewForm({ id, currentToken, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
@@ -26,14 +26,13 @@ function ReviewForm({ id, currentToken, onSubmitSuccess }) {
     try {
       setIsSubmitting(true);
       result = await createReview(body, currentToken);
+      onSubmit(result);
     } catch (error) {
       console.log(error);
     } finally {
       setIsSubmitting(false);
     }
-    // const { content } = result;
     setValues(INITIAL_VALUES);
-    // onSubmitSuccess(content);
   };
 
   const handleChange = (e) => {

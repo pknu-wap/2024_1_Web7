@@ -76,6 +76,10 @@ function Map() {
     );
   }
 
+  const handleReviewSubmit = (newReview) => {
+    setReviews((prevReviews) => [...prevReviews, newReview]);
+  };
+
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
@@ -147,15 +151,6 @@ function Map() {
     };
   }, [places]);
 
-  const handleReviewUpdate = async (place) => {
-    try {
-      const response = await getPlaceInfo({ id: place.id });
-      setReviews(response.reviews);
-    } catch (error) {
-      console.error("리뷰 업데이트에 실패하였습니다.");
-    }
-  };
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -207,10 +202,11 @@ function Map() {
   };
 
   const handleClickBookmark = async () => {
-    const id = selectedPlace.id;
+    const placeId = selectedPlace.id;
+
     try {
       if (selectedPlace && token) {
-        await addBookmark(id, token);
+        await addBookmark({ placeId: placeId, token: token });
         alert("북마크가 추가되었습니다.");
       } else {
         alert("로그인이 필요합니다.");
@@ -364,7 +360,7 @@ function Map() {
                 <ReviewForm
                   id={selectedPlace.id}
                   currentToken={token}
-                  onClick={handleReviewUpdate}
+                  onSubmit={handleReviewSubmit}
                 />
               </div>
             )}

@@ -148,7 +148,7 @@ export async function createReview({ rate, content, placeId }, token) {
   }
 }
 
-export async function addBookmark(id, token) {
+export async function addBookmark({ placeId, token }) {
   try {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/bookmark`,
@@ -158,7 +158,9 @@ export async function addBookmark(id, token) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(id),
+        body: JSON.stringify({
+          placeId: placeId,
+        }),
       }
     );
     const body = await response.json();
