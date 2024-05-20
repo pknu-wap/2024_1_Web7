@@ -24,6 +24,17 @@ import goodsSelec from "../img/goods_selec.png";
 import hosNone from "../img/hos_none.png";
 import hosSelec from "../img/hos_selec.png";
 import rateImg from "../img/rateImg.png";
+import filter from "../img/filter.png";
+import search from "../img/search.png";
+import footBlue from "../img/foot_blue.png";
+import size_all from "../img/size_all.png";
+import size_all2 from "../img/size_all2.png";
+import size_small from "../img/size_small.png";
+import size_small2 from "../img/size_small2.png";
+import size_mid from "../img/size_mid.png";
+import size_mid2 from "../img/size_mid2.png";
+import size_big from "../img/size_big.png";
+import size_big2 from "../img/size_big2.png";
 
 import "./Map.css";
 
@@ -39,7 +50,7 @@ function Map() {
   const [places, setPlaces] = useState([]);
   const [type, setType] = useState("all");
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedDogSizes, setSelectedDogSizes] = useState([]);
+  const [dogSize, setDogSize] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [images, setImages] = useState([]);
 
@@ -56,6 +67,23 @@ function Map() {
   const handleHospitalClick = () => setType("HOSPITAL");
   const handleBeautyClick = () => setType("BEAUTY");
   const handleGoodsClick = () => setType("GOODS");
+
+  const handleNullClick = () => {
+    setDogSize(null);
+    closeFilterModal();
+  };
+  const handleSmallClick = () => {
+    setDogSize("SMALL");
+    closeFilterModal();
+  };
+  const handleMediumClick = () => {
+    setDogSize("MEDIUM");
+    closeFilterModal();
+  };
+  const handleBigClick = () => {
+    setDogSize("BIG");
+    closeFilterModal();
+  };
 
   function ReviewList({ reviews, footImg }) {
     return (
@@ -87,7 +115,7 @@ function Map() {
         try {
           const response = await getPlaces({
             type: type,
-            dogSizes: selectedDogSizes,
+            dogSize: dogSize,
             // token: token,
           });
           setPlaces(response);
@@ -112,7 +140,7 @@ function Map() {
       };
       mapRef.current = new Map("map", mapOptions);
     }
-  }, [currentMyLocation, type, selectedDogSizes]);
+  }, [currentMyLocation, type, dogSize]);
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
@@ -173,20 +201,20 @@ function Map() {
     openFilterModal();
   };
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    if (checked) {
-      setSelectedDogSizes((prev) => {
-        if (prev.includes(name)) {
-          return prev; // 이미 선택된 사이즈일 경우 이전 배열 그대로 반환
-        } else {
-          return [...prev, name]; // 선택된 사이즈 배열에 추가
-        }
-      });
-    } else {
-      setSelectedDogSizes((prev) => prev.filter((size) => size !== name)); // 선택 해제된 사이즈를 배열에서 제거
-    }
-  };
+  // const handleCheckboxChange = (event) => {
+  //   const { name, checked } = event.target;
+  //   if (checked) {
+  //     setDogSize((prev) => {
+  //       if (prev.includes(name)) {
+  //         return prev; // 이미 선택된 사이즈일 경우 이전 배열 그대로 반환
+  //       } else {
+  //         return [...prev, name]; // 선택된 사이즈 배열에 추가
+  //       }
+  //     });
+  //   } else {
+  //     setDogSize((prev) => prev.filter((size) => size !== name)); // 선택 해제된 사이즈를 배열에서 제거
+  //   }
+  // };
 
   const handleClickReview = () => {
     if (token) {
@@ -257,9 +285,18 @@ function Map() {
 
       <div className="dogSize-filter-container">
         <div className="dogSize-filter-box">
-          <button onClick={handleFilterButtonClick}>필터</button>
-          <button>검색</button>
-          <button>내 장소</button>
+          <button onClick={handleFilterButtonClick}>
+            <img src={filter} />
+            <span>필터</span>
+          </button>
+          <button>
+            <img src={search} />
+            <span>검색</span>
+          </button>
+          <button>
+            <img src={footBlue} />
+            <span>내 장소</span>
+          </button>
         </div>
       </div>
 
@@ -269,34 +306,40 @@ function Map() {
           isOpen={isFilterModalOpen}
           closeModal={closeFilterModal}
         >
-          <div className="filter-btn-box">
-            <label>
-              <input
-                type="checkbox"
-                name="SMALL"
-                onChange={handleCheckboxChange}
-                checked={selectedDogSizes.includes("SMALL")}
-              />
-              소형
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="MEDIUM"
-                onChange={handleCheckboxChange}
-                checked={selectedDogSizes.includes("MEDIUM")}
-              />
-              중형
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="BIG"
-                onChange={handleCheckboxChange}
-                checked={selectedDogSizes.includes("BIG")}
-              />
-              대형
-            </label>
+          <div className="dogSize-filter-btn-box">
+            <div className="dogSize-filter-btn" onClick={handleNullClick}>
+              {dogSize === null ? (
+                <img src={size_all2} />
+              ) : (
+                <img src={size_all} />
+              )}
+              <div className="sizebox"></div>
+            </div>
+
+            <div className="dogSize-filter-btn" onClick={handleSmallClick}>
+              {dogSize === "SMALL" ? (
+                <img src={size_small2} />
+              ) : (
+                <img src={size_small} />
+              )}
+              <span>소형견 (10kg 미만)</span>
+            </div>
+            <div className="dogSize-filter-btn" onClick={handleMediumClick}>
+              {dogSize === "MEDIUM" ? (
+                <img src={size_mid2} />
+              ) : (
+                <img src={size_mid} />
+              )}
+              <span>중형견 (10kg~25kg 미만)</span>
+            </div>
+            <div className="dogSize-filter-btn" onClick={handleBigClick}>
+              {dogSize === "BIG" ? (
+                <img src={size_big2} />
+              ) : (
+                <img src={size_big} />
+              )}
+              <span>대형견 (25kg 이상)</span>
+            </div>
           </div>
         </PopupModal>
       )}

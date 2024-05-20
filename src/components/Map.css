@@ -46,16 +46,55 @@
 
 .dogSize-filter-box button {
   margin: 10%;
+  background-color: transparent;
+  border: none;
+  font-family: "Pretendard";
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.dogSize-filter-box button img {
+  width: 30px;
 }
 
 /* 사이즈 필터 모달 */
 
-.filter-btn-box {
+.dogSize-filter-btn-box {
   display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 5%;
+}
+
+.dogSize-filter-btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.dogSize-filter-btn img {
+  width: 107px;
+  padding: 0 5px;
+}
+
+.dogSize-filter-btn span {
+  font-size: 10px;
+
+  color: #7b7b7b;
+}
+
+.sizebox {
+  width: 76.88px;
+  height: 11.5px;
 }
 
 /* 상세 정보창 */

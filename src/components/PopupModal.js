@@ -3,16 +3,13 @@ import "./PopupModal.css";
 
 function PopupModal({ isOpen, closeModal, children }) {
   return (
-    <>
+    <div className="Popupmodal-overlay" onClick={closeModal}>
       {isOpen && (
         <div className={`Popup-modal`}>
           <>{children}</>
-          <button className="close-btn" onClick={closeModal}>
-            X
-          </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
