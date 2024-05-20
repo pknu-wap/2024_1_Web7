@@ -9,13 +9,30 @@ const INITIAL_VALUES = {
   placeId: "",
 };
 
+const validate = (input) => {
+  const { content, rate } = input;
+  const errors = {};
+
+  if (content === "") {
+    errors.content = "리뷰 내용이 입력되지 않았습니다.";
+  }
+  if (rate === "0") {
+    errors.rate = "별점이 입력되지 않았습니다.";
+  }
+};
+
 function ReviewForm({ id, currentToken, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
-  const [tempRate, setTempRate] = useState(0);
+  const [errors, setErrors] = useState({});
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+
+    if (values.rate === "0" || values.content === "") {
+      alert("별점 또는 리뷰 내용이 입력되지 않았습니다!");
+      return;
+    }
 
     const body = {
       rate: values.rate,
@@ -61,6 +78,7 @@ function ReviewForm({ id, currentToken, onSubmit }) {
           className="aaa"
         />
         <span>별점을 등록해주세요!</span>
+        {errors.rate && <span className="errorMsg">{errors.rate}</span>}
       </div>
 
       <textarea
@@ -71,6 +89,7 @@ function ReviewForm({ id, currentToken, onSubmit }) {
         onChange={handleChange}
         maxLength={100}
       />
+      {errors.content && <span className="errorMsg">{errors.content}</span>}
 
       <button
         className="ReviewForm-submit-btn"
