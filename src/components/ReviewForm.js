@@ -1,16 +1,18 @@
 import { useState } from "react";
 import "./ReviewForm.css";
 import { createReview } from "../api";
+import StarRating from "./StarRating";
 
 const INITIAL_VALUES = {
   content: "",
-  rate: "5.0",
+  rate: "0",
   placeId: "",
 };
 
 function ReviewForm({ id, currentToken, onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
+  const [tempRate, setTempRate] = useState(0);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -43,19 +45,22 @@ function ReviewForm({ id, currentToken, onSubmit }) {
     }));
   };
 
+  const handleSetRate = (rate) => {
+    setValues((preValues) => ({
+      ...preValues,
+      rate,
+    }));
+  };
+
   return (
     <form className="ReviewForm" onSubmit={handleReviewSubmit}>
       <div className="ReviewForm-rating-box">
-        <span>별점을 등록해주세요!</span>
-        <input
-          className="ReviewForm-rate"
-          type="number"
-          name="rate"
-          value={values.rate}
-          min={0}
-          max={5}
-          onChange={handleChange}
+        <StarRating
+          onSetRate={handleSetRate}
+          defaultRate={values.rate}
+          className="aaa"
         />
+        <span>별점을 등록해주세요!</span>
       </div>
 
       <textarea

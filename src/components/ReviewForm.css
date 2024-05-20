@@ -4,7 +4,10 @@
   position: relative;
 }
 
-.ReviewForm-rating {
+.ReviewForm-rating-box {
+  display: flex;
+  align-items: center;
+  gap: 2%;
   color: #7b7b7b;
 }
 

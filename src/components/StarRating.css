@@ -1,0 +1,8 @@
+.starRate-box {
+  display: flex;
+}
+
+.starRate {
+  display: flex;
+  align-items: center;
+}
