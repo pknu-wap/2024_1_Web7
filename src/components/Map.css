@@ -22,6 +22,7 @@
 
 .type-filter-btn {
   width: 15px;
+  cursor: pointer;
 }
 
 .type-filter-btn img {

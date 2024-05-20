@@ -12,11 +12,12 @@
   position: fixed;
   top: 30%;
   left: 20%;
-  width: 800px;
+  width: 60%;
   height: 30%;
   background-color: #ffffff;
   z-index: 1000;
   border-radius: 30px;
+  overflow: auto;
 
   display: flex;
   align-items: center;
