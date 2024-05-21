@@ -129,7 +129,7 @@ export async function addBookmark({ placeId, token }) {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          placeId: placeId,
+          id: placeId,
         }),
       }
     );
