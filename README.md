@@ -57,3 +57,14 @@
         1. 아이디 (이메일)
         2. 비밀번호
         3. 닉네임
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href=""><img src="width="100px;" alt=""/><br /><sub><b> BE(팀장) : 권형일 </b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b> BE : 윤상연 </b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Keun04"><img src="" width="100px;" alt=""/><br /><sub><b> FE : 임가은 </b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b> FE : 유하경 </b></sub></a><br /></td>      
+    </tr>
+  </tbody>
+</table>
