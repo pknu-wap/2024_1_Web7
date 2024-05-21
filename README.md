@@ -1,3 +1,6 @@
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0075FF&height=250&section=header&text=Dogventure&fontSize=50&fontColor=ffffff" />
+
+
 # 1. 프로젝트 소개
 
 - 반려견 지도 웹 개발
