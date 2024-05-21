@@ -22,11 +22,6 @@ public class BookmarkController {
         service.bookmark(requestDto);
     }
 
-    @PostMapping("/cancle")
-    public void unBookmark(@RequestBody PlaceIdRequestDto requestDto) {
-        service.unBookmark(requestDto);
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<SimplePlaceDto>> getAllBookmarks() {
 

@@ -34,21 +34,14 @@ public class BookmarkService {
 
         Place place = placeRepository.findById(requestDto.getId()).orElseThrow(() -> new EntityNotFoundException("Place가 없습니다"));
 
-        user.getBookmarkPlaces().add(place);
+        if (user.getBookmarkPlaces().contains(place)) {
+            user.getBookmarkPlaces().remove(place);
+            userRepository.save(user);
 
-        userRepository.save(user);
-    }
-
-    public void unBookmark(PlaceIdRequestDto requestDto) {
-
-        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = UserRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
-
-        Place place = placeRepository.findById(requestDto.getId()).orElseThrow(() -> new EntityNotFoundException("Place가 없습니다"));
-
-        user.getBookmarkPlaces().remove(place);
-
-        userRepository.save(user);
+        } else {
+            user.getBookmarkPlaces().add(place);
+            userRepository.save(user);
+        }
     }
 
     public List<SimplePlaceDto> getBookmarkedPlaces() {
