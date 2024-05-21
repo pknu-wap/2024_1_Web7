@@ -1,5 +1,7 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0075FF&height=250&section=header&text=Dogventure&fontSize=50&fontColor=ffffff" />
+<p align="center">
+    <img width="500" section="header" align="center" src="https://github.com/pknu-wap/2024_1_Web7/assets/128891914/f1c5b1d0-4827-471b-b44a-be92be7d4a63" />
 
+</p>
 
 # 1. 프로젝트 소개
 
