@@ -17,12 +17,12 @@ public class BookmarkController {
 
     private final BookmarkService service;
 
-    @PostMapping("/")
+    @PostMapping
     public void bookmark(@RequestBody PlaceIdRequestDto requestDto) {
         service.bookmark(requestDto);
     }
 
-    @PostMapping("/cancel")
+    @PostMapping("/cancle")
     public void unBookmark(@RequestBody PlaceIdRequestDto requestDto) {
         service.unBookmark(requestDto);
     }

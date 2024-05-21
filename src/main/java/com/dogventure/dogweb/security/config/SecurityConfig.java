@@ -102,7 +102,9 @@ public class SecurityConfig {
                                 "/api/test/",
                                 "/api/gpt/**",
                                 "/api/mypage/**",
-                                "/api/bookemark/**",
+                                "/api/bookmark",
+                                "/api/bookmark/cancle",
+                                "/api/bookemark/all",
                                 "/api/place/review/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())
 
