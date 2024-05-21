@@ -148,7 +148,7 @@ function MainPage() {
         <hr className="place-nav-line" />
         <PlaceList items={items} />
       </div>
-      {/* <ChatbotHG /> */}
+      <ChatbotHG />
     </>
   );
 }

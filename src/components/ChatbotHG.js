@@ -1,49 +1,66 @@
 import React, { useState } from "react";
 import imglogo from "../img/dogventure_logo.png";
-import imgfoot from "../img/foot_purple.png";
-import imghwasalpyo from "../img/hwasalpyo.png";
+import footblue from "../img/foot_blue.png";
 import imgsend from "../img/send.png";
+import backbutton from "../img/backbutton.png";
 import "./ChatbotHG.css";
 
 const ChatbotHG = () => {
+  /*const [responseText, setResponseText] = useState('');*/
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
-  const apiEndpoint = `${process.env.REACT_APP_API_URL}api/gpt/question`;
+  const apiEndpoint = `${process.env.REACT_APP_API_URL}/api/gpt/question`;
 
   const addMessage = (sender, message) => {
+    const currentTime = new Date().toLocaleTimeString(); //현재 시간 출력
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
   };
+
+  // 메세지 상태 업데이트
+  // const animateMessage = (message) => {
+  //   let arr = messages[1].split('');
+  //   for (let i = 0; i < arr.length; i++) {
+  //     setMessages(i)
+  //   }
+  // }
 
   const handleSendMessage = async () => {
     const message = userInput.trim();
     if (message.length === 0) return;
 
     addMessage("user", message);
-    setUserInput("");
-    setLoading(true);
+    setUserInput(""); // 입력 필드를 비움
+    setLoading(true); // 로딩 상태 true 설정
+    const response = await fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("Authorization")}`,
+      },
+      body: JSON.stringify({ prompt: message }),
+    });
 
     try {
-      const response = await fetch(apiEndpoint, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("Authorization")}`,
-        },
-        body: JSON.stringify({ prompt: message }),
-      });
+      const bodyData = await response.body;
+      const reader = await bodyData.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let result = "";
 
-      const data = await response.json();
-      const aiResponse = data.choices?.[0]?.message?.content || "No response";
-      addMessage("bot", aiResponse);
-    } catch (error) {
-      console.error("오류 발생", error);
-      addMessage("system", "오류 발생");
-    } finally {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const answer = decoder.decode(value).toString();
+        result += answer.replace(/data: |data:/g, "");
+        addMessage("bot", result);
+      }
+
       setLoading(false);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -53,25 +70,56 @@ const ChatbotHG = () => {
     }
   };
 
+  const handleCloseChat = () => {
+    setShowChat(false);
+  };
+
   return (
     <div>
       <div id="chatbot-icon" onClick={() => setShowChat(!showChat)}>
-        <img src={imgfoot} width="58" height="58" />
+        <img src={footblue} alt="Chatbot Icon" className="icon" />
       </div>
       {showChat && (
         <div id="chatbot-window">
-          <h1>
-            {" "}
-            <img src={imghwasalpyo} width="10" height="10" />
-          </h1>
-          <h2>
-            <img src={imglogo} width="292" height="111.05" />
-          </h2>
+          <div className="header">
+            <img
+              src={backbutton}
+              alt="Back"
+              className="back-icon"
+              onClick={handleCloseChat}
+            />
+            <div className="chatbot-logo-text">
+              <img
+                src={footblue}
+                alt="SmallLogo"
+                className="chatbot-small-logo"
+              />
+              <div className="chatbot-small-text">
+                <p className="title">Dogventures</p>
+                <p className="subtitle">30분 내 답변 받으실 수 있어요.</p>
+              </div>
+            </div>
+            <img src={imglogo} alt="Logo" className="logo" />
+            <div className="header-text">
+              <p>도그벤처 챗봇에 문의하기 </p>
+            </div>
+          </div>
           <div className="chatDiv">
             {loading && <span className="messageWait"></span>}
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
-                {`${msg.sender === "user" ? "" : ""}  ${msg.message}`}
+                {msg.sender === "bot" && (
+                  <img
+                    src={footblue}
+                    alt="Bot Profile"
+                    className="bot-profile"
+                  />
+                )}
+                <div>
+                  <div> {msg.message} </div>
+                  <div className="message-time">{msg.time}</div>{" "}
+                  {/* 시간 표시 */}
+                </div>
               </div>
             ))}
           </div>
@@ -84,7 +132,7 @@ const ChatbotHG = () => {
               onKeyDown={handleKeyDown}
             />
             <button onClick={handleSendMessage}>
-              <img src={imgsend} width="20" height="20" />
+              <img src={imgsend} alt="Send" className="send-icon" />
             </button>
           </div>
         </div>
