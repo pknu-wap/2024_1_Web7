@@ -21,7 +21,13 @@ const validate = (input) => {
   }
 };
 
-function ReviewForm({ id, currentToken, onSubmit }) {
+function ReviewForm({
+  id,
+  currentToken,
+  onSubmit,
+  reviewUpdate,
+  setReviewUpdate,
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
 
@@ -46,6 +52,7 @@ function ReviewForm({ id, currentToken, onSubmit }) {
       setIsSubmitting(false);
     }
     setValues(INITIAL_VALUES);
+    setReviewUpdate(!reviewUpdate);
   };
 
   const handleChange = (e) => {

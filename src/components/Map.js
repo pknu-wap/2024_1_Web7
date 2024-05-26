@@ -61,6 +61,7 @@ function Map() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReview, setIsReview] = useState(false);
+  const [reviewUpdate, setReviewupdate] = useState(false);
 
   let token = localStorage.getItem("Authorization");
 
@@ -109,6 +110,21 @@ function Map() {
   const handleReviewSubmit = (newReview) => {
     setReviews((prevReviews) => [...prevReviews, newReview]);
   };
+
+  useEffect(() => {
+    const place = selectedPlace;
+
+    const handleReviewUpdate = async () => {
+      try {
+        const response = await getPlaceInfo({ id: place.id });
+        setReviews(response.reviews);
+      } catch (error) {
+        console.error("리뷰를 업데이트 하는 데 실패했습니다.", error);
+      }
+    };
+
+    handleReviewUpdate();
+  }, [reviewUpdate]);
 
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
@@ -352,10 +368,16 @@ function Map() {
             <div className="name-type-rate">
               <h2 className="place-name">{selectedPlace.name}</h2>
               <span className="place-type">{selectedPlace.placeType} |</span>
-              <span className="place-rate">{selectedPlace.rate}</span>
+              <span className="place-rate">
+                <img className="rate-img2" src={rateImg} />
+                {selectedPlace.rate.toFixed(1)}
+              </span>
             </div>
-
-            <img className="bookmark-btn-img" src={bookmark} />
+            <img
+              onClick={handleClickBookmark}
+              className="bookmark-btn-img"
+              src={bookmark}
+            />
           </div>
           <hr className="info-window-line" />
           <div className="isOpen-add">
@@ -393,7 +415,9 @@ function Map() {
               <div className="review-info">
                 <span>리뷰 | </span>
                 <img className="rate-img" src={rateImg} />
-                <span className="place-rate">{selectedPlace.rate}</span>
+                <span className="place-rate">
+                  {selectedPlace.rate.toFixed(1)}
+                </span>
               </div>
               <button onClick={handleClickReview}>리뷰 쓰기</button>
             </div>
@@ -404,6 +428,8 @@ function Map() {
                   id={selectedPlace.id}
                   currentToken={token}
                   onSubmit={handleReviewSubmit}
+                  reviewUpdate={reviewUpdate}
+                  setReviewUpdate={setReviewupdate}
                 />
               </div>
             )}
