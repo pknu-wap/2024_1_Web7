@@ -44,9 +44,9 @@ function Login() {
         }
       );
 
-      if (!response.ok) {
-        alert("로그인에 실패했습니다.");
-      }
+      // if (!response.ok) {
+      //   alert("로그인에 실패했습니다.");
+      // }
 
       const data = await response.json();
 
