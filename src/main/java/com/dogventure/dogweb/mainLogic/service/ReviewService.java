@@ -12,6 +12,7 @@ import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +28,15 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
 
-    public void save(ReviewRequestDto requestDto) {
+    public ResponseEntity<?> save(ReviewRequestDto requestDto) {
 
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
+
+        // 중복 리뷰 막기 기능
+        if (reviewRepository.existsByUser(user)) {
+            return ResponseEntity.badRequest().body("User has already submitted a review");
+        }
 
         Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
 
@@ -47,6 +53,8 @@ public class ReviewService {
         place.setRate(averageRate);
 
         placeRepository.save(place);
+        // 변경점
+        return ResponseEntity.ok(place);
     }
 
     public void update(ReviewUpdateRequestDto requestDto) {

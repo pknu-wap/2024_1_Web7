@@ -3,6 +3,9 @@ package com.dogventure.dogweb.mainLogic.controller;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ReviewIdResponseDto;
+import com.dogventure.dogweb.mainLogic.entity.User;
+import com.dogventure.dogweb.mainLogic.repository.ReviewRepository;
+import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import com.dogventure.dogweb.mainLogic.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,14 +25,12 @@ public class ReviewController {
 
     @PostMapping("/write")
     public ResponseEntity write(@RequestBody ReviewRequestDto requestDto) {
-
         service.save(requestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/update")
     public ResponseEntity update(@RequestBody ReviewUpdateRequestDto requestDto) {
-
         service.update(requestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

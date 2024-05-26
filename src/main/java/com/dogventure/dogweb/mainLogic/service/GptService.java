@@ -42,6 +42,7 @@ public class GptService {
                 .subscribe(data -> {
                     try {
                         if ("[DONE]".equals(data.trim())) {
+                            emitter.send(SseEmitter.event().data("done"));
                             emitter.complete();
                             return;
                         }
@@ -66,9 +67,7 @@ public class GptService {
     }
 
     private String convertMessage(String message) {
-
         String baseMessage = "아래의 메시지에 대한 답변을 할 때, 강아지 말투를 사용해서 답변해줘. 예를 들면 말 끝마다 '멍!'을 붙이는 식으로.\n\n";
-
         return baseMessage + message;
     }
 }
