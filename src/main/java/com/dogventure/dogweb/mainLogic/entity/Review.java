@@ -26,8 +26,9 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "place_id")
-    private Place place;
+    private Place place;            //엔티티 클래스의 필드 이름과 JPA 쿼리 메소드의 이름이 일치해야 함
 
+    // Spring MVC가 요청 본문을 읽어 Review 객체로 변환
     public Review(Double rate, String content, User user, Place place) {
         this.rate = rate;
         this.content = content;

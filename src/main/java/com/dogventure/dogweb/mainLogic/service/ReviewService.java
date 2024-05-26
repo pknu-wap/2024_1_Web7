@@ -28,17 +28,19 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
 
-    public ResponseEntity<?> save(ReviewRequestDto requestDto) {
-
+    // Dto의 속성을 들고올 것
+    public void save(ReviewRequestDto requestDto) {
+        //context(JWT Token?) 받고 Auth받고 그 안에 들어있는 내용 받기
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
-        // 중복 리뷰 막기 기능
-        if (reviewRepository.existsByUser(user)) {
-            return ResponseEntity.badRequest().body("User has already submitted a review");
-        }
-
+        // 왜 Id???
         Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
+
+        // 중복 리뷰 막기 기능
+        if (reviewRepository.existsByUserAndPlace(user, place)) {
+            return;
+        }
 
         Review review = new Review(requestDto.getRate(), requestDto.getContent(), user, place);
 
@@ -53,8 +55,7 @@ public class ReviewService {
         place.setRate(averageRate);
 
         placeRepository.save(place);
-        // 변경점
-        return ResponseEntity.ok(place);
+
     }
 
     public void update(ReviewUpdateRequestDto requestDto) {
