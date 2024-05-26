@@ -113,16 +113,28 @@
   width: 100%;
 }
 
-.bookmark-btn {
+/* .bookmark-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 15%;
   background-color: transparent;
-  border: 1px solid #0075ff;
+  border: none;
   border-radius: 30px;
   padding: 1.5% 3%;
   cursor: pointer;
+} */
+
+.bookmark-btn-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15%;
+  background-color: transparent;
+  border: none;
+  padding: 1.5% 3%;
+  cursor: pointer;
+  width: 120px;
 }
 
 .bookmark-btn img {

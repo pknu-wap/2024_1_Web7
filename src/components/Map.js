@@ -35,6 +35,8 @@ import size_mid from "../img/size_mid.png";
 import size_mid2 from "../img/size_mid2.png";
 import size_big from "../img/size_big.png";
 import size_big2 from "../img/size_big2.png";
+import bookmark from "../img/bookmark1.png";
+import bookmark2 from "../img/bookmark2.png";
 
 import "./Map.css";
 
@@ -352,10 +354,8 @@ function Map() {
               <span className="place-type">{selectedPlace.placeType} |</span>
               <span className="place-rate">{selectedPlace.rate}</span>
             </div>
-            <button className="bookmark-btn" onClick={handleClickBookmark}>
-              <img src={footImg} />
-              <span>저장</span>
-            </button>
+
+            <img className="bookmark-btn-img" src={bookmark} />
           </div>
           <hr className="info-window-line" />
           <div className="isOpen-add">
