@@ -4,12 +4,13 @@ import { getTypePlaces, searchPlaces } from "../api";
 import "./MainPage.css";
 
 import mainImg from "../img/mainBg.png";
-import searchImg from "../img/searchBtn.png";
+// import searchImg from "../img/searchBtn.png";
 import mapLocation from "../img/mapLocation.png";
 
 import mapBtn from "../img/dogventure_logo_white.png";
 import PlaceList from "../components/PlaceList";
 import ChatbotHG from "../components/ChatbotHG";
+import Search from "../components/Search";
 
 function AppFilterButton({ selected, children, onClick }) {
   return (
@@ -130,20 +131,7 @@ function MainPage() {
               병원
             </AppFilterButton>
           </div>
-
-          <div className="search-box">
-            <form className="search-form" onSubmit={handleSearchSubmit}>
-              <input
-                className="search-input"
-                name="search"
-                placeholder="상호명을 입력해보세요!"
-                autoComplete="off"
-              />
-              <button className="search-btn" type="submit">
-                <img src={searchImg} alt="검색 이미지" />
-              </button>
-            </form>
-          </div>
+          <Search handleSearchSubmit={handleSearchSubmit} />
         </div>
         <hr className="place-nav-line" />
         <PlaceList items={items} />

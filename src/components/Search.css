@@ -1,0 +1,40 @@
+/* 검색 */
+
+.search-form {
+  border: 1.5px solid #0075ff;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1px 0px 1px 15px;
+}
+
+.search-input {
+  width: 80%;
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+
+  font-size: 15px;
+  font-family: "Pretendard";
+  font-weight: 600;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-btn {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.search-btn img {
+  width: 100%;
+}

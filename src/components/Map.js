@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../function/AuthContext";
 
 import useGeolocation from "../hooks/useGeolocation";
-import { getPlaces, getPlaceInfo, addBookmark, createReview } from "../api";
+import {
+  getPlaces,
+  getPlaceInfo,
+  addBookmark,
+  createReview,
+  searchPlaces,
+} from "../api";
 
 import Modal from "./Modal";
 import PopupModal from "./PopupModal";
@@ -25,7 +31,7 @@ import hosNone from "../img/hos_none.png";
 import hosSelec from "../img/hos_selec.png";
 import rateImg from "../img/rateImg.png";
 import filter from "../img/filter.png";
-import search from "../img/search.png";
+import searchImg from "../img/search.png";
 import footBlue from "../img/foot_blue.png";
 import size_all from "../img/size_all.png";
 import size_all2 from "../img/size_all2.png";
@@ -39,6 +45,7 @@ import bookmark from "../img/bookmark1.png";
 import bookmark2 from "../img/bookmark2.png";
 
 import "./Map.css";
+import MapSearch from "./MapSearch";
 
 function Map() {
   const mapRef = useRef(null);
@@ -55,6 +62,7 @@ function Map() {
   const [dogSize, setDogSize] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [images, setImages] = useState([]);
+  const [search, setSearch] = useState("");
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -62,14 +70,27 @@ function Map() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReview, setIsReview] = useState(false);
   const [reviewUpdate, setReviewupdate] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   let token = localStorage.getItem("Authorization");
 
-  const handleAllClick = () => setType("all");
-  const handleCafeClick = () => setType("CAFE");
+  const handleAllClick = () => {
+    setType("all");
+    setSearch("");
+  };
+  const handleCafeClick = () => {
+    setType("CAFE");
+    setSearch("");
+  };
   const handleHospitalClick = () => setType("HOSPITAL");
-  const handleBeautyClick = () => setType("BEAUTY");
-  const handleGoodsClick = () => setType("GOODS");
+  const handleBeautyClick = () => {
+    setType("BEAUTY");
+    setSearch("");
+  };
+  const handleGoodsClick = () => {
+    setType("GOODS");
+    setSearch("");
+  };
 
   const handleNullClick = () => {
     setDogSize(null);
@@ -118,9 +139,7 @@ function Map() {
       try {
         const response = await getPlaceInfo({ id: place.id });
         setReviews(response.reviews);
-      } catch (error) {
-        console.error("리뷰를 업데이트 하는 데 실패했습니다.", error);
-      }
+      } catch (error) {}
     };
 
     handleReviewUpdate();
@@ -130,12 +149,18 @@ function Map() {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
       const fetchLocation = async () => {
+        let response;
         try {
-          const response = await getPlaces({
-            type: type,
-            dogSize: dogSize,
-            // token: token,
-          });
+          if (search) {
+            response = await searchPlaces({ word: search });
+          } else {
+            response = await getPlaces({
+              type: type,
+              dogSize: dogSize,
+              // token: token,
+            });
+          }
+
           setPlaces(response);
         } catch (error) {
           console.error("장소를 불러오는 데 실패했습니다.", error);
@@ -158,7 +183,7 @@ function Map() {
       };
       mapRef.current = new Map("map", mapOptions);
     }
-  }, [currentMyLocation, type, dogSize]);
+  }, [currentMyLocation, type, dogSize, search]);
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
@@ -217,6 +242,18 @@ function Map() {
 
   const handleFilterButtonClick = () => {
     openFilterModal();
+  };
+
+  const handleClickSearch = () => {
+    setIsSearch(!isSearch);
+  };
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    const searchTerm = e.target["search"].value;
+    setSearch(searchTerm);
+    setType("all");
+    setIsSearch(false);
   };
 
   // const handleCheckboxChange = (event) => {
@@ -307,8 +344,8 @@ function Map() {
             <img src={filter} />
             <span>필터</span>
           </button>
-          <button>
-            <img src={search} />
+          <button onClick={handleClickSearch}>
+            <img src={searchImg} />
             <span>검색</span>
           </button>
           <button>
@@ -317,6 +354,8 @@ function Map() {
           </button>
         </div>
       </div>
+
+      {isSearch && <MapSearch handleSearchSubmit={handleSearchSubmit} />}
 
       {isFilterModalOpen && (
         <PopupModal

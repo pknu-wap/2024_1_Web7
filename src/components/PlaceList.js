@@ -13,7 +13,7 @@ function PlaceListItem({ item }) {
           <span className="PlaceListItem-place-type">{placeType} |</span>
           <span className="PlaceListItem-place-rate">
             <img className="PlaceListItem-rateImg" src={rateImg} />
-            {rate}
+            {rate.toFixed(1)}
           </span>
         </div>
         <div className="PlaceListItem-inopen-add">
