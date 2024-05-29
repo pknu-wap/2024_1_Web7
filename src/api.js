@@ -80,19 +80,6 @@ export async function searchPlaces({ word = "" }) {
   }
 }
 
-// export async function tokenApi(token) {
-//   try {
-//     await fetch(`${process.env.REACT_APP_API_URL}api/test/`, {
-//       method: "POST",
-//       headers: {
-//         Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3Q0QHRlc3QuY29tIiwiYXV0aG9yaXR5IjoiVVNFUiIsImlhdCI6MTcxNTc3Njg4MSwiZXhwIjoxNzE1NzgwNDgxfQ.fREcAoZ07rv2dMeAtNHDv0kwzUk9RdjpAkADaWXDLAg`,
-//       },
-//     });
-//   } catch (error) {
-//     console.log("토큰 오류");
-//   }
-// }
-
 export async function createReview({ rate, content, placeId }, token) {
   try {
     const response = await fetch(
@@ -136,7 +123,6 @@ export async function addBookmark({ placeId, token }) {
     const body = await response.json();
     return body.id;
   } catch (error) {
-    console.error("즐겨찾기에 실패했습니다.", error);
-    throw error;
+    console.error("즐겨찾기 오류", error);
   }
 }
