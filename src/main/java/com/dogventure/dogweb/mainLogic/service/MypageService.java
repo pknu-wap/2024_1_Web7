@@ -30,7 +30,7 @@ public class MypageService {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = repository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
-        MypageResponseDto responseDto = new MypageResponseDto(user.getUsername(), user.getDescription());
+        MypageResponseDto responseDto = new MypageResponseDto(user.getUsername(), user.getDescription(), user.getDog());
 
         return responseDto;
     }
