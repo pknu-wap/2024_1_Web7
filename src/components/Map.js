@@ -136,12 +136,16 @@ function Map() {
     setReviews((prevReviews) => [...prevReviews, newReview]);
   };
 
+  // 리뷰 실시간 업데이트
   useEffect(() => {
     const place = selectedPlace;
 
     const handleReviewUpdate = async () => {
       try {
-        const response = await getPlaceInfo({ id: place.id });
+        const response = await getPlaceLoginInfo({
+          id: place.id,
+          token: token,
+        });
         setReviews(response.reviews);
       } catch (error) {}
     };
@@ -245,6 +249,7 @@ function Map() {
     };
   }, [places]);
 
+  // 모달 재렌더링
   useEffect(() => {
     setIsModalOpen(true);
   }, [isBookmark]);

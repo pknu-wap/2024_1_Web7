@@ -5,7 +5,7 @@ import StarRating from "./StarRating";
 
 const INITIAL_VALUES = {
   content: "",
-  rate: "0",
+  rate: "null",
   placeId: "",
 };
 

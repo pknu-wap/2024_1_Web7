@@ -130,6 +130,7 @@ export async function createReview({ rate, content, placeId }, token) {
       {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
