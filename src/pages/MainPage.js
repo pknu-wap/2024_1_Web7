@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTypePlaces, searchPlaces } from "../api";
+import { getTypePlaces, searchPlaces, getPlaces } from "../api";
 import "./MainPage.css";
 
 import mainImg from "../img/mainBg.png";
-// import searchImg from "../img/searchBtn.png";
-import mapLocation from "../img/mapLocation.png";
+import mapLocation from "../img/mapLocation_white.png";
 
-import mapBtn from "../img/dogventure_logo_white.png";
 import PlaceList from "../components/PlaceList";
 import ChatbotHG from "../components/ChatbotHG";
 import Search from "../components/Search";
@@ -65,7 +63,7 @@ function MainPage() {
       if (search) {
         result = await searchPlaces({ word: search });
       } else {
-        result = await getTypePlaces({ type });
+        result = await getPlaces({ type });
       }
 
       if (result) {

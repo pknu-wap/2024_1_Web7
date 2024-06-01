@@ -17,9 +17,9 @@ import PopupModal from "./PopupModal";
 import ReviewForm from "./ReviewForm";
 
 import footImg from "../img/foot_green.png";
-import clockImg from "../img/clock.png";
-import addImg from "../img/location.png";
-import phoneImg from "../img/phone.png";
+import clockImg from "../img/inOpen.png";
+import addImg from "../img/mapLocation.png";
+import phoneImg from "../img/phoneImg.png";
 import allNone from "../img/all_none.png";
 import allSelec from "../img/all_selec.png";
 import beautyNone from "../img/beauty_none.png";
@@ -45,6 +45,7 @@ import size_big from "../img/size_big.png";
 import size_big2 from "../img/size_big2.png";
 import bookmark from "../img/bookmark1.png";
 import bookmark2 from "../img/bookmark2.png";
+import reviewPen from "../img/reviewPen.png";
 
 import "./Map.css";
 import MapSearch from "./MapSearch";
@@ -113,6 +114,15 @@ function Map() {
     closeFilterModal();
   };
 
+  function StarRating({ rate }) {
+    const stars = [];
+    for (let i = 0; i < rate; i++) {
+      stars.push(<img key={i} src={rateImg} alt="별점" />);
+    }
+
+    return <span className="user-rate">{stars}</span>;
+  }
+
   function ReviewList({ reviews, footImg }) {
     return (
       <ul className="review-ul">
@@ -120,11 +130,15 @@ function Map() {
           <li className="review-list" key={review.id}>
             <img className="review-profile-img" src={footImg} alt="Profile" />
             <div className="review-content-box">
-              <div>
+              <div className="review-user-rate">
                 <span className="review-username">{review.user.username}</span>
-                <span className="review-rate">{review.rate}</span>
+                <span className="review-rate ">
+                  <StarRating rate={review.rate} />
+                </span>
               </div>
-              <div className="review-content">{review.content}</div>
+              <div className="review-content">
+                <div className="review-content-inbox">{review.content}</div>
+              </div>
             </div>
           </li>
         ))}
@@ -478,18 +492,22 @@ function Map() {
                 )}
               </span>
             </div>
-            {isBookmark ? (
-              <img
-                onClick={handleClickBookmark}
-                className="bookmark-btn-img"
-                src={bookmark2}
-              />
-            ) : (
-              <img
-                onClick={handleClickBookmark}
-                className="bookmark-btn-img"
-                src={bookmark}
-              />
+            {token && (
+              <>
+                {isBookmark ? (
+                  <img
+                    onClick={handleClickBookmark}
+                    className="bookmark-btn-img"
+                    src={bookmark2}
+                  />
+                ) : (
+                  <img
+                    onClick={handleClickBookmark}
+                    className="bookmark-btn-img"
+                    src={bookmark}
+                  />
+                )}
+              </>
             )}
           </div>
           <hr className="info-window-line" />
@@ -497,9 +515,19 @@ function Map() {
             <div className="isOpen-box">
               <img className="info-img" src={clockImg} alt="시계 이미지" />
               {{ isOpen } ? "영업 중" : "금일 영업 마감"}
+              <div className="isOpen-time">
+                <div>|</div>
+                <div>
+                  {selectedPlace.openTime} - {selectedPlace.endTime}
+                </div>
+              </div>
             </div>
             <div className="place-add">
-              <img className="info-img" src={addImg} alt="위치 이미지" />
+              <img
+                className="info-img location"
+                src={addImg}
+                alt="위치 이미지"
+              />
               {selectedPlace.address}
             </div>
             <div className="place-call">
@@ -532,7 +560,10 @@ function Map() {
                   {selectedPlace.rate.toFixed(1)}
                 </span>
               </div>
-              <button onClick={handleClickReview}>리뷰 쓰기</button>
+              <button onClick={handleClickReview}>
+                <img className="reviewPen-img" src={reviewPen} />
+                리뷰 쓰기
+              </button>
             </div>
 
             {isReview && (
