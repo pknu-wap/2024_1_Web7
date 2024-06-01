@@ -52,6 +52,29 @@ export async function getPlaces({ type = "all", dogSize = null }) {
   }
 }
 
+// 로그인 시 북마크 된 장소 불러오기
+export async function getMyPlaces({ token }) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/map/naver/place/all`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const body = await response.json();
+    const filteredPlaces = body.filter((place) => place.bookmark === true);
+
+    return filteredPlaces;
+  } catch (error) {
+    console.error("장소를 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
 export async function getPlaceInfo({ id = "" }) {
   try {
     const response = await fetch(

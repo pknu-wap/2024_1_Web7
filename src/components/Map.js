@@ -9,6 +9,7 @@ import {
   addBookmark,
   searchPlaces,
   getPlaceLoginInfo,
+  getMyPlaces,
 } from "../api";
 
 import Modal from "./Modal";
@@ -33,6 +34,7 @@ import rateImg from "../img/rateImg.png";
 import filter from "../img/filter.png";
 import searchImg from "../img/search.png";
 import footBlue from "../img/foot_blue.png";
+import footGreen from "../img/foot_red.png";
 import size_all from "../img/size_all.png";
 import size_all2 from "../img/size_all2.png";
 import size_small from "../img/size_small.png";
@@ -64,6 +66,7 @@ function Map() {
   const [images, setImages] = useState([]);
   const [search, setSearch] = useState("");
   const [isBookmark, setIsBookmark] = useState(false);
+  const [isMyPlaces, setIsMyPlaces] = useState(false);
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -155,6 +158,8 @@ function Map() {
         try {
           if (search) {
             response = await searchPlaces({ word: search });
+          } else if (isMyPlaces) {
+            response = await getMyPlaces({ token: token });
           } else {
             response = await getPlaces({
               type: type,
@@ -185,7 +190,7 @@ function Map() {
       };
       mapRef.current = new Map("map", mapOptions);
     }
-  }, [currentMyLocation, type, dogSize, search]);
+  }, [currentMyLocation, type, dogSize, search, isMyPlaces]);
 
   // 장소 정보 api 받아와서 마커 표시 및 정보창 띄우는 코드
   useEffect(() => {
@@ -337,6 +342,10 @@ function Map() {
     setIsBookmark(!isBookmark);
   };
 
+  const handleClickMyPlace = () => {
+    setIsMyPlaces(!isMyPlaces);
+  };
+
   return (
     <div className="map-box">
       <div
@@ -386,10 +395,18 @@ function Map() {
             <img src={searchImg} />
             <span>검색</span>
           </button>
-          <button>
-            <img src={footBlue} />
-            <span>내 장소</span>
-          </button>
+          {token &&
+            (isMyPlaces ? (
+              <button onClick={handleClickMyPlace}>
+                <img src={footGreen} />
+                <span>내 장소</span>
+              </button>
+            ) : (
+              <button onClick={handleClickMyPlace}>
+                <img src={footBlue} />
+                <span>내 장소</span>
+              </button>
+            ))}
         </div>
       </div>
 
