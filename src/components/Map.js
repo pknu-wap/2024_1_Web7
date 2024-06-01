@@ -408,8 +408,14 @@ function Map() {
               <h2 className="place-name">{selectedPlace.name}</h2>
               <span className="place-type">{selectedPlace.placeType} |</span>
               <span className="place-rate">
-                <img className="rate-img2" src={rateImg} />
-                {selectedPlace.rate.toFixed(1)}
+                {selectedPlace.rate ? (
+                  <>
+                    <img className="rate-img2" src={rateImg} />
+                    {selectedPlace.rate.toFixed(1)}
+                  </>
+                ) : (
+                  <div>등록된 별점이 없습니다.</div>
+                )}
               </span>
             </div>
             <img
