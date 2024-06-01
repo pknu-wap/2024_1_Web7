@@ -65,6 +65,26 @@ export async function getPlaceInfo({ id = "" }) {
   }
 }
 
+export async function getPlaceLoginInfo({ id = "", token }) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/map/naver/place/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const body = await response.json();
+    return body;
+  } catch (error) {
+    console.error("장소 정보를 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
 export async function searchPlaces({ word = "" }) {
   try {
     const response = await fetch(
@@ -87,7 +107,6 @@ export async function createReview({ rate, content, placeId }, token) {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({

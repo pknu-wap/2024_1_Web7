@@ -7,8 +7,8 @@ import {
   getPlaces,
   getPlaceInfo,
   addBookmark,
-  createReview,
   searchPlaces,
+  getPlaceLoginInfo,
 } from "../api";
 
 import Modal from "./Modal";
@@ -63,6 +63,7 @@ function Map() {
   const [reviews, setReviews] = useState([]);
   const [images, setImages] = useState([]);
   const [search, setSearch] = useState("");
+  const [isBookmark, setIsBookmark] = useState(false);
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -145,6 +146,7 @@ function Map() {
     handleReviewUpdate();
   }, [reviewUpdate]);
 
+  // 필터 별 마커 표시
   useEffect(() => {
     if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
       // 백엔드 장소 GET 코드
@@ -209,22 +211,43 @@ function Map() {
     });
 
     const handleMarkerClick = async (place) => {
-      try {
-        const response = await getPlaceInfo({ id: place.id });
-        setSelectedPlace(response);
-        setImages(response.images);
-        setReviews(response.reviews);
-      } catch (error) {
-        console.error("장소 정보를 불러오는 데 실패했습니다.", error);
+      if (token) {
+        try {
+          const response = await getPlaceLoginInfo({
+            id: place.id,
+            token: token,
+          });
+          setSelectedPlace(response);
+          setImages(response.images);
+          setReviews(response.reviews);
+          setIsBookmark(response.bookmark);
+        } catch (error) {
+          console.error("저장된 장소 정보를 불러오는 데 실패했습니다.", error);
+        }
+      } else {
+        try {
+          const response = await getPlaceInfo({ id: place.id });
+          setSelectedPlace(response);
+          setImages(response.images);
+          setReviews(response.reviews);
+        } catch (error) {
+          console.error("장소 정보를 불러오는 데 실패했습니다.", error);
+        }
       }
+
       setIsOpen(place.isOpen);
       openModal();
     };
   }, [places]);
 
+  useEffect(() => {
+    setIsModalOpen(true);
+  }, [isBookmark]);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPlace(null);
@@ -287,16 +310,31 @@ function Map() {
   const handleClickBookmark = async () => {
     const placeId = selectedPlace.id;
 
-    try {
-      if (selectedPlace && token) {
-        await addBookmark({ placeId: placeId, token: token });
-        alert("북마크가 추가되었습니다.");
-      } else {
-        alert("로그인이 필요합니다.");
+    if (isBookmark) {
+      try {
+        if (selectedPlace && token) {
+          await addBookmark({ placeId: placeId, token: token });
+          alert("북마크가 최소되었습니다.");
+        } else {
+          alert("로그인이 필요합니다.");
+        }
+      } catch (error) {
+        console.error("북마크 추가에 실패했습니다.", error);
       }
-    } catch (error) {
-      console.error("북마크 추가에 실패했습니다.", error);
+    } else {
+      try {
+        if (selectedPlace && token) {
+          await addBookmark({ placeId: placeId, token: token });
+          alert("북마크가 추가되었습니다.");
+        } else {
+          alert("로그인이 필요합니다.");
+        }
+      } catch (error) {
+        console.error("북마크 추가에 실패했습니다.", error);
+      }
     }
+
+    setIsBookmark(!isBookmark);
   };
 
   return (
@@ -418,11 +456,19 @@ function Map() {
                 )}
               </span>
             </div>
-            <img
-              onClick={handleClickBookmark}
-              className="bookmark-btn-img"
-              src={bookmark}
-            />
+            {isBookmark ? (
+              <img
+                onClick={handleClickBookmark}
+                className="bookmark-btn-img"
+                src={bookmark2}
+              />
+            ) : (
+              <img
+                onClick={handleClickBookmark}
+                className="bookmark-btn-img"
+                src={bookmark}
+              />
+            )}
           </div>
           <hr className="info-window-line" />
           <div className="isOpen-add">
