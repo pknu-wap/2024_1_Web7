@@ -229,7 +229,7 @@ function Map() {
         } catch (error) {
           console.error("저장된 장소 정보를 불러오는 데 실패했습니다.", error);
         }
-      } else {
+      } else if (!token) {
         try {
           const response = await getPlaceInfo({ id: place.id });
           setSelectedPlace(response);
