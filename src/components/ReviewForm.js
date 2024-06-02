@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ReviewForm.css";
-import { createReview } from "../api";
+import { createReview, updateReview } from "../api";
 import StarRating from "./StarRating";
 
 const INITIAL_VALUES = {
   content: "",
-  rate: "null",
+  rate: 0,
   placeId: "",
 };
 
@@ -16,9 +16,11 @@ const validate = (input) => {
   if (content === "") {
     errors.content = "리뷰 내용이 입력되지 않았습니다.";
   }
-  if (rate === "0") {
+  if (rate === 0) {
     errors.rate = "별점이 입력되지 않았습니다.";
   }
+
+  return errors;
 };
 
 function ReviewForm({
@@ -27,9 +29,19 @@ function ReviewForm({
   onSubmit,
   reviewUpdate,
   setReviewUpdate,
+  reviewFormData,
+  isEdit,
+  setIsEdit,
+  currentReviewId,
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [values, setValues] = useState(INITIAL_VALUES);
+
+  useEffect(() => {
+    if (isEdit && reviewFormData) {
+      setValues(reviewFormData);
+    }
+  }, [isEdit, reviewFormData]);
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -40,17 +52,30 @@ function ReviewForm({
       placeId: id,
     };
 
+    const Updatebody = {
+      reviewId: currentReviewId,
+      placeId: id,
+      rate: values.rate,
+      content: values.content,
+    };
+
     let result;
 
     try {
       setIsSubmitting(true);
-      result = await createReview(body, currentToken);
+      if (isEdit) {
+        result = await updateReview(Updatebody, currentToken);
+        setIsEdit(false);
+      } else {
+        result = await createReview(body, currentToken);
+      }
       onSubmit(result);
     } catch (error) {
       console.log(error);
     } finally {
       setIsSubmitting(false);
     }
+    setIsEdit(false);
     setValues(INITIAL_VALUES);
     setReviewUpdate(!reviewUpdate);
   };
@@ -95,7 +120,7 @@ function ReviewForm({
         type="submit"
         disabled={isSubmitting}
       >
-        리뷰 등록
+        {isEdit ? "리뷰 수정" : "리뷰 등록"}
       </button>
     </form>
   );

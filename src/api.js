@@ -153,7 +153,7 @@ export async function createReview({ rate, content, placeId }, token) {
 }
 
 export async function updateReview(
-  { reviewId, rate, content, placeId },
+  { reviewId, placeId, rate, content },
   token
 ) {
   try {
@@ -167,14 +167,14 @@ export async function updateReview(
         },
         body: JSON.stringify({
           reviewId: reviewId,
+          placeId: placeId,
           rate: rate,
           content: content,
-          placeId: placeId,
         }),
       }
     );
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (error) {
     console.error("리뷰를 수정하는 데 실패했습니다.", error);
     throw error;

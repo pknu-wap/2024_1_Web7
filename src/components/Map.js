@@ -69,13 +69,19 @@ function Map() {
   const [isBookmark, setIsBookmark] = useState(false);
   const [isMyPlaces, setIsMyPlaces] = useState(false);
   const [username, SetUsername] = useState("");
+  const [reviewFormData, setReviewFormData] = useState({
+    rate: null,
+    content: "",
+  });
+  const [isEdit, setIsEdit] = useState(false);
+  const [currentReviewId, setCurrentReviewId] = useState("");
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReview, setIsReview] = useState(false);
-  const [reviewUpdate, setReviewupdate] = useState(false);
+  const [reviewUpdate, setReviewUpdate] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
   let token = localStorage.getItem("Authorization");
@@ -157,7 +163,9 @@ function Map() {
                 </div>
 
                 {review.user.username === username && (
-                  <button>리뷰 수정</button>
+                  <button onClick={() => handleReviewEdit(review)}>
+                    리뷰 수정
+                  </button>
                 )}
               </div>
               <div className="review-content">
@@ -170,26 +178,63 @@ function Map() {
     );
   }
 
-  const handleReviewSubmit = (newReview) => {
-    setReviews((prevReviews) => [...prevReviews, newReview]);
+  const handleReviewEdit = (review) => {
+    setReviewFormData({
+      reviewId: review.id,
+      rate: review.rate,
+      content: review.content,
+      placeId: selectedPlace.id,
+    });
+    setCurrentReviewId(review.id);
+    setIsEdit(true);
+    setIsReview(true);
   };
 
+  const handleReviewSubmit = (submittedReview) => {
+    if (!submittedReview) {
+      console.error("Submitted review is undefined.");
+      return;
+    }
+    setReviews((prevReviews) => {
+      const reviewIndex = prevReviews.findIndex(
+        (review) => review.id === submittedReview.id
+      );
+
+      if (reviewIndex !== -1) {
+        // 기존 리뷰를 찾아서 수정된 리뷰로 대체
+        const updatedReview = {
+          ...submittedReview,
+          id: submittedReview.reviewId, // 구조를 조정합니다.
+        };
+        delete updatedReview.reviewId; // 더 이상 필요하지 않은 reviewId 속성을 제거합니다.
+
+        return prevReviews.map((review, index) =>
+          index === reviewIndex ? updatedReview : review
+        );
+      } else {
+        // 새로운 리뷰 추가
+        return [...prevReviews, submittedReview];
+      }
+    });
+
+    setIsReview(false);
+  };
   // 리뷰 실시간 업데이트
-  useEffect(() => {
-    const place = selectedPlace;
+  // useEffect(() => {
+  //   const place = selectedPlace;
 
-    const handleReviewUpdate = async () => {
-      try {
-        const response = await getPlaceLoginInfo({
-          id: place.id,
-          token: token,
-        });
-        setReviews(response.reviews);
-      } catch (error) {}
-    };
+  //   const handleReviewUpdate = async () => {
+  //     try {
+  //       const response = await getPlaceLoginInfo({
+  //         id: place.id,
+  //         token: token,
+  //       });
+  //       setReviews(response.reviews);
+  //     } catch (error) {}
+  //   };
 
-    handleReviewUpdate();
-  }, [reviewUpdate]);
+  //   handleReviewUpdate();
+  // }, [reviewUpdate]);
 
   // 필터 별 마커 표시
   useEffect(() => {
@@ -597,7 +642,11 @@ function Map() {
                   currentToken={token}
                   onSubmit={handleReviewSubmit}
                   reviewUpdate={reviewUpdate}
-                  setReviewUpdate={setReviewupdate}
+                  setReviewUpdate={setReviewUpdate}
+                  reviewFormData={reviewFormData}
+                  isEdit={isEdit}
+                  setIsEdit={setIsEdit}
+                  currentReviewId={currentReviewId}
                 />
               </div>
             )}
