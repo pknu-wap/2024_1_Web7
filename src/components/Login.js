@@ -3,6 +3,7 @@ import "./Login.css";
 import naver_logo from "../img/naver_logo.png";
 import google_logo from "../img/google_logo.png";
 import { useNavigate } from "react-router-dom";
+import { getUserName } from "../api";
 
 function Login() {
   const navigate = useNavigate();
@@ -43,7 +44,6 @@ function Login() {
           }),
         }
       );
-
       // if (!response.ok) {
       //   alert("로그인에 실패했습니다.");
       // }

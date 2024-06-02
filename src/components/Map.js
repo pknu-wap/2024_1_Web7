@@ -10,6 +10,7 @@ import {
   searchPlaces,
   getPlaceLoginInfo,
   getMyPlaces,
+  getUserName,
 } from "../api";
 
 import Modal from "./Modal";
@@ -55,7 +56,6 @@ function Map() {
   const { naver } = window;
   const { currentMyLocation } = useGeolocation();
   const { LatLng, Map, Marker } = naver.maps; // 필요한 객체를 비구조화 할당
-  // const { currentUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -68,6 +68,7 @@ function Map() {
   const [search, setSearch] = useState("");
   const [isBookmark, setIsBookmark] = useState(false);
   const [isMyPlaces, setIsMyPlaces] = useState(false);
+  const [username, SetUsername] = useState("");
 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
@@ -78,6 +79,21 @@ function Map() {
   const [isSearch, setIsSearch] = useState(false);
 
   let token = localStorage.getItem("Authorization");
+
+  useEffect(() => {
+    const currentUsername = async () => {
+      if (token) {
+        try {
+          const username = await getUserName({ token: token });
+          SetUsername(username);
+        } catch (error) {
+          console.error("유저 아이디를 찾지 못했습니다.", error);
+        }
+      }
+    };
+
+    currentUsername();
+  }, [token]);
 
   const handleAllClick = () => {
     setType("all");
@@ -130,11 +146,19 @@ function Map() {
           <li className="review-list" key={review.id}>
             <img className="review-profile-img" src={footImg} alt="Profile" />
             <div className="review-content-box">
-              <div className="review-user-rate">
-                <span className="review-username">{review.user.username}</span>
-                <span className="review-rate ">
-                  <StarRating rate={review.rate} />
-                </span>
+              <div className="review-user-rate-update">
+                <div className="review-user-rate">
+                  <span className="review-username">
+                    {review.user.username}
+                  </span>
+                  <span className="review-rate ">
+                    <StarRating rate={review.rate} />
+                  </span>
+                </div>
+
+                {review.user.username === username && (
+                  <button>리뷰 수정</button>
+                )}
               </div>
               <div className="review-content">
                 <div className="review-content-inbox">{review.content}</div>
@@ -479,7 +503,7 @@ function Map() {
         <Modal isOpen={isModalOpen} closeModal={closeModal}>
           <div className="name-type-rate-bookmark">
             <div className="name-type-rate">
-              <h2 className="place-name">{selectedPlace.name}</h2>
+              <h2 className="place-name">{selectedPlace.name} </h2>
               <span className="place-type">{selectedPlace.placeType} |</span>
               <span className="place-rate">
                 {selectedPlace.rate ? (

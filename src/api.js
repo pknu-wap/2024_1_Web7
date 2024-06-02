@@ -75,6 +75,7 @@ export async function getMyPlaces({ token }) {
   }
 }
 
+// 장소 상세 정보 불러오기
 export async function getPlaceInfo({ id = "" }) {
   try {
     const response = await fetch(
@@ -88,6 +89,7 @@ export async function getPlaceInfo({ id = "" }) {
   }
 }
 
+// 로그인 시 장소 상세 정보 (북마크)
 export async function getPlaceLoginInfo({ id = "", token }) {
   try {
     const response = await fetch(
@@ -108,6 +110,7 @@ export async function getPlaceLoginInfo({ id = "", token }) {
   }
 }
 
+// 검색된 장소
 export async function searchPlaces({ word = "" }) {
   try {
     const response = await fetch(
@@ -123,6 +126,7 @@ export async function searchPlaces({ word = "" }) {
   }
 }
 
+// 리뷰 생성
 export async function createReview({ rate, content, placeId }, token) {
   try {
     const response = await fetch(
@@ -144,6 +148,52 @@ export async function createReview({ rate, content, placeId }, token) {
     console.log(data);
   } catch (error) {
     console.error("리뷰를 작성하는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
+export async function updateReview(
+  { reviewId, rate, content, placeId },
+  token
+) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/place/review/update/${reviewId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          reviewId: reviewId,
+          rate: rate,
+          content: content,
+          placeId: placeId,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("리뷰를 수정하는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
+// 현재 사용자 name 가져오기
+export async function getUserName({ token }) {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}api/mypage`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { name } = await response.json();
+    return name;
+  } catch (error) {
+    console.error("사용자의 아이디를 가져오는 데 실패했습니다.", error);
     throw error;
   }
 }

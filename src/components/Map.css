@@ -111,7 +111,7 @@
 .name-type-rate {
   display: flex;
   align-items: center;
-  gap: 2%;
+  gap: 1%;
   width: 100%;
 }
 
@@ -154,7 +154,7 @@
 
 .rate-img2 {
   width: 13px;
-  margin: 0 4px;
+  margin-right: 5px;
 }
 
 .info-window-line {
@@ -275,7 +275,7 @@
 .review-list {
   display: flex;
   align-items: center;
-  gap: 5%;
+  gap: 2%;
   font-family: "Pretendard";
   padding: 2% 3%;
   border: 1px solid #7b7b7b;
@@ -284,13 +284,25 @@
 }
 
 .review-profile-img {
-  width: 50px;
+  width: 65px;
   padding: 5px;
 }
 
 .review-content-box {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.review-user-rate-update {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.review-user-rate-update button {
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .review-user-rate {
@@ -307,7 +319,7 @@
 .review-content {
   color: #7b7b7b;
   padding-top: 5px;
-  width: 400px;
+  width: 100%;
   word-wrap: break-word;
 }
 
