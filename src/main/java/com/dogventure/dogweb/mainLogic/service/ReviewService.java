@@ -27,12 +27,16 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
 
-    public void save(ReviewRequestDto requestDto) {
+    public void save(ReviewRequestDto requestDto) throws IllegalAccessException {
 
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
 
         Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
+
+        if (reviewRepository.existsByUserAndPlace(user, place)) {
+            throw new IllegalAccessException("한 장소에 두개 이상의 리뷰는 작성할 수 없습니다");
+        }
 
         Review review = new Review(requestDto.getRate(), requestDto.getContent(), user, place);
 

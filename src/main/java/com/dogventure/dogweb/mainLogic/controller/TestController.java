@@ -14,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -29,203 +29,126 @@ public class TestController {
     private final ImageRepository imageRepo;
 
     @PostMapping("/place/add")
-    public void addPlace(@RequestParam("image1")MultipartFile file1,
-                         @RequestParam("image2")MultipartFile file2,
-                         @RequestParam("image3")MultipartFile file3,
+    public void addPlace(@RequestParam Map<String, MultipartFile> files) throws IOException {
 
-                         @RequestParam("image4")MultipartFile file4,
-                         @RequestParam("image5")MultipartFile file5,
-                         @RequestParam("image6")MultipartFile file6,
+        List<MultipartFile> fileList = files.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
 
-                         @RequestParam("image7")MultipartFile file7,
-                         @RequestParam("image8")MultipartFile file8,
-                         @RequestParam("image9")MultipartFile file9,
+        List<List<Image>> allImageLists = new ArrayList<>();
 
-                         @RequestParam("image10")MultipartFile file10,
-                         @RequestParam("image11")MultipartFile file11,
-                         @RequestParam("image12")MultipartFile file12,
+        for (int i = 0; i < fileList.size(); i += 3) {
+            List<Image> images = new ArrayList<>();
+            for (int j = i; j < i + 3 && j < fileList.size(); j++) {
+                MultipartFile file = fileList.get(j);
+                Image image = new Image(file.getOriginalFilename(), file.getBytes());
+                imageRepo.save(image);
+                images.add(image);
+            }
+            allImageLists.add(images);
+        }
 
-                         @RequestParam("image13")MultipartFile file13,
-                         @RequestParam("image14")MultipartFile file14,
-                         @RequestParam("image15")MultipartFile file15,
 
-                         @RequestParam("image16")MultipartFile file16,
-                         @RequestParam("image17")MultipartFile file17,
-                         @RequestParam("image18")MultipartFile file18,
+        /*
+         * 동물 병원
+         */
+        Place place1 = new Place("튼튼 동물병원", 35.1383, 129.1024, allImageLists.get(0), LocalTime.of(9, 30), LocalTime.of(19, 0), "부산광역시 남구 대연동 39-22", "051-621-7555", "안녕하세요, 튼튼 동물병원입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place1);
 
-                         @RequestParam("image19")MultipartFile file19,
-                         @RequestParam("image20")MultipartFile file20,
-                         @RequestParam("image21")MultipartFile file21,
+        Place place2 = new Place("더본외과 동물의료센터", 35.1395, 129.1053, allImageLists.get(1), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 남구 수영로 364 4층", "051-711-7515", "안녕하세요, 더본외과 동물의료센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place2);
 
-                         @RequestParam("image22")MultipartFile file22,
-                         @RequestParam("image23")MultipartFile file23,
-                         @RequestParam("image24")MultipartFile file24,
+        Place place3 = new Place("다온 동물병원", 35.1401, 129.1041, allImageLists.get(2), LocalTime.of(9, 30), LocalTime.of(19, 0), "부산광역시 남구 수영로 345 힐스테이트푸르지오 혁신상가 124호", "051-622-2171", "안녕하세요, 다온 동물병원입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place3);
 
-                         @RequestParam("image25")MultipartFile file25,
-                         @RequestParam("image26")MultipartFile file26,
-                         @RequestParam("image27")MultipartFile file27,
+        Place place4 = new Place("더프라임 동물의료원", 35.1427, 129.1081, allImageLists.get(3), LocalTime.of(10, 30), LocalTime.of(19, 0), "부산광역시 수영구 수영로 405-1", "051-625-2345", "안녕하세요, 더프라임 동물의료원입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place4);
 
-                         @RequestParam("image28")MultipartFile file28,
-                         @RequestParam("image29")MultipartFile file29,
-                         @RequestParam("image30")MultipartFile file30
-                         ) throws IOException {
+        Place place5 = new Place("24시 UN동물의료센터", 35.1353, 129.0907, allImageLists.get(4), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 남구 수영로 221", "051-624-2475", "안녕하세요, 24시 UN동물의료센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place5);
 
-//        List<MultipartFile> multipartFiles = new ArrayList<>();
-//        List<List<Image>> imageList = new ArrayList<>();
-//        for (int i=0; i<30; i++) {
-//
-//        }
-//
-//        Image image1 = new Image(file1.getOriginalFilename(), file1.getBytes());
-//        imageRepo.save(image1);
-//        Image image2 = new Image(file2.getOriginalFilename(), file2.getBytes());
-//        imageRepo.save(image2);
-//        Image image3 = new Image(file3.getOriginalFilename(), file3.getBytes());
-//        imageRepo.save(image3);
-//
-//        List<Image> images1 = new ArrayList<>();
-//        images1.add(image1);
-//        images1.add(image2);
-//        images1.add(image3);
-//
-//
-//        Image image4 = new Image(file4.getOriginalFilename(), file4.getBytes());
-//        imageRepo.save(image4);
-//        Image image5 = new Image(file5.getOriginalFilename(), file5.getBytes());
-//        imageRepo.save(image5);
-//        Image image6 = new Image(file6.getOriginalFilename(), file6.getBytes());
-//        imageRepo.save(image6);
-//
-//        List<Image> images2 = new ArrayList<>();
-//        images2.add(image4);
-//        images2.add(image5);
-//        images2.add(image6);
-//
-//
-//        Image image7 = new Image(file7.getOriginalFilename(), file7.getBytes());
-//        imageRepo.save(image7);
-//        Image image8 = new Image(file8.getOriginalFilename(), file8.getBytes());
-//        imageRepo.save(image8);
-//        Image image9 = new Image(file9.getOriginalFilename(), file9.getBytes());
-//        imageRepo.save(image9);
-//
-//        List<Image> images3 = new ArrayList<>();
-//        images3.add(image7);
-//        images3.add(image8);
-//        images3.add(image9);
-//
-//
-//        Image image10 = new Image(file10.getOriginalFilename(), file10.getBytes());
-//        imageRepo.save(image10);
-//        Image image11 = new Image(file11.getOriginalFilename(), file11.getBytes());
-//        imageRepo.save(image11);
-//        Image image12 = new Image(file12.getOriginalFilename(), file12.getBytes());
-//        imageRepo.save(image12);
-//
-//        List<Image> images4 = new ArrayList<>();
-//        images4.add(image10);
-//        images4.add(image11);
-//        images4.add(image12);
-//
-//
-//        Image image13 = new Image(file13.getOriginalFilename(), file13.getBytes());
-//        imageRepo.save(image13);
-//        Image image14 = new Image(file14.getOriginalFilename(), file14.getBytes());
-//        imageRepo.save(image14);
-//        Image image15 = new Image(file15.getOriginalFilename(), file15.getBytes());
-//        imageRepo.save(image15);
-//
-//        List<Image> images5 = new ArrayList<>();
-//        images1.add(image13);
-//        images1.add(image14);
-//        images1.add(image15);
-//
-//
-//        Image image16 = new Image(file16.getOriginalFilename(), file16.getBytes());
-//        imageRepo.save(image16);
-//        Image image17 = new Image(file17.getOriginalFilename(), file17.getBytes());
-//        imageRepo.save(image17);
-//        Image image18 = new Image(file18.getOriginalFilename(), file18.getBytes());
-//        imageRepo.save(image18);
-//
-//        List<Image> images6 = new ArrayList<>();
-//        images1.add(image16);
-//        images1.add(image17);
-//        images1.add(image18);
-//
-//
-//        Image image19 = new Image(file19.getOriginalFilename(), file19.getBytes());
-//        imageRepo.save(image19);
-//        Image image20 = new Image(file20.getOriginalFilename(), file20.getBytes());
-//        imageRepo.save(image20);
-//        Image image21 = new Image(file21.getOriginalFilename(), file21.getBytes());
-//        imageRepo.save(image21);
-//
-//        List<Image> images7 = new ArrayList<>();
-//        images1.add(image19);
-//        images1.add(image20);
-//        images1.add(image21);
-//
-//
-//        Image image22 = new Image(file22.getOriginalFilename(), file22.getBytes());
-//        imageRepo.save(image22);
-//        Image image23 = new Image(file23.getOriginalFilename(), file23.getBytes());
-//        imageRepo.save(image23);
-//        Image image24 = new Image(file24.getOriginalFilename(), file24.getBytes());
-//        imageRepo.save(image24);
-//
-//        List<Image> images8 = new ArrayList<>();
-//        images1.add(image22);
-//        images1.add(image23);
-//        images1.add(image24);
-//
-//
-//        Image image25 = new Image(file25.getOriginalFilename(), file1.getBytes());
-//        imageRepo.save(image1);
-//        Image image2 = new Image(file2.getOriginalFilename(), file2.getBytes());
-//        imageRepo.save(image2);
-//        Image image3 = new Image(file3.getOriginalFilename(), file3.getBytes());
-//        imageRepo.save(image3);
-//
-//        List<Image> images1 = new ArrayList<>();
-//        images1.add(image1);
-//        images1.add(image2);
-//        images1.add(image3);
-//
-//
-//        Image image1 = new Image(file1.getOriginalFilename(), file1.getBytes());
-//        imageRepo.save(image1);
-//        Image image2 = new Image(file2.getOriginalFilename(), file2.getBytes());
-//        imageRepo.save(image2);
-//        Image image3 = new Image(file3.getOriginalFilename(), file3.getBytes());
-//        imageRepo.save(image3);
-//
-//        List<Image> images1 = new ArrayList<>();
-//        images1.add(image1);
-//        images1.add(image2);
-//        images1.add(image3);
-//        /*
-//         * 동물 병원
-//         */
-//        Place place1 = new Place("헬로 동물병원", 35.1321, 129.1125, images1, LocalTime.of(10, 0), LocalTime.of(19, 0), "부산 남구 분포로 115 힐탑 탑플레이 A동 403호", "051-627-1275", "헬로 동물병원입니다, 편하게 찾아주세요^^", DogSize.BIG, PlaceType.HOSPITAL, 5.0);
-//        placeRepo.save(place1);
-//
-//        /*
-//         * 애견 카페
-//         */
-//        Place place2 = new Place("덕수네 애견", 35.137, 129.1005, images2, LocalTime.of(11, 30), LocalTime.of(21, 30), "대연동 55-6번지 4층 덕수네애견 남구 부산광역시 KR", "051-625-2956", "덕수네 애견카페입니다, 편하게 찾아주세요^^", DogSize.SMALL, PlaceType.CAFE, 5.0);
-//        placeRepo.save(place2);
-//
-//        /*
-//         * 애견 미용
-//         */
-//        Place place3 = new Place("애견 미용", 35.127, 129.1035, images3, LocalTime.of(11, 30), LocalTime.of(21, 30), "대연동 55-6번지 4층 덕수네애견 남구 부산광역시 KR", "051-625-2956", "덕수네 애견카페입니다, 편하게 찾아주세요^^", DogSize.MEDIUM, PlaceType.BEAUTY, 5.0);
-//        placeRepo.save(place3);
-//
-//        /*
-//         * 애견 용품
-//         */
-//        Place place4 = new Place("애견 용품", 35.107, 129.1095, images4, LocalTime.of(11, 30), LocalTime.of(21, 30), "대연동 55-6번지 4층 덕수네애견 남구 부산광역시 KR", "051-625-2956", "덕수네 애견카페입니다, 편하게 찾아주세요^^", DogSize.BIG, PlaceType.GOODS, 5.0);
+        Place place6 = new Place("조양래 동물의료센터", 35.1348, 129.091, allImageLists.get(5), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 남구 수영로 224-1", "051-621-8880", "안녕하세요, 조양래 동물의료센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place6);
+
+        Place place7 = new Place("W 동물의료센터", 35.1255, 129.111, allImageLists.get(6), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 남구 용호로 68", "051-626-5050", "안녕하세요, W 동물의료센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place7);
+
+        Place place8 = new Place("바다 동물병원", 35.1527, 129.1161, allImageLists.get(7), LocalTime.of(10, 0), LocalTime.of(18, 30), "부산광역시 수영구 광남로 125 바다동물병원 1층", "051-756-0075", "안녕하세요, 바다 동물병원입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place8);
+
+        Place place9 = new Place("센텀 동물메디컬센터", 35.1684, 129.114, allImageLists.get(8), LocalTime.of(10, 0), LocalTime.of(20, 0), "부산광역시 수영구 연수로 407-1", "051-746-7582", "안녕하세요, 센텀 동물메디컬센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place9);
+
+        Place place10 = new Place("문현 동물병원", 35.1365, 129.0717, allImageLists.get(9), LocalTime.of(9, 30), LocalTime.of(19, 30), "부산광역시", "051-634-4017", "안녕하세요, 문현 동물병원입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place10);
+
+        Place place11 = new Place("다솜고양이 메디컬센터", 35.1373, 129.0693, allImageLists.get(10), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 남구 수영로13번길 3", "051-632-7580", "안녕하세요, 다솜고양이 메디컬센터입니다", DogSize.BIG, PlaceType.HOSPITAL, null);
+        placeRepo.save(place11);
+
+
+        /*
+         * 애견 카페
+         */
+        Place place12 = new Place("도그민", 35.1548, 129.1201, allImageLists.get(11), LocalTime.of(11, 0), LocalTime.of(21, 0), "부산광역시 수영구 민락동 179-1번지 6층", "0507-1306-6720", "안녕하세요, 도그민입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place12);
+
+        Place place13 = new Place("FC일석이조", 35.1358, 129.1002, allImageLists.get(12), LocalTime.of(13, 0), LocalTime.of(22, 30), "부산광역시 남구", "051-612-2571", "안녕하세요, FC일석이조입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place13);
+
+        Place place14 = new Place("또또애견", 35.1425, 129.0562, allImageLists.get(13), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 부산진구 신암로 9", "051-633-7789", "안녕하세요, 또또애견입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place14);
+
+        Place place15 = new Place("홀킷", 35.1555, 129.066, allImageLists.get(14), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 부산진구 서전로58번길 48 3층", "010-6292-0678", "안녕하세요, 홀킷입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place15);
+
+        Place place16 = new Place("개라모르겠다", 35.155, 129.0631, allImageLists.get(15), LocalTime.of(12, 0), LocalTime.of(22, 0), "부산광역시 부산진구 전포대로 209번길 39-9호 2층", "051-804-1435", "안녕하세요, 개라모르겠다입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place16);
+
+        Place place17 = new Place("플루오", 35.1589, 129.0641, allImageLists.get(16), LocalTime.of(12, 0), LocalTime.of(20, 30), "부산광역시 부산진구 서전로37번길 26 3층", "010-4464-7919", "안녕하세요, 플루오입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place17);
+
+        Place place18 = new Place("카페개네 서면점", 35.1589, 129.0641, allImageLists.get(17), LocalTime.of(12, 0), LocalTime.of(20, 30), "부산광역시 부산진구 서전로37번길 26 3층", "010-4464-7919", "안녕하세요, 플루오입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place18);
+
+        Place place19 = new Place("월월월", 35.1805, 129.0882, allImageLists.get(18), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 연제구 쌍미천로84번길 6 월월월앳더모먼츠", "010-7584-7599", "안녕하세요, 월월월입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place19);
+
+        Place place20 = new Place("아껴줄개", 35.192, 129.1, allImageLists.get(19), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 동래구 온천천로 463", "051-532-2232", "안녕하세요, 아껴줄개입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place20);
+
+        Place place21 = new Place("덕수네 애견카페", 35.0993, 129.0317, allImageLists.get(20), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 중구 광복동2가", "051-245-2956", "안녕하세요, 덕수네 애견카페입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place21);
+
+        /*
+         * 애견 미용
+         */
+        Place place22 = new Place("J@야니스타일 애견미용", 35.148, 129.0573, allImageLists.get(21), LocalTime.of(13, 0), LocalTime.of(21, 0), "부산광역시 동구 J@ 야니스타일", "051-442-5750", "안녕하세요, J@야니스타일 애견미용입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place22);
+
+        Place place23 = new Place("미소애견미용실", 35.1571, 129.054, allImageLists.get(22), LocalTime.of(10, 0), LocalTime.of(18, 0), "부산광역시 부산진구 가야대로 754 1층", "051-894-2009", "안녕하세요, 미소애견미용실입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place23);
+
+        Place place24 = new Place("메리몰애견숍", 35.1076, 129.0341, allImageLists.get(23), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산광역시 중구 동광동5가 9-48", "051-469-4948", "안녕하세요, 메리몰애견숍입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place24);
+
+        Place place25 = new Place("행복애견미용실", 35.1702, 129.0677, allImageLists.get(24), LocalTime.of(10, 30), LocalTime.of(20, 0), "부산광역시", "051-867-8483", "안녕하세요, 행복애견미용실입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place25);
+
+        Place place26 = new Place("펫코스", 35.1646, 129.1676, allImageLists.get(25), LocalTime.of(9, 0), LocalTime.of(19, 0), "부산광역시 해운대구 해운대해변로357번길 17 3층", "051-710-2002", "안녕하세요, 펫코스입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place26);
+
+        Place place27 = new Place("핑코애견", 35.1733, 129.1701, allImageLists.get(26), LocalTime.of(9, 0), LocalTime.of(20, 0), "부산광역시 해운대구 좌제3동", "051-945-2800", "안녕하세요, 핑코애견입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        placeRepo.save(place27);
+
+//        Place place28 = new Place("지니펫살롱", 35.2247, 129.0821, allImageLists.get(26), LocalTime.of(9, 0), LocalTime.of(20, 0), "부산광역시 해운대구 좌제3동", "051-945-2800", "안녕하세요, 핑코애견입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+//        placeRepo.save(place28);
+
+
+        /*
+         * 애견 용품
+         */
+//        Place place4 = new Place("애견 용품", 35.107, 129.1095, images4, LocalTime.of(11, 30), LocalTime.of(21, 30), "대연동 55-6번지 4층 덕수네애견 남구 부산광역시 KR", "051-625-2956", "덕수네 애견카페입니다, 편하게 찾아주세요^^", DogSize.BIG, PlaceType.GOODS, null);
 //        placeRepo.save(place4);
     }
 

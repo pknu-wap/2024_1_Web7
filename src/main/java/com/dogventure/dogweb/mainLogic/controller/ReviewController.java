@@ -2,10 +2,8 @@ package com.dogventure.dogweb.mainLogic.controller;
 
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ReviewIdResponseDto;
 import com.dogventure.dogweb.mainLogic.service.ReviewService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +19,7 @@ public class ReviewController {
     private final ReviewService service;
 
     @PostMapping("/write")
-    public ResponseEntity write(@RequestBody ReviewRequestDto requestDto) {
+    public ResponseEntity write(@RequestBody ReviewRequestDto requestDto) throws IllegalAccessException {
 
         service.save(requestDto);
         return new ResponseEntity<>(HttpStatus.OK);
