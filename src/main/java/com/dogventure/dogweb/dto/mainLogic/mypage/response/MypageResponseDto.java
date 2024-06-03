@@ -15,4 +15,6 @@ public class MypageResponseDto {
     private String description;
 
     private Dog dog;
+
+    private Integer count;
 }

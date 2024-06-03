@@ -105,10 +105,10 @@ public class TestController {
         Place place16 = new Place("개라모르겠다", 35.155, 129.0631, allImageLists.get(15), LocalTime.of(12, 0), LocalTime.of(22, 0), "부산광역시 부산진구 전포대로 209번길 39-9호 2층", "051-804-1435", "안녕하세요, 개라모르겠다입니다", DogSize.SMALL, PlaceType.CAFE, null);
         placeRepo.save(place16);
 
-        Place place17 = new Place("오시개", 35.1663, 129.0427, allImageLists.get(16), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 부산진구 부암동 335-9번지 오시개 1층", "051-805-0707", "순수한 사랑을 받기에 충분한 소중한 반려견을 정성으로 미용하는 부산진구 오시개 애견샵입니다. 예약하시면 편한시간에 미용을 받으실수 있습니다. 가위컷/애견스파/머드팩/기본목욕/기본미용/애견용품/간식,사료", DogSize.SMALL, PlaceType.CAFE, null);
+        Place place17 = new Place("스포독", 35.1766, 129.1263, allImageLists.get(16), LocalTime.of(12, 0), LocalTime.of(19, 0), "부산 해운대구 센텀동로 102 센텀필상가1관 옥상", "0507-1359-1972", "※ 스포독과 함께 즐길 수 있는 7가지 포인트 ※  1. 스포독 : 도심 속 드넓은 루프탑 반려견 운동장  - 시즌별 운영시간 봄&가을 : 13:00~20:00 여름 : 15:00~21:30 (수영장 OPEN!) 겨울 : 12:00~19:00  소형견 운동장 / 중대형견 운동장 분리 - 소형견 입장료 (11kg 미만) : 6,000원 - 중형견 입장료(11kg~19kg) : 7,000원 - 대형견 입장료(20kg 이상) : 8,000원  ※ 할인이벤트 ※ - 2견 이상 데리고 올 시 다둥이견 할인! - 중,고,대학생 학생증 제시하면 1견 입장료 할인!  - 사람 입장료 : 6,000원 * 여름한정 레인데이 보호자 입장료 무료 * 음료 및 간단한 디저트류 반입 가능  - 주차 : 1시간 30분 무료 * 배달음식 주문 시 추가 주차시간 1시간 제공 ( 이후 주차 요금은 시간당 1,000원 추가입니다. 데스크에서 결제하시면 됩니다 )  2. 요트독 : 반려견과 함께 즐기는 요트투어  - 프라이빗 요트 : 요트 전체 대여 및 투어  - 퍼블릭 요트 투어 : 다른 손님들과 함께 동승하는 요트투어 ※ 스포독 1견 무료입장권 2장 제공  - 365일 / 13시~20시 (1시간 단위로 운영)  3. 면세독 : 온라인보다 저렴한 반려생활의 필수템 가득!  4. 돌봄 : 보호자의 마음으로 돌봐주는 전문케어시스템 - 입장료 내시면 2시간~4시간 케어 가능합니다!  5. 대관 : 운영시간 외 나와 강아지만을 위한 공간 모임, 동호회 등 단체 대관도 OK!  - 소형견 운동장 (11kg 미만) 1시간 : 5만원 / 2시간 : 8만원 - 중.대형견 운동장 (11kg 이상) 1시간 : 6만원 / 2시간 : 9만원  6. 제휴음식 : 허기진 배를 달래 줄 맛있는 제휴음식들 - 피자알볼로, 쌀통닭, 강다짐  7. 다양한 반려견 관련 행사 : 반려견에 의한, 반려견을 위한 다채로운 행사 - 운동회, 독스타 컨테스트, 할로윈파티, 플리마켓, 마켓독 (오프라인 중고마켓) 등  주소 : 부산시 해운대구 센텀필상가 1관 옥상 문의 : 051-783-1976 홈페이지 : http://spodog.modoo.at 인스타그램 : @spodog_love", DogSize.SMALL, PlaceType.CAFE, null);
         placeRepo.save(place17);
 
-        Place place18 = new Place("카페개네 서면점", 35.1589, 129.0641, allImageLists.get(17), LocalTime.of(12, 0), LocalTime.of(20, 30), "부산광역시 부산진구 서전로37번길 26 3층", "010-4464-7919", "안녕하세요, 플루오입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        Place place18 = new Place("카페개네 서면점", 35.1589, 129.0641, allImageLists.get(17), LocalTime.of(12, 0), LocalTime.of(20, 30), "부산광역시 부산진구 서전로37번길 26 3층", "010-4464-7919", "안녕하세요, 카페개네 서면점입니다", DogSize.SMALL, PlaceType.CAFE, null);
         placeRepo.save(place18);
 
         Place place19 = new Place("월월월", 35.1805, 129.0882, allImageLists.get(18), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 연제구 쌍미천로84번길 6 월월월앳더모먼츠", "010-7584-7599", "<1층> 카페&스토어 펫-프랜들리 복합문화공간 * 실내외 자유로운 반려견(10kg미만) 출입 ※ 수컷강아지 기저귀 필수 착용(매장에서 구입가능) * Signature I 베이글, 분식류, 커피, 시즌 베버리지  <2층> 스튜디오, 대관 룸 * 생파, 독서모임, 교육/세미나,상업사진촬영 브라이덜 샤워 대관 등  <루프탑> 플레이 그라운드(Play Ground)  * 전용주차장 I 4~5대 주차가능", DogSize.SMALL, PlaceType.CAFE, null);
@@ -129,7 +129,7 @@ public class TestController {
         Place place23 = new Place("미소애견미용실", 35.1571, 129.054, allImageLists.get(22), LocalTime.of(10, 0), LocalTime.of(18, 0), "부산광역시 부산진구 가야대로 754 1층", "051-894-2009", "안녕하세요, 미소애견미용실입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
         placeRepo.save(place23);
 
-        Place place24 = new Place("메리몰애견숍", 35.1076, 129.0341, allImageLists.get(23), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산광역시 중구 동광동5가 9-48", "051-469-4948", "안녕하세요, 메리몰애견숍입니다", DogSize.SMALL, PlaceType.BEAUTY, null);
+        Place place24 = new Place("메리몰펫샵 문현점", 35.1076, 129.0341, allImageLists.get(23), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산 남구 수영로39번나길 53 1층 메리몰펫샵", "010-5761-2944", "안녕하세요. 반려견 가위컷 전문, 부산애견미용 메리몰펫샵 문현점입니다. 애견미용,스파, 가위컷,놀이방, 호텔, 대형견 목욕,미용 등 애견미용전문 펫샵이므로 부담없이 상담 문의해 주세요.", DogSize.SMALL, PlaceType.BEAUTY, null);
         placeRepo.save(place24);
 
         Place place25 = new Place("행복애견미용실", 35.1702, 129.0677, allImageLists.get(24), LocalTime.of(10, 30), LocalTime.of(20, 0), "부산 부산진구 거제대로 18", "051-867-8483", "안녕하세요, 행복애견미용실입니다", DogSize.SMALL, PlaceType.BEAUTY, null);

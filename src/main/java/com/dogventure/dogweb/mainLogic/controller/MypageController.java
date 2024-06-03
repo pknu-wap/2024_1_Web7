@@ -21,7 +21,7 @@ public class MypageController {
     private final MypageService service;
     private final DogService dogService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<MypageResponseDto> getMypage() {
 
         MypageResponseDto responseDto = service.getMypage();

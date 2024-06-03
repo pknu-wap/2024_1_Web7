@@ -6,6 +6,7 @@ import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ImageDto;
 import com.dogventure.dogweb.mainLogic.entity.Image;
 import com.dogventure.dogweb.mainLogic.entity.User;
 import com.dogventure.dogweb.mainLogic.repository.ImageRepository;
+import com.dogventure.dogweb.mainLogic.repository.ReviewRepository;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +24,15 @@ import java.io.IOException;
 public class MypageService {
 
     private final UserRepository repository;
-    private final ImageRepository imageRepository;
+    private final ReviewRepository reviewRepository;
 
     public MypageResponseDto getMypage() {
 
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = repository.findUserByEmail(userEmail).orElseThrow(() -> new EntityNotFoundException("토큰 인증을 받은 사용자가 존재하지 않습니다"));
+        int reviewCount = reviewRepository.countAllByUser(user);
 
-        MypageResponseDto responseDto = new MypageResponseDto(user.getUsername(), user.getDescription(), user.getDog());
+        MypageResponseDto responseDto = new MypageResponseDto(user.getUsername(), user.getDescription(), user.getDog(), reviewCount);
 
         return responseDto;
     }

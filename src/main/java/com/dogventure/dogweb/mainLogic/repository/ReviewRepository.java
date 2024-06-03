@@ -8,5 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+
     boolean existsByUserAndPlace(User user, Place place);
+
+    Integer countAllByUser(User user);
 }
