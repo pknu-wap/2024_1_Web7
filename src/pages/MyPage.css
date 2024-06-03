@@ -137,9 +137,9 @@
 .pet-info {
   margin-top: 26px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  gap: 15%;
+  gap: 5%;
   flex-direction: row;
   position: relative;
 }
@@ -286,7 +286,7 @@ input {
   border: 1px solid #7b7b7b;
   border-radius: 100px;
   padding: 21px 121px;
-  width: 490px;
+  width: 100%;
 }
 
 .modal-footer {
@@ -307,8 +307,8 @@ input {
 
 .modal-select {
   border-radius: 100px;
-  padding: 5%;
-  width: 30%;
+  padding: 4%;
+  width: 40%;
   cursor: pointer;
   font-family: "Pretendard";
 }
