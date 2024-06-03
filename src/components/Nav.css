@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.myPage-foot-btn {
+  cursor: pointer;
+}
+
 .login-signup-box {
   display: flex;
   margin-right: 8px;

@@ -5,6 +5,7 @@ import SignUp from "./components/SignUp";
 import ChatbotHG from "./components/ChatbotHG";
 import MainPage from "./pages/MainPage";
 import Map from "./components/Map";
+import MyPage from "./pages/MyPage";
 
 function Main() {
   return (
@@ -16,6 +17,7 @@ function Main() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="chatbot" element={<ChatbotHG />} />
+          <Route path="mypage" element={<MyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

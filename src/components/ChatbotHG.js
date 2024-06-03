@@ -1,9 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import imglogo from "../img/dogventure_logo.png";
 import footblue from "../img/foot_blue.png";
 import imgsend from "../img/send.png";
 import backbutton from "../img/backbutton.png";
 import "./ChatbotHG.css";
+
+const TypingEffect = ({ text, speed }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const typeText = async () => {
+      while (currentIndex < text.length) {
+        await new Promise((resolve) => setTimeout(resolve, speed));
+        setDisplayedText((prev) => {
+          if (currentIndex < text.length) {
+            const updatedText = prev + text[currentIndex];
+            currentIndex++;
+            return updatedText;
+          }
+          return prev;
+        });
+      }
+    };
+
+    setDisplayedText("");
+    typeText();
+
+    return () => {
+      setDisplayedText("");
+    };
+  }, [text, speed]);
+
+  return <div>{displayedText}</div>;
+};
 
 const ChatbotHG = () => {
   /*const [responseText, setResponseText] = useState('');*/
@@ -12,20 +42,12 @@ const ChatbotHG = () => {
   const [loading, setLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
-  const apiEndpoint = `${process.env.REACT_APP_API_URL}/api/gpt/question`;
+  const apiEndpoint = `${process.env.REACT_APP_API_URL}api/gpt/question`;
 
   const addMessage = (sender, message) => {
     const currentTime = new Date().toLocaleTimeString(); //현재 시간 출력
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
   };
-
-  // 메세지 상태 업데이트
-  // const animateMessage = (message) => {
-  //   let arr = messages[1].split('');
-  //   for (let i = 0; i < arr.length; i++) {
-  //     setMessages(i)
-  //   }
-  // }
 
   const handleSendMessage = async () => {
     const message = userInput.trim();
@@ -42,12 +64,13 @@ const ChatbotHG = () => {
       },
       body: JSON.stringify({ prompt: message }),
     });
+    let result = "";
 
     try {
       const bodyData = await response.body;
       const reader = await bodyData.getReader();
       const decoder = new TextDecoder("utf-8");
-      let result = "";
+      // let result = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -55,12 +78,13 @@ const ChatbotHG = () => {
 
         const answer = decoder.decode(value).toString();
         result += answer.replace(/data: |data:/g, "");
-        addMessage("bot", result);
       }
+    } catch (e) {
+      let cleaedresult = result.replace(/\s+/g, "");
+      // console.log(result)
+      addMessage("bot", cleaedresult);
 
       setLoading(false);
-    } catch (e) {
-      console.log(e);
     }
   };
 
@@ -116,7 +140,13 @@ const ChatbotHG = () => {
                   />
                 )}
                 <div>
-                  <div> {msg.message} </div>
+                  {msg.sender === "bot" && msg.message ? (
+                    <div>
+                      <TypingEffect text={msg.message} speed={100} />
+                    </div>
+                  ) : (
+                    <div> {msg.message} </div>
+                  )}
                   <div className="message-time">{msg.time}</div>{" "}
                   {/* 시간 표시 */}
                 </div>
