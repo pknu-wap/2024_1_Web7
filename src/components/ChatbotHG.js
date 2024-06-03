@@ -113,10 +113,10 @@ const ChatbotHG = () => {
 
   useEffect(() => {
     if (showChat) {
-      addMessage(
-        "bot",
-        "안녕하세요 :) 당신의 반려견과 함께하는 오늘을 응원하는 도그벤처 챗봇입니다.\n\n궁금한 사항이나 알아보고 싶은 사항들을 검색해주세요! 챗봇이 빠르게 답해드립니다."
-      );
+      if (!localStorage.getItem("chatbot-welcome-shown")) {
+        addMessage("bot", "안녕하세요 ◡̈ 당신의 반려견과 함께하는 오늘을 응원하는 도그벤처 챗봇입니다.\n\n궁금한 사항이나 알아보고 싶은 사항들을 검색해주세요! 챗봇이 빠르게 답해드립니다.");
+        localStorage.setItem("chatbot-welcome-shown", "true");
+      }
     }
   }, [showChat]);
 
