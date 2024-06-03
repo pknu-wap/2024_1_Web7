@@ -36,6 +36,7 @@ public class Place {
 
     private String phoneNumber;
 
+    @Lob
     private String detailContent;
 
     private DogSize dogSize;
