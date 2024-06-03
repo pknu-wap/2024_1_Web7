@@ -50,6 +50,7 @@ import reviewPen from "../img/reviewPen.png";
 
 import "./Map.css";
 import MapSearch from "./MapSearch";
+import ReviewEdit from "./ReviewEdit";
 
 function Map() {
   const mapRef = useRef(null);
@@ -191,34 +192,29 @@ function Map() {
   };
 
   const handleReviewSubmit = (submittedReview) => {
-    if (!submittedReview) {
-      console.error("Submitted review is undefined.");
-      return;
-    }
     setReviews((prevReviews) => {
-      const reviewIndex = prevReviews.findIndex(
-        (review) => review.id === submittedReview.id
-      );
+      // const reviewIndex = prevReviews.findIndex(
+      //   (review) => review.id === submittedReview.reviewId
+      // );
 
-      if (reviewIndex !== -1) {
-        // 기존 리뷰를 찾아서 수정된 리뷰로 대체
-        const updatedReview = {
-          ...submittedReview,
-          id: submittedReview.reviewId, // 구조를 조정합니다.
-        };
-        delete updatedReview.reviewId; // 더 이상 필요하지 않은 reviewId 속성을 제거합니다.
-
-        return prevReviews.map((review, index) =>
-          index === reviewIndex ? updatedReview : review
-        );
-      } else {
-        // 새로운 리뷰 추가
+      if (!isEdit) {
         return [...prevReviews, submittedReview];
       }
+
+      // if (reviewIndex !== -1) {
+      //   // 기존 리뷰를 찾아서 수정된 리뷰로 대체
+      //   return prevReviews.map((review) =>
+      //     review.id === reviewIndex ? submittedReview : review
+      //   );
+      // } else {
+      //   // 새로운 리뷰 추가
+      //   return [...prevReviews, submittedReview];
+      // }
     });
 
     setIsReview(false);
   };
+
   // 리뷰 실시간 업데이트
   // useEffect(() => {
   //   const place = selectedPlace;

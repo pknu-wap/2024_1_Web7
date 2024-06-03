@@ -156,6 +156,12 @@ export async function updateReview(
   { reviewId, placeId, rate, content },
   token
 ) {
+  const body = {
+    reviewId: reviewId,
+    placeId: placeId,
+    rate: rate,
+    content: content,
+  };
   try {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api/place/review/update/${reviewId}`,
@@ -165,12 +171,7 @@ export async function updateReview(
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          reviewId: reviewId,
-          placeId: placeId,
-          rate: rate,
-          content: content,
-        }),
+        body: JSON.stringify(body),
       }
     );
     const data = await response.json();

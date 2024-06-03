@@ -66,10 +66,11 @@ function ReviewForm({
       if (isEdit) {
         result = await updateReview(Updatebody, currentToken);
         setIsEdit(false);
+        onSubmit(Updatebody);
       } else {
         result = await createReview(body, currentToken);
+        onSubmit(result);
       }
-      onSubmit(result);
     } catch (error) {
       console.log(error);
     } finally {
