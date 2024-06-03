@@ -6,7 +6,7 @@ import backbutton from "../img/backbutton.png";
 import "./ChatbotHG.css";
 
 const TypingEffect = ({ text, speed }) => {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState("");
   useEffect(() => {
     let currentIndex = 0;
 
@@ -16,7 +16,7 @@ const TypingEffect = ({ text, speed }) => {
         setDisplayedText((prev) => {
           if (currentIndex < text.length) {
             const updatedText = prev + text[currentIndex];
-            currentIndex++; 
+            currentIndex++;
             return updatedText;
           }
           return prev;
@@ -24,24 +24,24 @@ const TypingEffect = ({ text, speed }) => {
       }
     };
 
-    setDisplayedText('');
+    setDisplayedText("");
     typeText();
 
     return () => {
-      setDisplayedText('');
+      setDisplayedText("");
     };
   }, [text, speed]);
 
   return <div>{displayedText}</div>;
 };
 
-
 const ChatbotHG = () => {
-  /*const [responseText, setResponseText] = useState('');*/
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
+  const chatEndRef = useRef(null);
 
   const apiEndpoint = `${process.env.REACT_APP_API_URL}api/gpt/question`;
 
@@ -50,10 +50,18 @@ const ChatbotHG = () => {
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
   };
 
-  const handleSendMessage = async () => {
-    const message = userInput.trim();
-    if (message.length === 0) return;
+  // 메세지 상태 업데이트
+  // const animateMessage = (message) => {
+  //   let arr = messages[1].split('');
+  //   for (let i = 0; i < arr.length; i++) {
+  //     setMessages(i)
+  //   }
+  // }
 
+  const handleSendMessage = async (message) => {
+    if (message.trim().length === 0) return;
+
+    setShowWelcomeMessage(false);
     addMessage("user", message);
     setUserInput(""); // 입력 필드를 비움
     setLoading(true); // 로딩 상태 true 설정
@@ -78,13 +86,11 @@ const ChatbotHG = () => {
         if (done) break;
 
         const answer = decoder.decode(value).toString();
+        if(!answer.includes('data:done')) {
         result += answer.replace(/data: |data:/g, "");
-       
-      }
-      
+      }}
     } catch (e) {
-      let cleaedresult = result.replace(/\s+/g, '');
-      // console.log(result)
+      let cleaedresult = result.replace(/\s+/g, "");
       addMessage("bot", cleaedresult);
 
       setLoading(false);
@@ -93,13 +99,30 @@ const ChatbotHG = () => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !event.nativeEvent.isComposing) {
-      handleSendMessage();
+      handleSendMessage(userInput);
     }
   };
 
   const handleCloseChat = () => {
     setShowChat(false);
   };
+
+  const handleRecommendedQuestionClick = (question) => {
+    handleSendMessage(question);
+  };
+
+  useEffect(() => {
+    if (showChat) {
+      addMessage(
+        "bot",
+        "안녕하세요 :) 당신의 반려견과 함께하는 오늘을 응원하는 도그벤처 챗봇입니다.\n\n궁금한 사항이나 알아보고 싶은 사항들을 검색해주세요! 챗봇이 빠르게 답해드립니다."
+      );
+    }
+  }, [showChat]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div>
@@ -134,7 +157,7 @@ const ChatbotHG = () => {
           <div className="chatDiv">
             {loading && <span className="messageWait"></span>}
             {messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.sender}`}>
+              <div key={index} className={`message-wrapper ${msg.sender}`}>
                 {msg.sender === "bot" && (
                   <img
                     src={footblue}
@@ -142,18 +165,46 @@ const ChatbotHG = () => {
                     className="bot-profile"
                   />
                 )}
-                <div>
-                {msg.sender === "bot" && msg.message ?
-                (<div><TypingEffect text={msg.message} speed={100} /></div>)
-                :
-                 (<div> {msg.message} </div>)
-                  }
-                  <div className="message-time">{msg.time}</div>{" "}
-                  {/* 시간 표시 */}
+                <div className={`message ${msg.sender}`}>
+                  {msg.sender === "bot" && msg.message ? (
+                    <TypingEffect text={msg.message} speed={100} />
+                  ) : (
+                    <div>{msg.message}</div>
+                  )}
+                  <div className="message-time">{msg.time}</div>
                 </div>
               </div>
             ))}
+            {showWelcomeMessage && (
+              <div className="recommended-questions">
+                <button
+                  onClick={() =>
+                    handleRecommendedQuestionClick("오늘 날씨 어때?")
+                  }
+                >
+                  오늘 날씨 어때?
+                </button>
+                <button
+                  onClick={() =>
+                    handleRecommendedQuestionClick("부산 여행 추천")
+                  }
+                >
+                  부산 여행 추천
+                </button>
+                <button
+                  onClick={() =>
+                    handleRecommendedQuestionClick(
+                      "오늘 반려견과 떠나기 좋은 장소를 추천해주세요!"
+                    )
+                  }
+                >
+                  오늘 반려견과 떠나기 좋은 장소를 추천해주세요!
+                </button>
+              </div>
+            )}
+            <div ref={chatEndRef} />
           </div>
+
           <div className="inputDiv">
             <input
               type="text"
@@ -162,7 +213,11 @@ const ChatbotHG = () => {
               onChange={(e) => setUserInput(e.target.value)}
               onKeyDown={handleKeyDown}
             />
-            <button onClick={handleSendMessage}>
+            <button
+              onClick={() => {
+                handleSendMessage(userInput);
+              }}
+            >
               <img src={imgsend} alt="Send" className="send-icon" />
             </button>
           </div>
