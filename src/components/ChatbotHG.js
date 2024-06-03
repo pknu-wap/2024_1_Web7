@@ -50,14 +50,6 @@ const ChatbotHG = () => {
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
   };
 
-  // 메세지 상태 업데이트
-  // const animateMessage = (message) => {
-  //   let arr = messages[1].split('');
-  //   for (let i = 0; i < arr.length; i++) {
-  //     setMessages(i)
-  //   }
-  // }
-
   const handleSendMessage = async () => {
     const message = userInput.trim();
     if (message.length === 0) return;

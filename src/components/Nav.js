@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "./Container";
 import "./Nav.css";
 import nav_logo from "../img/dogventure_logo_white.png";
+import mypage_logo from "../img/foot_blue.png";
 
 function Nav() {
   const token = localStorage.getItem("Authorization");
@@ -14,6 +15,10 @@ function Nav() {
     window.location.reload();
   };
 
+  const handleMypage = () => {
+    navigate("/mypage");
+  };
+
   return (
     <div className="nav-box">
       <Container className="container">
@@ -22,11 +27,16 @@ function Nav() {
         </Link>
         <ul className="menu-box">
           {token ? (
-            <li>
-              <button className="logout-btn" onClick={handleLogout}>
-                로그아웃
-              </button>
-            </li>
+            <li
+            style={{
+              display: "inline-flex",
+            }}
+          >
+            <button className="logout-btn" onClick={handleLogout}>
+              로그아웃
+            </button>
+            <img src={mypage_logo} onClick={handleMypage} width={30} />
+          </li>
           ) : (
             <div className="login-signup-box">
               <li>
