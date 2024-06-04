@@ -2,7 +2,6 @@ package com.dogventure.dogweb.mainLogic.service;
 
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestDto;
-import com.dogventure.dogweb.dto.mainLogic.naverMap.response.ReviewIdResponseDto;
 import com.dogventure.dogweb.mainLogic.entity.Place;
 import com.dogventure.dogweb.mainLogic.entity.Review;
 import com.dogventure.dogweb.mainLogic.entity.User;
@@ -11,12 +10,10 @@ import com.dogventure.dogweb.mainLogic.repository.ReviewRepository;
 import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +66,10 @@ public class ReviewService {
         place.setRate(averageRate);
 
         placeRepository.save(place);
+    }
+
+    public void delete(Long id) {
+
+        reviewRepository.deleteById(id);
     }
 }
