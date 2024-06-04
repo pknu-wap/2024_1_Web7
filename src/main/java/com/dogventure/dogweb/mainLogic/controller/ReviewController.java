@@ -29,7 +29,7 @@ public class ReviewController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{review_id")
+    @PostMapping("/delete/{review_id}")
     public ResponseEntity delete(@PathVariable("review_id") Long id) {
 
         service.delete(id);
