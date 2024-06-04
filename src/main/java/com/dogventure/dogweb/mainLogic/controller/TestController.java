@@ -68,37 +68,37 @@ public class TestController {
         Place place5 = new Place("24시 UN동물의료센터", 35.1353, 129.0907, allImageLists.get(4), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 남구 수영로 221", "051-624-2475", "부산 남구 대연동에 위치한 24시 UN동물의료센터는 석,박사 출신의 전문 의료진을 포함한 30여명 의료진들이 반려동물과 행복한 동행을 위해 2016년에 개원되었습니다.  1,2,3층 160여평의 단독 병원으로 의료 장비에 대한 투자를 끊임없이 하고 있으며 심장신장/내분비특화센터, 외과수술센터, 고양이친화센터, 영상진단센터, 야간응급센터를 갖추고 있습니다.  [365일 24시간 동행ㅣ야간응급센터] 야간 전담 의료진이 상주하여 위급한 상황에 응급 진료가 가능하며 책임 간호제가 도입되어 입원 중인 아픈 아이들을 24시간 집중 케어하고 있습니다.  [심장신장/내분비 특화센터] 수의학 내과 박사 대표원장님이 책임지고 있으며 폭 넓은 내과 질환들을 다루고 있습니다. 심장/순환기 질환에 특화된 최첨단 장비(심장초음파, 신장투석기, 산소자동공급시스템 등)를 보유하고 있으며 중환자를 집중 치료 할 수 있도록 정밀하고 체계적인 진료 시스템이 구축되어 있습니다.  [외과수술센터] 슬개골탈구, 십자인대, 골절, 디스크 등 외과 수술이 가능하며 외과학 박사 대표원장님의 정확한 진단부터 수술, 회복까지 체계적인 의료 서비스를 제공하고 있습니다.  [고양이친화센터] 고양이의학에 가장 권위 있는 단체 국제고양이수의사회(ISFM)에서 고양이친화병원 GOLD 등급을 인증 받은 곳입니다. 고양이 전문 대표원장님의 특화된 진료가 가능하며 강아지와 독립된 대기실 및 진료 공간에서 의료 서비스를 받으실 수 있습니다.  [영상진단센터] 내외과 구분 없이 모든 질병에 대한 정확한 진단을 위해 최고사양 CT/MRI 검사가 가능합니다. 영상의학과 전공의 원장님이 영상 판독 및 진단을 내려줍니다.  [진료시간] 주간진료 10:00 ~ 21:00 야간진료 21:00 ~ 24:00 심야진료 24:00 ~ 08:30 점심시간 12:30 ~ 14:00  [면회시간] 강아지 11:00 ~ 19:00 고양이 11:00 ~ 18:30 (점심시간 제외)", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
         placeRepo.save(place5);
 
-//        Place place6 = new Place("조양래 동물의료센터", 35.1348, 129.091, allImageLists.get(5), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 남구 수영로 224-1", "051-621-8880", "사람과 반려동물의 건강하고 행복한 동행  조양래동물의료센터를 찾아주셔서 감사합니다. 저희 의료진은 보호자님의 반려동물을 사랑과 정성으로 진료할 것을 약속드립니다.  - 석, 박사 의료진을 비롯한 40여명의 스텝들 간의 상호 체계적이고 전문화된 진료 시스템 - 내과, 외과, 영상의학과 협진을 통한 분과 진료 - 국내를 넘어 세계적으로 인정받는 최고사양의 동물전용 동물혈액분석장비 마취기 환자모니터기 도입 - 연간 2000건 이상의 안전한 수술 경력 - 최고사양 치과 전문 치료장비 full setting - 안락한 진료 환경을 위해 국내 최초 강아지/고양이 진료 공간 분리 (2F강아지전문클리닉/3F고양이전문클리닉 운영)  * 부설센터 : 동물내시경센터, 동물혈액분석연구소, 동물암진단센터, 수의치과전문센터", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place6);
-//
-//        Place place7 = new Place("W 동물의료센터", 35.1255, 129.111, allImageLists.get(6), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 남구 용호로 68", "051-626-5050", "반려동물의 위한 새로운 선택 양방 / 한방 / 재활 유기적인 협력 시스템 정성 정직 정확한 진료  (진료과목) 예방의학과 / 외과 / 내과 / 한방외과 / 한방내과 / 재활의학과 / 방사선과  (특화진료) * 피부 특화진료센터 ( 재발성 피부병 / 노령성 피부병 / 난치성 피부병 )  * W한방동물병원 ( 디스크 / 마비/ 신경성질환 / 만성 질환 / 난치성 피부병 )  * W재활동물병원 ( 수술 후 재활 / 비수술적 재활 치료 / 노령견 운동 센터 )  * W척추관절센터 ( 수술, 비수술 척추 관절 치료 / 통증클리닉 )  * W치과전문클리닉", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place7);
-//
-//        Place place8 = new Place("바다 동물병원", 35.1527, 129.1161, allImageLists.get(7), LocalTime.of(10, 0), LocalTime.of(18, 30), "부산광역시 수영구 광남로 125 바다동물병원 1층", "051-756-0075", "안녕하세요, 바다 동물병원입니다", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place8);
-//
-//        Place place9 = new Place("센텀 동물메디컬센터", 35.1684, 129.114, allImageLists.get(8), LocalTime.of(10, 0), LocalTime.of(20, 0), "부산광역시 수영구 연수로 407-1", "051-746-7582", "- 365일 연중무휴 최고의 전문진료 동물병원 - 정형외과/심장영상 등 중증 진료부터 - 강아지/고양이 건강검진과 일반 진료까지! - 입원 24시간 모니터링 - 수영역 2번 출구 100m 위치  [정형외과 전문] - 슬개골탈구, 고관절탈구, 십자인대파열, 골절 등 - 수의외과학 박사 집도 - 슬개골 재탈구 책임보증제 실시  [심장/영상 전문] - 이첨판폐쇄부전증 등 심장 질환 전문 - 심장 전문 영상의학과 석사 원장님 판독 및 진단 - 심장 정밀검진 및 모니터링 관리  [고양이 전문병원] - 고양이 단독 진료층 (3층) 분리 - 고양이 전문 원장님 진료 - 고양이 친화병원 골드  [진료시간] 회진시간 : 09:00 ~ 10:00 주간진료 : 10:00 ~ 19:00 야간진료 : 19:00 ~ 20:00", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place9);
-//
-//        Place place10 = new Place("문현 동물병원", 35.1365, 129.0717, allImageLists.get(9), LocalTime.of(9, 30), LocalTime.of(19, 30), "부산 남구 수영로 38", "051-634-4017", "안녕하세요, 문현 동물병원입니다", DogSize.SMALL, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place10);
-//
-//        Place place11 = new Place("다솜고양이 메디컬센터", 35.1373, 129.0693, allImageLists.get(10), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 남구 수영로13번길 3", "051-632-7580", "'우리아가'라는 마음으로 진료하는 다솜고양이메디컬센터입니다. 다솜은 고양이 / 심장 / 치과 / 외과 / 영상 전문 동물병원으로 다양한 임상사례를 경험한 대학병원, 대형병원출신 석박사급 의료진의 분과 진료를 통해 전문성과 안전성을 갖추고있습니다.  국내 최초 ISFM 고양이친화인증을 받은 '고양이전문병원'으로 고양이만을 위한 전문적인 시설과 진료 방식으로 진료합니다.  1층 [다솜동물메디컬센터] 2층 [다솜고양이메디컬센터] 3층 [동물영상센터(CT, MRI, 동물심장센터) / 고양이입원병동 / 대기실] 4층 [외과센터 / 치과센터]", DogSize.SMALL, PlaceType.HOSPITAL, null);
-//        placeRepo.save(place11);
+        Place place6 = new Place("조양래 동물의료센터", 35.1348, 129.091, allImageLists.get(5), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 남구 수영로 224-1", "051-621-8880", "사람과 반려동물의 건강하고 행복한 동행  조양래동물의료센터를 찾아주셔서 감사합니다. 저희 의료진은 보호자님의 반려동물을 사랑과 정성으로 진료할 것을 약속드립니다.  - 석, 박사 의료진을 비롯한 40여명의 스텝들 간의 상호 체계적이고 전문화된 진료 시스템 - 내과, 외과, 영상의학과 협진을 통한 분과 진료 - 국내를 넘어 세계적으로 인정받는 최고사양의 동물전용 동물혈액분석장비 마취기 환자모니터기 도입 - 연간 2000건 이상의 안전한 수술 경력 - 최고사양 치과 전문 치료장비 full setting - 안락한 진료 환경을 위해 국내 최초 강아지/고양이 진료 공간 분리 (2F강아지전문클리닉/3F고양이전문클리닉 운영)  * 부설센터 : 동물내시경센터, 동물혈액분석연구소, 동물암진단센터, 수의치과전문센터", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
+        placeRepo.save(place6);
+
+        Place place7 = new Place("W 동물의료센터", 35.1255, 129.111, allImageLists.get(6), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 남구 용호로 68", "051-626-5050", "반려동물의 위한 새로운 선택 양방 / 한방 / 재활 유기적인 협력 시스템 정성 정직 정확한 진료  (진료과목) 예방의학과 / 외과 / 내과 / 한방외과 / 한방내과 / 재활의학과 / 방사선과  (특화진료) * 피부 특화진료센터 ( 재발성 피부병 / 노령성 피부병 / 난치성 피부병 )  * W한방동물병원 ( 디스크 / 마비/ 신경성질환 / 만성 질환 / 난치성 피부병 )  * W재활동물병원 ( 수술 후 재활 / 비수술적 재활 치료 / 노령견 운동 센터 )  * W척추관절센터 ( 수술, 비수술 척추 관절 치료 / 통증클리닉 )  * W치과전문클리닉", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
+        placeRepo.save(place7);
+
+        Place place8 = new Place("바다 동물병원", 35.1527, 129.1161, allImageLists.get(7), LocalTime.of(10, 0), LocalTime.of(18, 30), "부산광역시 수영구 광남로 125 바다동물병원 1층", "051-756-0075", "안녕하세요, 바다 동물병원입니다", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
+        placeRepo.save(place8);
+
+        Place place9 = new Place("센텀 동물메디컬센터", 35.1684, 129.114, allImageLists.get(8), LocalTime.of(10, 0), LocalTime.of(20, 0), "부산광역시 수영구 연수로 407-1", "051-746-7582", "- 365일 연중무휴 최고의 전문진료 동물병원 - 정형외과/심장영상 등 중증 진료부터 - 강아지/고양이 건강검진과 일반 진료까지! - 입원 24시간 모니터링 - 수영역 2번 출구 100m 위치  [정형외과 전문] - 슬개골탈구, 고관절탈구, 십자인대파열, 골절 등 - 수의외과학 박사 집도 - 슬개골 재탈구 책임보증제 실시  [심장/영상 전문] - 이첨판폐쇄부전증 등 심장 질환 전문 - 심장 전문 영상의학과 석사 원장님 판독 및 진단 - 심장 정밀검진 및 모니터링 관리  [고양이 전문병원] - 고양이 단독 진료층 (3층) 분리 - 고양이 전문 원장님 진료 - 고양이 친화병원 골드  [진료시간] 회진시간 : 09:00 ~ 10:00 주간진료 : 10:00 ~ 19:00 야간진료 : 19:00 ~ 20:00", DogSize.MEDIUM, PlaceType.HOSPITAL, null);
+        placeRepo.save(place9);
+
+        Place place10 = new Place("문현 동물병원", 35.1365, 129.0717, allImageLists.get(9), LocalTime.of(9, 30), LocalTime.of(19, 30), "부산 남구 수영로 38", "051-634-4017", "안녕하세요, 문현 동물병원입니다", DogSize.SMALL, PlaceType.HOSPITAL, null);
+        placeRepo.save(place10);
+
+        Place place11 = new Place("다솜고양이 메디컬센터", 35.1373, 129.0693, allImageLists.get(10), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 남구 수영로13번길 3", "051-632-7580", "'우리아가'라는 마음으로 진료하는 다솜고양이메디컬센터입니다. 다솜은 고양이 / 심장 / 치과 / 외과 / 영상 전문 동물병원으로 다양한 임상사례를 경험한 대학병원, 대형병원출신 석박사급 의료진의 분과 진료를 통해 전문성과 안전성을 갖추고있습니다.  국내 최초 ISFM 고양이친화인증을 받은 '고양이전문병원'으로 고양이만을 위한 전문적인 시설과 진료 방식으로 진료합니다.  1층 [다솜동물메디컬센터] 2층 [다솜고양이메디컬센터] 3층 [동물영상센터(CT, MRI, 동물심장센터) / 고양이입원병동 / 대기실] 4층 [외과센터 / 치과센터]", DogSize.SMALL, PlaceType.HOSPITAL, null);
+        placeRepo.save(place11);
 
 
         /*
          * 애견 카페
          */
-//        Place place12 = new Place("도그민", 35.1548, 129.1201, allImageLists.get(11), LocalTime.of(11, 0), LocalTime.of(21, 0), "부산광역시 수영구 민락동 179-1번지 6층", "0507-1306-6720", "강아지 없이도 입장가능한 중소형견(~15kg) 애견카페입니다", DogSize.BIG, PlaceType.CAFE, null);
-//        placeRepo.save(place12);
-//
-//        Place place13 = new Place("FC일석이조", 35.1358, 129.1002, allImageLists.get(12), LocalTime.of(13, 0), LocalTime.of(22, 30), "부산광역시 남구", "051-612-2571", "안녕하세요, FC일석이조입니다", DogSize.BIG, PlaceType.CAFE, null);
-//        placeRepo.save(place13);
-//
-//        Place place14 = new Place("또또애견", 35.1425, 129.0562, allImageLists.get(13), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 부산진구 신암로 9", "051-633-7789", "안녕하세요, 또또애견입니다", DogSize.SMALL, PlaceType.CAFE, null);
-//        placeRepo.save(place14);
-//
+        Place place12 = new Place("도그민", 35.1548, 129.1201, allImageLists.get(11), LocalTime.of(11, 0), LocalTime.of(21, 0), "부산광역시 수영구 민락동 179-1번지 6층", "0507-1306-6720", "강아지 없이도 입장가능한 중소형견(~15kg) 애견카페입니다", DogSize.BIG, PlaceType.CAFE, null);
+        placeRepo.save(place12);
+
+        Place place13 = new Place("FC일석이조", 35.1358, 129.1002, allImageLists.get(12), LocalTime.of(13, 0), LocalTime.of(22, 30), "부산광역시 남구", "051-612-2571", "안녕하세요, FC일석이조입니다", DogSize.BIG, PlaceType.CAFE, null);
+        placeRepo.save(place13);
+
+        Place place14 = new Place("또또애견", 35.1425, 129.0562, allImageLists.get(13), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 부산진구 신암로 9", "051-633-7789", "안녕하세요, 또또애견입니다", DogSize.SMALL, PlaceType.CAFE, null);
+        placeRepo.save(place14);
+
 //        Place place15 = new Place("홀킷", 35.1555, 129.066, allImageLists.get(14), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 부산진구 서전로58번길 48 3층", "010-6292-0678", "안녕하세요, 홀킷입니다", DogSize.SMALL, PlaceType.CAFE, null);
 //        placeRepo.save(place15);
 //
