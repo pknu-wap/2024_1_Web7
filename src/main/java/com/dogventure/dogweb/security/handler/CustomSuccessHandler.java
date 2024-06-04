@@ -42,20 +42,16 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        response.addCookie(createCookie("Authorization", token));
+        // JSON 형식으로 응답
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpStatus.OK.value());
-        response.sendRedirect("http://localhost:3000");
-    }
 
-    private Cookie createCookie(String key, String token) {
+        // JSON 응답 생성
+        String jsonResponse = String.format("{\"token\": \"%s\"}", token);
 
-        Cookie cookie = new Cookie(key, token);
-        cookie.setMaxAge(60*60*60);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-//        cookie.setSecure(true);
-
-        return cookie;
+        response.getWriter().write(jsonResponse);
+        response.getWriter().flush();
     }
 }
 
