@@ -35,6 +35,7 @@ function MyPage() {
     }
   };
 
+  // 컴퓨터에 있는 이미지를 넣음 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -44,6 +45,7 @@ function MyPage() {
     setShowImageOptions(!showImageOptions);
   };
 
+  // 이미지 선택(무료 이미지 선택 기능)
   const handleImageSelect = async (url) => {
     try {
       const response = await fetch(url);
@@ -56,6 +58,8 @@ function MyPage() {
     setShowImageOptions(false);
   };
 
+  // 제일 하단 부분 () 있을 때마다 화면 새로고침
+  // 등록이 됐을 때 데이터의 변경됨을 보여주기 위해
   useEffect(() => {
     const getUser = async () => {
       const response = await getUserData(token);
@@ -67,7 +71,6 @@ function MyPage() {
     };
     getUser();
   }, [showPetModal]);
-
   return (
     <div className="mypage-container">
       <div className="user-wrapper">
@@ -103,7 +106,7 @@ function MyPage() {
 
               <div className="review">
                 <span className="review-text">작성한 리뷰</span>
-                <span className="review-count">4</span>
+                <span className="review-count">{dogInfo.count === undefined ? 0 : dogInfo.count} 개</span>
               </div>
             </div>{" "}
             <div
@@ -252,7 +255,7 @@ function MyPage() {
                     )}
                   </div>
                 </div>
-                <div className="pet-info-right">
+                <div className="pet-info-right-m">
                   <input
                     type="text"
                     name="name"
@@ -281,7 +284,7 @@ function MyPage() {
                       }}
                     >
                       <option value="" disabled>
-                        성별을 선택해주세요
+                        성별
                       </option>
                       <option value="암컷">암컷</option>
                       <option value="수컷">수컷</option>
