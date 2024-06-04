@@ -70,6 +70,10 @@ public class ReviewService {
 
     public void delete(Long id) {
 
+        if (!reviewRepository.existsById(id)) {
+            throw new NullPointerException("해당하는 리뷰가 존재하지 않습니다");
+        }
+
         reviewRepository.deleteById(id);
     }
 }

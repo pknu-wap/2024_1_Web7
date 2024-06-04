@@ -13,4 +13,16 @@ public class ApiExceptionController {
 
         return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
     }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<String> nullPointerHandler(NullPointerException e) {
+
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> exceptionHandler(Exception e) {
+
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
