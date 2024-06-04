@@ -103,7 +103,9 @@ function MyPage() {
 
               <div className="review">
                 <span className="review-text">작성한 리뷰</span>
-                <span className="review-count">4</span>
+                <span className="review-count">
+                  {dogInfo.count === undefined ? 0 : dogInfo.count} 개
+                </span>
               </div>
             </div>{" "}
             <div

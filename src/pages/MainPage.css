@@ -1,11 +1,14 @@
 /* 메인 배경 이미지 */
 .bg-box {
   position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 0 5%;
+  background-color: #cdf3ff;
 }
 
 .bg-img {
   width: 100%;
-  height: 550px;
 }
 
 .map-btn {
@@ -14,10 +17,10 @@
   align-items: center;
   gap: 10%;
   position: absolute;
-  top: 85%;
+  top: 93%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 40px;
+  padding: 12px 25px;
 
   background-color: #0075ff;
   color: #ffffff;

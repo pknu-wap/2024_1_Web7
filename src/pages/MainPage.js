@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getTypePlaces, searchPlaces, getPlaces } from "../api";
 import "./MainPage.css";
 
-import mainImg from "../img/mainBg.png";
+import mainImg from "../img/dogBack.gif";
 import mapLocation from "../img/mapLocation_white.png";
 
 import PlaceList from "../components/PlaceList";

@@ -150,17 +150,25 @@ function Map() {
     return (
       <ul className="review-ul">
         {reviews.map((review) => {
-          const base64URL = review.user.image?.data
-            ? `data:image/jpeg;base64,${review.user.image.data}`
-            : footImg;
+          // const base64URL = review.user.image.data;
+          // const Imgsrc = `data:image/jpeg;base64,${base64URL}`;
 
           return (
             <li className="review-list" key={review.id}>
-              <img
-                className="review-profile-img"
-                src={base64URL}
-                alt={`${review.user.username}'s profile`}
-              />
+              {/* {review.user.image.data ? (
+                <img
+                  className="review-profile-img"
+                  src={Imgsrc}
+                  alt={`${review.user.username}'s profile`}
+                />
+              ) : (
+                <img
+                  className="review-profile-img"
+                  src={footImg}
+                />
+              )} */}
+              <img className="review-profile-img" src={footImg} />
+
               <div className="review-content-box">
                 <div className="review-user-rate-update">
                   <div className="review-user-rate">
@@ -226,21 +234,21 @@ function Map() {
   };
 
   // 리뷰 실시간 업데이트
-  // useEffect(() => {
-  //   const place = selectedPlace;
+  useEffect(() => {
+    const place = selectedPlace;
 
-  //   const handleReviewUpdate = async () => {
-  //     try {
-  //       const response = await getPlaceLoginInfo({
-  //         id: place.id,
-  //         token: token,
-  //       });
-  //       setReviews(response.reviews);
-  //     } catch (error) {}
-  //   };
+    const handleReviewUpdate = async () => {
+      try {
+        const response = await getPlaceLoginInfo({
+          id: place.id,
+          token: token,
+        });
+        setReviews(response.reviews);
+      } catch (error) {}
+    };
 
-  //   handleReviewUpdate();
-  // }, [reviewUpdate]);
+    handleReviewUpdate();
+  }, [reviewUpdate]);
 
   // 필터 별 마커 표시
   useEffect(() => {

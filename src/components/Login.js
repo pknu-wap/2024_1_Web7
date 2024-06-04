@@ -56,10 +56,7 @@ function Login() {
       } else {
         alert("유효한 토큰을 받지 못했습니다.");
       }
-    } catch (error) {
-      console.error("로그인 실패:", error.message);
-      alert("로그인 실패");
-    }
+    } catch (error) {}
   };
 
   return (
