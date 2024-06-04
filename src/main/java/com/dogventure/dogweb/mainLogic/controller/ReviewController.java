@@ -1,5 +1,6 @@
 package com.dogventure.dogweb.mainLogic.controller;
 
+import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewDeleteRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestDto;
 import com.dogventure.dogweb.mainLogic.service.ReviewService;
@@ -29,10 +30,10 @@ public class ReviewController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{review_id}")
-    public ResponseEntity delete(@PathVariable("review_id") Long id) {
+    @PostMapping("/delete")
+    public ResponseEntity delete(@RequestBody ReviewDeleteRequestDto requestDto) {
 
-        service.delete(id);
+        service.delete(requestDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.dogventure.dogweb.mainLogic.service;
 
+import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewDeleteRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewRequestDto;
 import com.dogventure.dogweb.dto.mainLogic.naverMap.request.ReviewUpdateRequestDto;
 import com.dogventure.dogweb.mainLogic.entity.Place;
@@ -17,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
 
+    @Transactional
     public void save(ReviewRequestDto requestDto) throws IllegalAccessException {
 
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -50,6 +51,7 @@ public class ReviewService {
         placeRepository.save(place);
     }
 
+    @Transactional
     public void update(ReviewUpdateRequestDto requestDto) {
 
         Review review = reviewRepository.findById(requestDto.getReviewId()).orElseThrow(() -> new EntityNotFoundException("Review가 존재하지 않습니다"));
@@ -68,12 +70,26 @@ public class ReviewService {
         placeRepository.save(place);
     }
 
-    public void delete(Long id) {
+    public void delete(ReviewDeleteRequestDto requestDto) {
 
-        if (!reviewRepository.existsById(id)) {
+        if (!reviewRepository.existsById(requestDto.getReviewId())) {
             throw new NullPointerException("해당하는 리뷰가 존재하지 않습니다");
         }
 
-        reviewRepository.deleteById(id);
+        reviewRepository.deleteById(requestDto.getReviewId());
+
+        Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
+
+        if (place.getReviews().isEmpty()) {
+            place.setRate(null);
+            placeRepository.save(place);
+            return;
+        }
+
+        Double averageRate = place.getReviews().stream().mapToDouble(Review::getRate).average().getAsDouble();
+
+        place.setRate(averageRate);
+
+        placeRepository.save(place);
     }
 }
