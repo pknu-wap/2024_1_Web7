@@ -90,14 +90,14 @@ public class TestController {
         /*
          * 애견 카페
          */
-        Place place12 = new Place("도그민", 35.1548, 129.1201, allImageLists.get(11), LocalTime.of(11, 0), LocalTime.of(21, 0), "부산광역시 수영구 민락동 179-1번지 6층", "0507-1306-6720", "강아지 없이도 입장가능한 중소형견(~15kg) 애견카페입니다", DogSize.BIG, PlaceType.CAFE, null);
-        placeRepo.save(place12);
-
-        Place place13 = new Place("FC일석이조", 35.1358, 129.1002, allImageLists.get(12), LocalTime.of(13, 0), LocalTime.of(22, 30), "부산광역시 남구", "051-612-2571", "안녕하세요, FC일석이조입니다", DogSize.BIG, PlaceType.CAFE, null);
-        placeRepo.save(place13);
-
-        Place place14 = new Place("또또애견", 35.1425, 129.0562, allImageLists.get(13), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 부산진구 신암로 9", "051-633-7789", "안녕하세요, 또또애견입니다", DogSize.SMALL, PlaceType.CAFE, null);
-        placeRepo.save(place14);
+//        Place place12 = new Place("도그민", 35.1548, 129.1201, allImageLists.get(11), LocalTime.of(11, 0), LocalTime.of(21, 0), "부산광역시 수영구 민락동 179-1번지 6층", "0507-1306-6720", "강아지 없이도 입장가능한 중소형견(~15kg) 애견카페입니다", DogSize.BIG, PlaceType.CAFE, null);
+//        placeRepo.save(place12);
+//
+//        Place place13 = new Place("FC일석이조", 35.1358, 129.1002, allImageLists.get(12), LocalTime.of(13, 0), LocalTime.of(22, 30), "부산광역시 남구", "051-612-2571", "안녕하세요, FC일석이조입니다", DogSize.BIG, PlaceType.CAFE, null);
+//        placeRepo.save(place13);
+//
+//        Place place14 = new Place("또또애견", 35.1425, 129.0562, allImageLists.get(13), LocalTime.of(12, 0), LocalTime.of(21, 0), "부산광역시 부산진구 신암로 9", "051-633-7789", "안녕하세요, 또또애견입니다", DogSize.SMALL, PlaceType.CAFE, null);
+//        placeRepo.save(place14);
 //
 //        Place place15 = new Place("홀킷", 35.1555, 129.066, allImageLists.get(14), LocalTime.of(0, 1), LocalTime.of(0, 0), "부산광역시 부산진구 서전로58번길 48 3층", "010-6292-0678", "안녕하세요, 홀킷입니다", DogSize.SMALL, PlaceType.CAFE, null);
 //        placeRepo.save(place15);
