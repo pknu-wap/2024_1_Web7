@@ -1,6 +1,7 @@
 package com.dogventure.dogweb.security.handler;
 
 import com.dogventure.dogweb.dto.oauth2.response.Oauth2UserResponseDto;
+import com.dogventure.dogweb.security.auth.JwtAuthToken;
 import com.dogventure.dogweb.security.utils.JwtTokenProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -36,9 +38,13 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String token = jwtTokenProvider.createJwt(new UsernamePasswordAuthenticationToken(oauth2User.getEmail(), null, oauth2User.getAuthorities()));
         log.info("JWT 토큰이 발급되었습니다");
 
+        Authentication auth = new JwtAuthToken(oauth2User.getEmail(), oauth2User.getAuthorities(), token);
+
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
         response.addCookie(createCookie("Authorization", token));
         response.setStatus(HttpStatus.OK.value());
-//        response.sendRedirect("http://localhost:3000");
+        response.sendRedirect("http://localhost:3000");
     }
 
     private Cookie createCookie(String key, String token) {
