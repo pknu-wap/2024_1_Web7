@@ -149,32 +149,42 @@ function Map() {
   function ReviewList({ reviews, footImg }) {
     return (
       <ul className="review-ul">
-        {reviews.map((review) => (
-          <li className="review-list" key={review.id}>
-            <img className="review-profile-img" src={footImg} alt="Profile" />
-            <div className="review-content-box">
-              <div className="review-user-rate-update">
-                <div className="review-user-rate">
-                  <span className="review-username">
-                    {review.user.username}
-                  </span>
-                  <span className="review-rate ">
-                    <StarRating rate={review.rate} />
-                  </span>
-                </div>
+        {reviews.map((review) => {
+          const base64URL = review.user.image?.data
+            ? `data:image/jpeg;base64,${review.user.image.data}`
+            : footImg;
 
-                {review.user.username === username && (
-                  <button onClick={() => handleReviewEdit(review)}>
-                    리뷰 수정
-                  </button>
-                )}
+          return (
+            <li className="review-list" key={review.id}>
+              <img
+                className="review-profile-img"
+                src={base64URL}
+                alt={`${review.user.username}'s profile`}
+              />
+              <div className="review-content-box">
+                <div className="review-user-rate-update">
+                  <div className="review-user-rate">
+                    <span className="review-username">
+                      {review.user.username}
+                    </span>
+                    <span className="review-rate ">
+                      <StarRating rate={review.rate} />
+                    </span>
+                  </div>
+
+                  {review.user.username === username && (
+                    <button onClick={() => handleReviewEdit(review)}>
+                      리뷰 수정
+                    </button>
+                  )}
+                </div>
+                <div className="review-content">
+                  <div className="review-content-inbox">{review.content}</div>
+                </div>
               </div>
-              <div className="review-content">
-                <div className="review-content-inbox">{review.content}</div>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
     );
   }
