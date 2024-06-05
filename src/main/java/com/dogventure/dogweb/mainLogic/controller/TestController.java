@@ -141,48 +141,48 @@ public class TestController {
         Place place27 = new Place("핑코애견", 35.1733, 129.1701, allImageLists.get(12), LocalTime.of(9, 0), LocalTime.of(20, 0), "부산광역시 해운대구 좌제3동", "051-945-2800", "애견미용실입니다  * 애견관리학과 출신 미용사. 10년경력의 풍부한 실전경력 ---- 애견미용사, 애견훈련사, 애견핸들러, 동물간호사, 교원자격증 보유  * 마이크로 버블 샤워기 장착. 모든 미용시 마이크로 버블샤워로 깔끔하고 시원한 피부세정및 피부병예방 * 편백나무욕조 제작, 100% 편백나무 오일 스파  ---- 편백나무의 효능 - 알레르기 및 피부질환개선, 강력한 향균효과, 스트레스완화, 진정효과, 쾌적효과 강력 탈취 및 정화기능, 면역기능증대효과", DogSize.BIG, PlaceType.BEAUTY, null);
         placeRepo.save(place27);
 
-        Place place28 = new Place("희야네애견미용실", 35.188, 129.9888, allImageLists.get(13), LocalTime.of(10, 0), LocalTime.of(20, 0), "부산광역시 사상구 모라동 979-1", "051-303-0279", "모라동 가위컷 전문 희야네 애견미용실입니다.  미용은 100% 예약제로 운영되며, 스트레스 받지 않는 공간에서 반려견을 위한 최고의 서비스를 제공합니다.", DogSize.BIG, PlaceType.BEAUTY, null);
-        placeRepo.save(place28);
-
-        Place place29 = new Place("안앤정 애견미용", 35.094, 129.964, allImageLists.get(14), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 사하구 하신중앙로 170 현대아파트 상가동 1층", "010-5709-8318", "안녕하세요. 안앤정 애견미용입니다. 오픈형 미용실 / 1:1 맞춤 케어 / 예약제 / 스파 / 전체미용시 신평동 전지역 무료 픽업 서비스", DogSize.MEDIUM, PlaceType.BEAUTY, null);
-        placeRepo.save(place29);
-
-        Place place30 = new Place("멍멍스타 펫살롱", 35.1019, 128.9972, allImageLists.get(15), LocalTime.of(9, 0), LocalTime.of(19, 0), "부산 사하구 낙동대로 174 멍멍스타", "051-293-3398", "** 반려견을 사랑하는 마음에 미용업을 시작해서15년째 한자리에서 멍멍스타를 운영하고 있습니다 ^^  ** 애견 미용경력 16년!! 클리핑, 가위컷 전문으로 세심하고 트렌디한 미용이 가능합니다^^  ** 2인 근무로 미용받는 애기들을 안전하게 보정하여 스트레스 받지 않는 환경에서 미용합니다^^  + 당일 스케줄에 따라 조기 마감 될 수 있는 점 양해 부탁드립니다. + 건강상태가 좋지 않은 애기, 입질이 심한 애기들은 돌발 상황에 즉각 대처가능한 동물병원 미용실을 방문하시는게 애기들에게 도움이 됩니다.  **** 미용비 안내***** *전체미용비 : ** 소형견 기준 (얼굴컷 포함시) 35,000~ ** 초소형견 기준 썸머컷 (스포팅: 등 털은 짧게, 다리털은 통통하게+ 얼굴컷) 6만~ / 비숑 썸머컷 6만5천원~ **전체가위컷 7만~ ** 위생미용 + 목욕 (소형견,단모기준) 30,000~ ** 포메, 스피츠와 같이 이중모,장모는 부분+목욕 35,000원부터 시작이고, 엉킴이 있어서 풀어야 하는 경우 추가비 발생 **털 길이, 체중 ,엉킴, 미용태도에 따라 추가비용 발생  -포메,스피츠, 페키 견종 등 이중모를 가진 친구들은 알로페시아 증상의 이유로 미용후 털이 균일하게 자라지 않을 수 있습니다. 가위컷을 해도 알로페시아 증상이 나타날수 있으니 참고 해주세요.  < 태도 추가비> 미용시, 노령견으로 부축이 꼭 필요하거나 미용에 대한 심한 거부, 입질, 산만함의 정도에 따라 5000~10,000원의 추가비 발생합니다 ( 미용시,다른 아이들에 비하여 위험도가 커서 상당한 집중이 요구되므로 추가비가 있음을 알려드립니다. 양해 부탁드립니다.)  -저희 가게는 분양,호텔 안합니다.", DogSize.MEDIUM, PlaceType.BEAUTY, null);
-        placeRepo.save(place30);
-
-        Place place31 = new Place("초량애견샵", 35.1202, 129.0394, allImageLists.get(16), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산 동구 초량중로 100-2", "051-463-1357", "안녕하세요, 초량애견샵입니다", DogSize.MEDIUM, PlaceType.BEAUTY, null);
-        placeRepo.save(place31);
+//        Place place28 = new Place("희야네애견미용실", 35.188, 129.9888, allImageLists.get(13), LocalTime.of(10, 0), LocalTime.of(20, 0), "부산광역시 사상구 모라동 979-1", "051-303-0279", "모라동 가위컷 전문 희야네 애견미용실입니다.  미용은 100% 예약제로 운영되며, 스트레스 받지 않는 공간에서 반려견을 위한 최고의 서비스를 제공합니다.", DogSize.BIG, PlaceType.BEAUTY, null);
+//        placeRepo.save(place28);
+//
+//        Place place29 = new Place("안앤정 애견미용", 35.094, 129.964, allImageLists.get(14), LocalTime.of(10, 0), LocalTime.of(19, 0), "부산광역시 사하구 하신중앙로 170 현대아파트 상가동 1층", "010-5709-8318", "안녕하세요. 안앤정 애견미용입니다. 오픈형 미용실 / 1:1 맞춤 케어 / 예약제 / 스파 / 전체미용시 신평동 전지역 무료 픽업 서비스", DogSize.MEDIUM, PlaceType.BEAUTY, null);
+//        placeRepo.save(place29);
+//
+//        Place place30 = new Place("멍멍스타 펫살롱", 35.1019, 128.9972, allImageLists.get(15), LocalTime.of(9, 0), LocalTime.of(19, 0), "부산 사하구 낙동대로 174 멍멍스타", "051-293-3398", "** 반려견을 사랑하는 마음에 미용업을 시작해서15년째 한자리에서 멍멍스타를 운영하고 있습니다 ^^  ** 애견 미용경력 16년!! 클리핑, 가위컷 전문으로 세심하고 트렌디한 미용이 가능합니다^^  ** 2인 근무로 미용받는 애기들을 안전하게 보정하여 스트레스 받지 않는 환경에서 미용합니다^^  + 당일 스케줄에 따라 조기 마감 될 수 있는 점 양해 부탁드립니다. + 건강상태가 좋지 않은 애기, 입질이 심한 애기들은 돌발 상황에 즉각 대처가능한 동물병원 미용실을 방문하시는게 애기들에게 도움이 됩니다.  **** 미용비 안내***** *전체미용비 : ** 소형견 기준 (얼굴컷 포함시) 35,000~ ** 초소형견 기준 썸머컷 (스포팅: 등 털은 짧게, 다리털은 통통하게+ 얼굴컷) 6만~ / 비숑 썸머컷 6만5천원~ **전체가위컷 7만~ ** 위생미용 + 목욕 (소형견,단모기준) 30,000~ ** 포메, 스피츠와 같이 이중모,장모는 부분+목욕 35,000원부터 시작이고, 엉킴이 있어서 풀어야 하는 경우 추가비 발생 **털 길이, 체중 ,엉킴, 미용태도에 따라 추가비용 발생  -포메,스피츠, 페키 견종 등 이중모를 가진 친구들은 알로페시아 증상의 이유로 미용후 털이 균일하게 자라지 않을 수 있습니다. 가위컷을 해도 알로페시아 증상이 나타날수 있으니 참고 해주세요.  < 태도 추가비> 미용시, 노령견으로 부축이 꼭 필요하거나 미용에 대한 심한 거부, 입질, 산만함의 정도에 따라 5000~10,000원의 추가비 발생합니다 ( 미용시,다른 아이들에 비하여 위험도가 커서 상당한 집중이 요구되므로 추가비가 있음을 알려드립니다. 양해 부탁드립니다.)  -저희 가게는 분양,호텔 안합니다.", DogSize.MEDIUM, PlaceType.BEAUTY, null);
+//        placeRepo.save(place30);
+//
+//        Place place31 = new Place("초량애견샵", 35.1202, 129.0394, allImageLists.get(16), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산 동구 초량중로 100-2", "051-463-1357", "안녕하세요, 초량애견샵입니다", DogSize.MEDIUM, PlaceType.BEAUTY, null);
+//        placeRepo.save(place31);
 
 
         /*
          * 애견 용품
          */
-        Place place32 = new Place("핫독애견용품", 35.1201, 129.1119, allImageLists.get(17), LocalTime.of(10, 0), LocalTime.of(21, 0), "부산광역시 남구 용호동 370-32", "051-611-0177", "안녕하세요, 핫독애견용품입니다", DogSize.SMALL, PlaceType.GOODS, null);
-        placeRepo.save(place32);
-
-        Place place33 = new Place("행복애견", 35.141, 129.1072, allImageLists.get(18), LocalTime.of(10, 0), LocalTime.of(21, 0), "부산광역시 수영구 남천제1동 24-6", "051-626-0994", "반러견 미용 전문샵입니다 미용은 100% 예약제입니다", DogSize.SMALL, PlaceType.GOODS, null);
-        placeRepo.save(place33);
-
-        Place place34 = new Place("펫마트 해운대점", 35.1739, 129.1741, allImageLists.get(19), LocalTime.of(9, 0), LocalTime.of(22, 0), "부산광역시 해운대구 좌동로91번길 38-7", "051-702-1556", "해운대 펫마트 오픈!  강아지-고양이-소동물 국내 반려동물용품 NO.1 프랜차이즈 해운대 최대규모/최다품목/최저가격  @주차가능! 130평 대규모 매장! @설날, 추석 당일만 휴무 @반려동물동반가능! @무료 와이파이! @파격적 적립혜택! 오픈기념 사은품 증정! @다양한 할인및 구매사은품! 매월 할인 이벤트!  반려동물용품은 역시 펫마트!  좌동 재래시장 인근! 병천순대국밥 골목 50m 안! ING동물병원 근처! 구.대궐쌈밥 자리!  좌동 908-3 넓은 주차장에 편하게 주차하시고 쇼핑하세요:)  <프리미엄 펫용품점 '펫칼코' 샵인샵 입점!!> *러프웨어 *스타캣휠 *피콜로카네 *아르르 *피단", DogSize.SMALL, PlaceType.GOODS, null);
-        placeRepo.save(place34);
-
-        Place place35 = new Place("펫아울렛 센텀강변점", 35.1745, 129.1188, allImageLists.get(20), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 수영구 좌수영로 117", "051-755-5302", "저희 펫아울렛 센텀강변점은 다양한 애견용품을 판매하는 대형 펫아울렛 매장입니다. 애견 애묘 사료, 간식, 용품 및 애견 미용도 가능한 멀티샵입니다. 많은 방문 및 문의 환영합니다 :)", DogSize.SMALL, PlaceType.GOODS, null);
-        placeRepo.save(place35);
-
-        Place place36 = new Place("펫스토어", 35.1638, 129.0546, allImageLists.get(21), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 부산진구 새싹로 76", "051-808-9319", "1층 2층 애견용품 (강아지 고양이)- 사료, 간식, 장난감, 패드  3층 미용,호텔 영업시간 :am10:00~ pm10:00 친절한직원들이 기다리고있습니다.", DogSize.BIG, PlaceType.GOODS, null);
-        placeRepo.save(place36);
-
-        Place place37 = new Place("펫마트 다대점", 35.0601, 128.9809, allImageLists.get(22), LocalTime.of(9, 0), LocalTime.of(22, 0), "부산광역시 사하구 다송로72번길 50", "051-266-1550", "한국프랜차이즈대상 2관왕  반려동물을 위한 모든 것! 강아지-고양이-소동물 국내 반려동물용품 NO.1 프랜차이즈 최대규모/최다품목/최저가격  @주차가능 / 연중무휴 / 반려동물동반가능 / 무료와이파이 @파격적 적립혜택 / 구매사은품 상시 증정! @다양한 묶음할인 제품 / 매월 할인 이벤트 진행 중!  반려동물용품은 역시 펫마트!", DogSize.BIG, PlaceType.GOODS, null);
-        placeRepo.save(place37);
-
-        Place place38 = new Place("핫독(HOT DOG)애견용품", 35.0979, 129.0328, allImageLists.get(23), LocalTime.of(11, 0), LocalTime.of(21, 0), "남포동2가 28-3번지 중구 부산광역시", "051-247-0999", "안녕하세요, 핫독(HOT DOG)애견용품입니다", DogSize.BIG, PlaceType.GOODS, null);
-        placeRepo.save(place38);
-
-        Place place39 = new Place("애견용품", 35.1568, 128.9776, allImageLists.get(24), LocalTime.of(10, 0), LocalTime.of(21, 0), "감전동 128-1번지 사상구 부산광역시", "051-323-6664", "안녕하세요, 애견용품입니다", DogSize.MEDIUM, PlaceType.GOODS, null);
-        placeRepo.save(place39);
-
-        Place place40 = new Place("펫존애완용품할인매장", 35.0856, 128.9857, allImageLists.get(25), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산 사하구 을숙도대로 741 영생비치맨션", "051-996-9631", "안녕하세요, 펫존애완용품할인매장입니다", DogSize.MEDIUM, PlaceType.GOODS, null);
-        placeRepo.save(place40);
+//        Place place32 = new Place("핫독애견용품", 35.1201, 129.1119, allImageLists.get(17), LocalTime.of(10, 0), LocalTime.of(21, 0), "부산광역시 남구 용호동 370-32", "051-611-0177", "안녕하세요, 핫독애견용품입니다", DogSize.SMALL, PlaceType.GOODS, null);
+//        placeRepo.save(place32);
+//
+//        Place place33 = new Place("행복애견", 35.141, 129.1072, allImageLists.get(18), LocalTime.of(10, 0), LocalTime.of(21, 0), "부산광역시 수영구 남천제1동 24-6", "051-626-0994", "반러견 미용 전문샵입니다 미용은 100% 예약제입니다", DogSize.SMALL, PlaceType.GOODS, null);
+//        placeRepo.save(place33);
+//
+//        Place place34 = new Place("펫마트 해운대점", 35.1739, 129.1741, allImageLists.get(19), LocalTime.of(9, 0), LocalTime.of(22, 0), "부산광역시 해운대구 좌동로91번길 38-7", "051-702-1556", "해운대 펫마트 오픈!  강아지-고양이-소동물 국내 반려동물용품 NO.1 프랜차이즈 해운대 최대규모/최다품목/최저가격  @주차가능! 130평 대규모 매장! @설날, 추석 당일만 휴무 @반려동물동반가능! @무료 와이파이! @파격적 적립혜택! 오픈기념 사은품 증정! @다양한 할인및 구매사은품! 매월 할인 이벤트!  반려동물용품은 역시 펫마트!  좌동 재래시장 인근! 병천순대국밥 골목 50m 안! ING동물병원 근처! 구.대궐쌈밥 자리!  좌동 908-3 넓은 주차장에 편하게 주차하시고 쇼핑하세요:)  <프리미엄 펫용품점 '펫칼코' 샵인샵 입점!!> *러프웨어 *스타캣휠 *피콜로카네 *아르르 *피단", DogSize.SMALL, PlaceType.GOODS, null);
+//        placeRepo.save(place34);
+//
+//        Place place35 = new Place("펫아울렛 센텀강변점", 35.1745, 129.1188, allImageLists.get(20), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 수영구 좌수영로 117", "051-755-5302", "저희 펫아울렛 센텀강변점은 다양한 애견용품을 판매하는 대형 펫아울렛 매장입니다. 애견 애묘 사료, 간식, 용품 및 애견 미용도 가능한 멀티샵입니다. 많은 방문 및 문의 환영합니다 :)", DogSize.SMALL, PlaceType.GOODS, null);
+//        placeRepo.save(place35);
+//
+//        Place place36 = new Place("펫스토어", 35.1638, 129.0546, allImageLists.get(21), LocalTime.of(10, 0), LocalTime.of(22, 0), "부산광역시 부산진구 새싹로 76", "051-808-9319", "1층 2층 애견용품 (강아지 고양이)- 사료, 간식, 장난감, 패드  3층 미용,호텔 영업시간 :am10:00~ pm10:00 친절한직원들이 기다리고있습니다.", DogSize.BIG, PlaceType.GOODS, null);
+//        placeRepo.save(place36);
+//
+//        Place place37 = new Place("펫마트 다대점", 35.0601, 128.9809, allImageLists.get(22), LocalTime.of(9, 0), LocalTime.of(22, 0), "부산광역시 사하구 다송로72번길 50", "051-266-1550", "한국프랜차이즈대상 2관왕  반려동물을 위한 모든 것! 강아지-고양이-소동물 국내 반려동물용품 NO.1 프랜차이즈 최대규모/최다품목/최저가격  @주차가능 / 연중무휴 / 반려동물동반가능 / 무료와이파이 @파격적 적립혜택 / 구매사은품 상시 증정! @다양한 묶음할인 제품 / 매월 할인 이벤트 진행 중!  반려동물용품은 역시 펫마트!", DogSize.BIG, PlaceType.GOODS, null);
+//        placeRepo.save(place37);
+//
+//        Place place38 = new Place("핫독(HOT DOG)애견용품", 35.0979, 129.0328, allImageLists.get(23), LocalTime.of(11, 0), LocalTime.of(21, 0), "남포동2가 28-3번지 중구 부산광역시", "051-247-0999", "안녕하세요, 핫독(HOT DOG)애견용품입니다", DogSize.BIG, PlaceType.GOODS, null);
+//        placeRepo.save(place38);
+//
+//        Place place39 = new Place("애견용품", 35.1568, 128.9776, allImageLists.get(24), LocalTime.of(10, 0), LocalTime.of(21, 0), "감전동 128-1번지 사상구 부산광역시", "051-323-6664", "안녕하세요, 애견용품입니다", DogSize.MEDIUM, PlaceType.GOODS, null);
+//        placeRepo.save(place39);
+//
+//        Place place40 = new Place("펫존애완용품할인매장", 35.0856, 128.9857, allImageLists.get(25), LocalTime.of(10, 0), LocalTime.of(20, 30), "부산 사하구 을숙도대로 741 영생비치맨션", "051-996-9631", "안녕하세요, 펫존애완용품할인매장입니다", DogSize.MEDIUM, PlaceType.GOODS, null);
+//        placeRepo.save(place40);
     }
 
     @PostMapping("/")
