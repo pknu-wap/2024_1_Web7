@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getTypePlaces, searchPlaces, getPlaces } from "../api";
+import { searchPlaces, getPlaces } from "../api";
 import "./MainPage.css";
 
 import mainImg from "../img/dogBack.gif";
 import mapLocation from "../img/mapLocation_white.png";
 import bgLogo from "../img/BgLogo.png";
+import loadingImg from "../img/LoadingImg.gif";
 
 import PlaceList from "../components/PlaceList";
 import ChatbotHG from "../components/ChatbotHG";
@@ -26,6 +27,7 @@ function MainPage() {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [type, setType] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleAllClick = () => {
     setType("all");
@@ -62,8 +64,10 @@ function MainPage() {
 
     try {
       if (search) {
+        setIsLoading(true);
         result = await searchPlaces({ word: search });
       } else {
+        setIsLoading(true);
         result = await getPlaces({ type });
       }
 
@@ -74,6 +78,8 @@ function MainPage() {
       }
     } catch (error) {
       console.log("로드 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,7 +140,11 @@ function MainPage() {
           <Search handleSearchSubmit={handleSearchSubmit} />
         </div>
         <hr className="place-nav-line" />
-        <PlaceList items={items} />
+        {isLoading ? (
+          <img src={loadingImg} alt="로딩 이미지" />
+        ) : (
+          <PlaceList items={items} />
+        )}
       </div>
       <ChatbotHG />
     </>

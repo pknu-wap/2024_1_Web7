@@ -2,6 +2,22 @@
   position: relative;
 }
 
+.loading-box {
+  position: absolute;
+  top: 30%;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.loading-gif {
+  z-index: 1000;
+  width: 500px;
+  border-radius: 1000px;
+}
+
 /* 상단 타입 필터 박스 */
 
 .type-filter-container {
@@ -188,6 +204,16 @@
 
 .info-img.location {
   width: 14px;
+}
+
+.place-detailContent {
+  align-items: center;
+  padding: 1%;
+  color: #7b7b7b;
+}
+
+.toggle-button {
+  cursor: pointer;
 }
 
 .place-add {

@@ -13,7 +13,12 @@ function Login() {
 
   const onNaverLogin = async (e) => {
     e.preventDefault();
-    window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
+    try {
+      window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
+    } finally {
+      navigate("/");
+    }
+
     try {
       const socialToken = await fetch(
         `${process.env.REACT_APP_API_URL}api/basic/login`

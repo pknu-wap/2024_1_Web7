@@ -47,10 +47,10 @@ import size_big2 from "../img/size_big2.png";
 import bookmark from "../img/bookmark1.png";
 import bookmark2 from "../img/bookmark2.png";
 import reviewPen from "../img/reviewPen.png";
+import loadingImg from "../img/Loading2.gif";
 
 import "./Map.css";
 import MapSearch from "./MapSearch";
-import ReviewEdit from "./ReviewEdit";
 
 function Map() {
   const mapRef = useRef(null);
@@ -84,6 +84,7 @@ function Map() {
   const [isReview, setIsReview] = useState(false);
   const [reviewUpdate, setReviewUpdate] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleExpand = () => setIsExpanded(!isExpanded);
@@ -183,7 +184,7 @@ function Map() {
 
                   {review.user.username === username && (
                     <button onClick={() => handleReviewEdit(review)}>
-                      리뷰 수정
+                      수정
                     </button>
                   )}
                 </div>
@@ -258,6 +259,7 @@ function Map() {
       const fetchLocation = async () => {
         let response;
         try {
+          setIsLoading(true);
           if (search) {
             response = await searchPlaces({ word: search });
           } else if (isMyPlaces) {
@@ -273,6 +275,8 @@ function Map() {
           setPlaces(response);
         } catch (error) {
           console.error("장소를 불러오는 데 실패했습니다.", error);
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -290,6 +294,7 @@ function Map() {
         zoomControl: true, // 줌 컨트롤 표시
         zoomContorlOptions: { position: 9 }, // 줌 컨트롤 우하단에 배치
       };
+
       mapRef.current = new Map("map", mapOptions);
     }
   }, [currentMyLocation, type, dogSize, search, isMyPlaces]);
@@ -451,9 +456,15 @@ function Map() {
 
   return (
     <div className="map-box">
+      <div className="loading-box">
+        {isLoading && (
+          <img className="loading-gif" src={loadingImg} alt="로딩 이미지" />
+        )}
+      </div>
+
       <div
         id="map"
-        style={{ width: "100%", height: "710px" }}
+        style={{ width: "100%", height: "650px" }}
         onClick={handleOverlayClick}
       />
       <div className="type-filter-container">
@@ -620,13 +631,13 @@ function Map() {
               <img className="info-img" src={phoneImg} alt="전화 이미지" />
               {selectedPlace.phoneNumber}
             </div>
-            <div>
+            <div className="place-detailContent">
               {isExpanded
                 ? selectedPlace.detailContent
-                : `${selectedPlace.detailContent.slice(0, MAX_LENGTH)}...`}
+                : `${selectedPlace.detailContent.slice(0, MAX_LENGTH)}`}
               {selectedPlace.detailContent.length > MAX_LENGTH && (
                 <span className="toggle-button" onClick={toggleExpand}>
-                  {isExpanded ? " 접기 ▲" : " 더보기 ▼"}
+                  {isExpanded ? "▲" : "▼"}
                 </span>
               )}
             </div>
