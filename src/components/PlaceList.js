@@ -14,7 +14,7 @@ function PlaceListItem({ item }) {
           <span className="PlaceListItem-place-type">{placeType} |</span>
           <span className="PlaceListItem-place-rate">
             <img className="PlaceListItem-rateImg" src={rateImg} />
-            {rate.toFixed(1)}
+            {rate ? rate.toFixed(1) : "별점을 등록해주세요!"}
           </span>
         </div>
         <div className="PlaceListItem-inopen-add">

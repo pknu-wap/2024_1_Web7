@@ -3,7 +3,6 @@ import "./Login.css";
 import naver_logo from "../img/naver_logo.png";
 import google_logo from "../img/google_logo.png";
 import { useNavigate } from "react-router-dom";
-import { getUserName } from "../api";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,8 +11,17 @@ function Login() {
     password: "",
   });
 
-  const onNaverLogin = () => {
+  const onNaverLogin = async (e) => {
+    e.preventDefault();
     window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
+    try {
+      const socialToken = await fetch(
+        `${process.env.REACT_APP_API_URL}api/basic/login`
+      );
+      localStorage.setItem("Authorization", socialToken);
+    } catch (error) {
+      console.error("네이버 로그인 실패");
+    }
   };
 
   const onGoogleLogin = () => {

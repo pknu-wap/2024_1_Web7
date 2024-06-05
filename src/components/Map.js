@@ -85,6 +85,11 @@ function Map() {
   const [reviewUpdate, setReviewUpdate] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  const MAX_LENGTH = 150; // 텍스트를 축약할 길이
+
   let token = localStorage.getItem("Authorization");
 
   useEffect(() => {
@@ -150,24 +155,20 @@ function Map() {
     return (
       <ul className="review-ul">
         {reviews.map((review) => {
-          // const base64URL = review.user.image.data;
-          // const Imgsrc = `data:image/jpeg;base64,${base64URL}`;
+          const base64URL = review.user.image.data;
+          const Imgsrc = `data:image/jpeg;base64,${base64URL}`;
 
           return (
             <li className="review-list" key={review.id}>
-              {/* {review.user.image.data ? (
+              {review.user.image.data ? (
                 <img
                   className="review-profile-img"
                   src={Imgsrc}
                   alt={`${review.user.username}'s profile`}
                 />
               ) : (
-                <img
-                  className="review-profile-img"
-                  src={footImg}
-                />
-              )} */}
-              <img className="review-profile-img" src={footImg} />
+                <img className="review-profile-img" src={footImg} />
+              )}
 
               <div className="review-content-box">
                 <div className="review-user-rate-update">
@@ -568,7 +569,9 @@ function Map() {
                 {selectedPlace.rate ? (
                   <>
                     <img className="rate-img2" src={rateImg} />
-                    {selectedPlace.rate.toFixed(1)}
+                    {selectedPlace.rate
+                      ? selectedPlace.rate.toFixed(1)
+                      : "별점을 등록해주세요!"}
                   </>
                 ) : (
                   <div>등록된 별점이 없습니다.</div>
@@ -617,6 +620,16 @@ function Map() {
               <img className="info-img" src={phoneImg} alt="전화 이미지" />
               {selectedPlace.phoneNumber}
             </div>
+            <div>
+              {isExpanded
+                ? selectedPlace.detailContent
+                : `${selectedPlace.detailContent.slice(0, MAX_LENGTH)}...`}
+              {selectedPlace.detailContent.length > MAX_LENGTH && (
+                <span className="toggle-button" onClick={toggleExpand}>
+                  {isExpanded ? " 접기 ▲" : " 더보기 ▼"}
+                </span>
+              )}
+            </div>
           </div>
           <div className="place-imgs">
             {images.map((image, index) => {
@@ -640,7 +653,9 @@ function Map() {
                 <span>리뷰 | </span>
                 <img className="rate-img" src={rateImg} />
                 <span className="place-rate">
-                  {selectedPlace.rate.toFixed(1)}
+                  {selectedPlace.rate
+                    ? selectedPlace.rate.toFixed(1)
+                    : "별점을 등록해주세요!"}
                 </span>
               </div>
               <button onClick={handleClickReview}>

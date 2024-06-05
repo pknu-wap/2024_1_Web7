@@ -206,13 +206,14 @@
 
 .place-imgs {
   display: flex;
-  gap: 2%;
+  justify-content: space-between;
   overflow-x: auto; /* 내용이 요소의 크기를 벗어날 때 가로 스크롤을 표시합니다. */
   white-space: nowrap;
 }
 
 .place-img {
-  width: 30%;
+  width: 250px;
+  height: 200px;
   padding: 1%;
   border-radius: 20px;
 }
@@ -285,7 +286,9 @@
 
 .review-profile-img {
   width: 65px;
+  height: 65px;
   padding: 5px;
+  border-radius: 1000px;
 }
 
 .review-content-box {

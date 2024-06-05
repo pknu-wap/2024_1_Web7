@@ -55,17 +55,19 @@
 
 .PlaceListItem-image-container {
   display: flex;
-  gap: 1%;
   justify-content: space-between;
   overflow-x: auto; /* 내용이 요소의 크기를 벗어날 때 가로 스크롤을 표시합니다. */
   white-space: nowrap; /* 요소 내의 텍스트가 줄 바꿈되지 않고 한 줄로 유지됩니다. */
   padding-top: 1%;
+  flex-wrap: wrap;
 }
 
 .PlaceListItem-place-img {
   margin-top: 5px;
   border-radius: 15px;
-  width: 32%;
+  width: 248px;
+  height: 180px;
+  object-fit: fill;
 }
 
 .PlaceList-list {

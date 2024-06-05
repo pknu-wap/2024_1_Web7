@@ -11,6 +11,13 @@
   width: 100%;
 }
 
+.bg-title-img {
+  position: absolute;
+  width: 100%;
+  padding: 0 20%;
+  bottom: 60%;
+}
+
 .map-btn {
   display: flex;
   justify-content: center;

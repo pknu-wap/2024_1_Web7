@@ -5,6 +5,7 @@ import "./MainPage.css";
 
 import mainImg from "../img/dogBack.gif";
 import mapLocation from "../img/mapLocation_white.png";
+import bgLogo from "../img/BgLogo.png";
 
 import PlaceList from "../components/PlaceList";
 import ChatbotHG from "../components/ChatbotHG";
@@ -91,6 +92,7 @@ function MainPage() {
     <>
       <div className="bg-box">
         <img className="bg-img" src={mainImg} />
+        <img className="bg-title-img" src={bgLogo} />
         <Link to="/map">
           <button className="map-btn">
             <img className="map-btn-img" src={mapLocation} />
