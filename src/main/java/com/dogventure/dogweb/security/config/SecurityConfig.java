@@ -100,6 +100,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/basic/logout",
                                 "/api/map/naver/place/**",
                                 "/api/test/",
+                                "/api/test/delete/{id}",
                                 "/api/gpt/**",
                                 "/api/mypage/**",
                                 "/api/bookmark",
