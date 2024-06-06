@@ -53,7 +53,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         response.getWriter().write(jsonResponse);
         response.getWriter().flush();
 
-        response.sendRedirect("http://dogventure-be-dev.ap-northeast-2.elasticbeanstalk.com");
+        response.sendRedirect("http://dogventure-fe-dev.ap-northeast-2.elasticbeanstalk.com");
     }
 }
 

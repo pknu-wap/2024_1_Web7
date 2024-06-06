@@ -10,6 +10,8 @@ import com.dogventure.dogweb.mainLogic.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,8 @@ public class NaverMapService {
 
     public List<SimplePlaceDto> getAllPlace() {
 
-        List<Place> places = repository.findAll();
+        Pageable pageable = PageRequest.of(0, 9);
+        List<Place> places = repository.findAll(pageable).getContent();
 
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 

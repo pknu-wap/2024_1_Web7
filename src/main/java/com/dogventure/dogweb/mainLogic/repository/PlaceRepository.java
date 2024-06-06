@@ -3,6 +3,7 @@ package com.dogventure.dogweb.mainLogic.repository;
 import com.dogventure.dogweb.constant.DogSize;
 import com.dogventure.dogweb.constant.PlaceType;
 import com.dogventure.dogweb.mainLogic.entity.Place;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
