@@ -1,0 +1,32 @@
+server:
+  port : 5000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}
+    username: ${rds.username}
+    password: ${rds.password}
+  # 수정
+  servlet:
+    multipart:
+      max-file-size: 300MB
+      max-request-size: 300MB
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+
+# 충분히 길게!
+jwt:
+  secret: vdafeqwfasdvfgdafewqfqfdafewafdafqewfeqfeqfeafqwfdasfdsa
+
+admin:
+  email: admin@naver.com
+

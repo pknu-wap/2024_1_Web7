@@ -44,7 +44,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         response.addCookie(createCookie("Authorization", token));
         response.setStatus(HttpStatus.OK.value());
-        response.sendRedirect("http://dogventure-fe-dev.ap-northeast-2.elasticbeanstalk.com");
+        response.sendRedirect("http://dogventure.ap-northeast-2.elasticbeanstalk.com");
     }
 
     private Cookie createCookie(String key, String token) {
@@ -58,5 +58,3 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         return cookie;
     }
 }
-
-

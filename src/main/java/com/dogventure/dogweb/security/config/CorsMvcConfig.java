@@ -12,6 +12,8 @@ public class CorsMvcConfig implements WebMvcConfigurer {
 
         corsRegistry.addMapping("/**")
                 .exposedHeaders("Set-Cookie")
-                .allowedOrigins("http://dogventure-fe-dev.ap-northeast-2.elasticbeanstalk.com");
+                .allowedOrigins("http://localhost:3000",
+                        "http://dogventure-fe-dev.ap-northeast-2.elasticbeanstalk.com",
+                        "http://dogventure.ap-northeast-2.elasticbeanstalk.com/");
     }
 }
