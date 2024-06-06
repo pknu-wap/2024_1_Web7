@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class GuestNaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
@@ -80,7 +82,8 @@ public class GuestNaverMapService {
             imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
         }
 
-        LocalTime now = LocalTime.now();
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
+        LocalTime now = LocalTime.now(zoneId);
         boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
         return new GuestDetailPlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getStartTime().toString(), place.getEndTime().toString(), place.getAddress(), place.getPhoneNumber(), place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate(), reviewDtos);
@@ -105,7 +108,8 @@ public class GuestNaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));
@@ -141,7 +145,8 @@ public class GuestNaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             simplePlaceDtos.add(new GuestSimplePlaceDto(place.getId(), place.getX(), place.getY(), place.getName(), imageDtos, isOpen, place.getDetailContent(), place.getPlaceType(), place.getDogSize(), place.getRate()));

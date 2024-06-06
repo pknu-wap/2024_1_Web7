@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,8 @@ public class NaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             boolean bookmark = false;
@@ -88,7 +90,8 @@ public class NaverMapService {
             imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
         }
 
-        LocalTime now = LocalTime.now();
+        ZoneId zoneId = ZoneId.of("Asia/Seoul");
+        LocalTime now = LocalTime.now(zoneId);
         boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -124,7 +127,8 @@ public class NaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             boolean bookmark = false;
@@ -168,7 +172,8 @@ public class NaverMapService {
                 imageDtos.add(new ImageDto(image.getFilename(), image.getData()));
             }
 
-            LocalTime now = LocalTime.now();
+            ZoneId zoneId = ZoneId.of("Asia/Seoul");
+            LocalTime now = LocalTime.now(zoneId);
             boolean isOpen = !now.isBefore(place.getStartTime()) && !now.isAfter(place.getEndTime());
 
             boolean bookmark = false;
