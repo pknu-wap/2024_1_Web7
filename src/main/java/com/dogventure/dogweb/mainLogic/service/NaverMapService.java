@@ -30,8 +30,8 @@ public class NaverMapService {
 
     public List<SimplePlaceDto> getAllPlace() {
 
-        Pageable pageable = PageRequest.of(0, 9);
-        List<Place> places = repository.findAll(pageable).getContent();
+//        Pageable pageable = PageRequest.of(0, 9);
+        List<Place> places = repository.findAll();
 
         List<SimplePlaceDto> simplePlaceDtos = new ArrayList<>();
 
