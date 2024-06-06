@@ -1,9 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Login.css";
 import naver_logo from "../img/naver_logo.png";
 import google_logo from "../img/google_logo.png";
 import { useNavigate } from "react-router-dom";
 
+const onNaverLogin = () => {
+  window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
+};
+
+const onGoogleLogin = () => {
+  window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/google`;
+};
+
+const saveTokenToLocalStorage = () => {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (let cookie of cookies) {
+    const [name, value] = cookie.split("=");
+    if (name === "Authorization") {
+      localStorage.setItem("Authorization", value);
+    }
+  }
+};
 function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -11,27 +30,9 @@ function Login() {
     password: "",
   });
 
-  const onNaverLogin = async (e) => {
-    e.preventDefault();
-    try {
-      window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/naver`;
-    } finally {
-      navigate("/");
-    }
-
-    try {
-      const socialToken = await fetch(
-        `${process.env.REACT_APP_API_URL}api/basic/login`
-      );
-      localStorage.setItem("Authorization", socialToken);
-    } catch (error) {
-      console.error("네이버 로그인 실패");
-    }
-  };
-
-  const onGoogleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/google`;
-  };
+  useEffect(() => {
+    saveTokenToLocalStorage();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,9 +58,9 @@ function Login() {
           }),
         }
       );
-      // if (!response.ok) {
-      //   alert("로그인에 실패했습니다.");
-      // }
+      if (!response.ok) {
+        alert("로그인에 실패했습니다.");
+      }
 
       const data = await response.json();
 
@@ -73,46 +74,48 @@ function Login() {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <h2>로그인</h2>
-      <div>
-        <div className="input-box">
-          <input
-            placeholder="아이디 (이메일)"
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-          />
+    <div className="login-form">
+      <form onSubmit={handleSubmit}>
+        <h2>로그인</h2>
+        <div className="login-box">
+          <div className="input-box">
+            <input
+              placeholder="아이디 (이메일)"
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
 
-          <input
-            placeholder="비밀번호"
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
+            <input
+              placeholder="비밀번호"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+          </div>
+          <li className="login-btn-box">
+            <button type="submit" className="login-btn">
+              로그인
+            </button>
+          </li>
+
+          <hr className="login-line" />
         </div>
-        <li className="login-btn-box">
-          <button type="submit" className="login-btn">
-            로그인
-          </button>
-        </li>
+      </form>
 
-        <hr className="login-line" />
-
-        <div className="social-login-box">
-          <button className="social-btn google-btn" onClick={onGoogleLogin}>
-            <img src={google_logo} />
-            <span>구글 로그인</span>
-          </button>
-          <button className="social-btn" onClick={onNaverLogin}>
-            <img src={naver_logo} />
-            <span>네이버 로그인</span>
-          </button>
-        </div>
+      <div className="social-login-box">
+        <button className="social-btn google-btn" onClick={onGoogleLogin}>
+          <img src={google_logo} />
+          <span>구글 로그인</span>
+        </button>
+        <button className="social-btn" onClick={onNaverLogin}>
+          <img src={naver_logo} />
+          <span>네이버 로그인</span>
+        </button>
       </div>
-    </form>
+    </div>
   );
 }
 

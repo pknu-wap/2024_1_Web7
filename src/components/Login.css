@@ -13,9 +13,10 @@
   font-weight: 700;
 }
 
-.login-form div {
+.login-box {
   padding: 2% 5%;
   margin: 0;
+  padding-bottom: 0;
 }
 
 .input-box {
@@ -39,7 +40,7 @@
 }
 
 .login-btn {
-  width: 50%;
+  width: 57%;
   border: none;
   border-radius: 30px;
   background-color: #007bff;
@@ -70,7 +71,7 @@
 }
 
 .social-btn {
-  width: 57%;
+  width: 52%;
   border: none;
   border-radius: 30px;
   background-color: #04c75b;
