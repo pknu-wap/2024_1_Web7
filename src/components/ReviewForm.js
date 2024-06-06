@@ -52,21 +52,14 @@ function ReviewForm({
       placeId: id,
     };
 
-    const Updatebody = {
-      reviewId: currentReviewId,
-      placeId: id,
-      rate: values.rate,
-      content: values.content,
-    };
-
     let result;
 
     try {
       setIsSubmitting(true);
       if (isEdit) {
-        result = await updateReview(Updatebody, currentToken);
-        setIsEdit(false);
-        onSubmit(Updatebody);
+        result = await createReview(body, currentToken);
+        onSubmit(result);
+        alert("리뷰를 수정하였습니다!");
       } else {
         result = await createReview(body, currentToken);
         onSubmit(result);

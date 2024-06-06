@@ -1,7 +1,6 @@
 import "./PlaceList.css";
 import inOpenImg from "../img/inOpen.png";
 import rateImg from "../img/rateImg.png";
-import addImg from "../img/mapLocation.png";
 
 function PlaceListItem({ item }) {
   const { name, images, isOpen, placeType, rate } = item;

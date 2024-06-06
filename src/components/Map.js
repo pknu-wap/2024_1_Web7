@@ -11,6 +11,7 @@ import {
   getPlaceLoginInfo,
   getMyPlaces,
   getUserName,
+  deleteReview,
 } from "../api";
 
 import Modal from "./Modal";
@@ -183,9 +184,17 @@ function Map() {
                   </div>
 
                   {review.user.username === username && (
-                    <button onClick={() => handleReviewEdit(review)}>
-                      수정
-                    </button>
+                    <div className="review-delete-edit">
+                      <button onClick={() => handleReviewEdit(review)}>
+                        수정
+                      </button>
+                      <button
+                        className="review-delete-btn"
+                        onClick={() => handleReviewDelete(review)}
+                      >
+                        삭제
+                      </button>
+                    </div>
                   )}
                 </div>
                 <div className="review-content">
@@ -213,26 +222,25 @@ function Map() {
 
   const handleReviewSubmit = (submittedReview) => {
     setReviews((prevReviews) => {
-      // const reviewIndex = prevReviews.findIndex(
-      //   (review) => review.id === submittedReview.reviewId
-      // );
-
       if (!isEdit) {
         return [...prevReviews, submittedReview];
       }
-
-      // if (reviewIndex !== -1) {
-      //   // 기존 리뷰를 찾아서 수정된 리뷰로 대체
-      //   return prevReviews.map((review) =>
-      //     review.id === reviewIndex ? submittedReview : review
-      //   );
-      // } else {
-      //   // 새로운 리뷰 추가
-      //   return [...prevReviews, submittedReview];
-      // }
     });
 
     setIsReview(false);
+  };
+
+  const handleReviewDelete = async (review) => {
+    const body = {
+      placeId: selectedPlace.id,
+      reviewId: review.id,
+    };
+    try {
+      await deleteReview(body, token);
+    } catch (error) {
+      console.error("리뷰 삭제에 실패했습니다.");
+    }
+    setReviewUpdate(!reviewUpdate);
   };
 
   // 리뷰 실시간 업데이트

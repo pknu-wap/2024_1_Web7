@@ -345,6 +345,18 @@
   margin-bottom: 1.5px;
 }
 
+.review-delete-edit {
+  display: flex;
+}
+
+.review-delete-edit button {
+  margin: 1%;
+}
+
+.review-delete-btn {
+  color: red;
+}
+
 .review-content {
   color: #7b7b7b;
   padding-top: 5px;

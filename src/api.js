@@ -152,6 +152,30 @@ export async function createReview({ rate, content, placeId }, token) {
   }
 }
 
+export async function deleteReview({ reviewId, placeId }, token) {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}api/place/review/delete`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          reviewId: reviewId,
+          placeId: placeId,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("리뷰를 삭제하는 데 실패했습니다.", error);
+    throw error;
+  }
+}
+
 export async function updateReview(
   { reviewId, placeId, rate, content },
   token
