@@ -42,18 +42,21 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        // JSON 형식으로 응답
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        response.addCookie(createCookie("Authorization", token));
         response.setStatus(HttpStatus.OK.value());
-
-        // JSON 응답 생성
-        String jsonResponse = String.format("{\"token\": \"%s\"}", token);
-
-        response.getWriter().write(jsonResponse);
-        response.getWriter().flush();
-
         response.sendRedirect("http://dogventure-fe-dev.ap-northeast-2.elasticbeanstalk.com");
     }
+
+    private Cookie createCookie(String key, String token) {
+
+        Cookie cookie = new Cookie(key, token);
+        cookie.setMaxAge(60*60*60);
+        cookie.setPath("/");
+        cookie.setHttpOnly(false);
+//        cookie.setSecure(true);
+
+        return cookie;
+    }
 }
+
 
