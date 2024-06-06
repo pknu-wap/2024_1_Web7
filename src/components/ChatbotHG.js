@@ -43,11 +43,21 @@ const ChatbotHG = () => {
   const [showChat, setShowChat] = useState(false);
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
   const chatEndRef = useRef(null);
+  const [isLogin, setIsLogin] = useState(false);
+  const [showError, setShowError] = useState(false);
+   const errorTimerRef = useRef(null);
+
+  useEffect(() => {
+    if(localStorage.getItem('Authorization') !== null){
+      setIsLogin(true);
+    }else{
+      setIsLogin(false);
+    }
+  },[localStorage])
 
   const apiEndpoint = `${process.env.REACT_APP_API_URL}api/gpt/question`;
-
+  
   const addMessage = (sender, message) => {
-    const currentTime = new Date().toLocaleTimeString(); //현재 시간 출력
     setMessages((prevMessages) => [...prevMessages, { sender, message }]);
   };
 
@@ -78,7 +88,7 @@ const ChatbotHG = () => {
         if (done) break;
 
         const answer = decoder.decode(value).toString();
-        if (!answer.includes("data:done")) {
+        if (!answer.includes("done")) {
           // done이 나올 경우에 멈추길 원햇지만 그냥 done일 때 result에 안 받기
           result += answer.replace(/data: |data:/g, ""); // data: 이거 안 보이게 하기
         }
@@ -106,25 +116,46 @@ const ChatbotHG = () => {
   };
 
   // 처음 안내문이 계속 나오니까 if 중첩문 넣어서 새로고침 할 때나 다시 시작할 때만 안내문 뜨게하기
+
   useEffect(() => {
     if (showChat) {
       if (!localStorage.getItem("chatbot-welcome-shown")) {
-        addMessage(
-          "bot",
-          "안녕하세요 ◡̈ 당신의 반려견과 함께하는 오늘을 응원하는 도그벤처 챗봇입니다.\n\n궁금한 사항이나 알아보고 싶은 사항들을 검색해주세요! 챗봇이 빠르게 답해드립니다."
-        );
-        localStorage.setItem("chatbot-welcome-shown", "true");
+        if (messages.length === 0) {
+          addMessage(
+            "bot",
+            "안녕하세요😊 당신의 반려견과 함께하는 오늘을 응원하는 도그벤처 챗봇입니다.\n\n궁금한 사항이나 알아보고 싶은 사항들을 검색해주세요! 챗봇이 빠르게 답해드립니다."
+          );
+          localStorage.setItem("chatbot-welcome-shown", "true");
+        }
       }
     }
-  }, [showChat]);
+  }, [showChat, messages]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]); // 스크롤 자동으로 내려가게
 
+  useEffect(() => {
+    if (showError) {
+      errorTimerRef.current = setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(errorTimerRef.current);
+    };
+  }, [showError]);
+
   return (
     <div>
-      <div id="chatbot-icon" onClick={() => setShowChat(!showChat)}>
+      <div id="chatbot-icon"onClick={() => {
+          if (isLogin) {
+            setShowChat(!showChat);
+          } else {
+            setShowError(true);
+          }
+        }}>
         <img src={footblue} alt="Chatbot Icon" className="icon" />
       </div>
       {showChat && (
@@ -177,26 +208,26 @@ const ChatbotHG = () => {
               <div className="recommended-questions">
                 <button
                   onClick={() =>
-                    handleRecommendedQuestionClick("오늘 날씨 어때?")
+                    handleRecommendedQuestionClick("☁️ 오늘 날씨 어때?")
                   }
                 >
-                  오늘 날씨 어때?
+                  ☁️오늘 날씨 어때?
                 </button>
                 <button
                   onClick={() =>
-                    handleRecommendedQuestionClick("부산 여행 추천")
+                    handleRecommendedQuestionClick("✈️ 부산 여행 추천")
                   }
                 >
-                  부산 여행 추천
+                  ✈️ 부산 여행 추천
                 </button>
                 <button
                   onClick={() =>
                     handleRecommendedQuestionClick(
-                      "오늘 반려견과 떠나기 좋은 장소를 추천해주세요!"
+                      "📕 오늘 반려견과 떠나기 좋은 장소를 추천해주세요!"
                     )
                   }
                 >
-                  오늘 반려견과 떠나기 좋은 장소를 추천해주세요!
+                  📕 반려견과 떠날 장소를 추천해주세요!
                 </button>
               </div>
             )}
@@ -219,6 +250,11 @@ const ChatbotHG = () => {
               <img src={imgsend} alt="Send" className="send-icon" />
             </button>
           </div>
+        </div>
+      )}
+      {showError && (
+        <div className="error-message">
+          <p>로그인 해야 이용 가능합니다.</p>
         </div>
       )}
     </div>

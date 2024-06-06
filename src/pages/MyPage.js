@@ -28,6 +28,7 @@ function MyPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const imageUrls = [ex1, ex2, ex3, ex4, ex5];
   const [dogInfo, setDogInfo] = useState({});
+  const [reviewCount, setReviewCount] = useState(0);
 
   const handleCloseModal = (e) => {
     if (e.target.classList.contains("modal")) {
@@ -63,10 +64,25 @@ function MyPage() {
       setNickname(response.name);
       if (response.dog !== null) {
         setDogInfo(response.dog);
+        setPetName(response.dog.dogName);
+        setPetType(response.dog.species);
+        setPetSex(response.dog.gender);
+        setPetAge(response.dog.registrationNumber);
+      }
+      if (response.count!==null) {
+        setReviewCount(response.count);
       }
     };
     getUser();
   }, [showPetModal]);
+
+  const handleEnterKey = (e) => {
+   
+    if(e.key === 'Enter'){
+      updateUserData(token, nickname);
+      setUserModifyMode(false);
+    }
+  }
 
   return (
     <div className="mypage-container">
@@ -80,6 +96,7 @@ function MyPage() {
                 onChange={(e) => {
                   setNickname(e.target.value);
                 }}
+                onKeyDown={handleEnterKey}
               />
             </div>
             <div className="user-right-content">
@@ -104,7 +121,7 @@ function MyPage() {
               <div className="review">
                 <span className="review-text">작성한 리뷰</span>
                 <span className="review-count">
-                  {dogInfo.count === undefined ? 0 : dogInfo.count} 개
+                  {reviewCount} 개
                 </span>
               </div>
             </div>{" "}
@@ -235,11 +252,14 @@ function MyPage() {
                     ) : (
                       <>
                         {petImage ? (
-                          <img
-                            src={URL.createObjectURL(petImage)}
-                            alt="Pet"
-                            className="pet-image"
-                          />
+                          <>
+                           <img
+                             src={URL.createObjectURL(petImage)}
+                             alt="Pet"
+                             className="pet-image"
+                           />
+                           
+                          </>
                         ) : (
                           <div
                             className="circle"

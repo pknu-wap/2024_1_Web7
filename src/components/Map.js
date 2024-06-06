@@ -640,8 +640,10 @@ function Map() {
                 <span>리뷰 | </span>
                 <img className="rate-img" src={rateImg} />
                 <span className="place-rate">
-                  {selectedPlace.rate.toFixed(1)}
-                </span>
+                  {selectedPlace.rate
+                    ? selectedPlace.rate.toFixed(1)
+                    : "별점을 등록해주세요!"}
+                 </span>
               </div>
               <button onClick={handleClickReview}>
                 <img className="reviewPen-img" src={reviewPen} />
