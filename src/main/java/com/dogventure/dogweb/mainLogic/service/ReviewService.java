@@ -32,15 +32,33 @@ public class ReviewService {
 
         Place place = placeRepository.findById(requestDto.getPlaceId()).orElse(null);
 
+        Review review = reviewRepository.findByUserAndPlace(user, place).orElse(null);
+
+        // 리뷰 수정
+        if (review != null) {
+            review.setRate(requestDto.getRate());
+            review.setContent(requestDto.getContent());
+
+            reviewRepository.save(review);
+
+            Double averageRate = place.getReviews().stream().mapToDouble(Review::getRate).average().getAsDouble();
+
+            place.setRate(averageRate);
+
+            placeRepository.save(place);
+
+            return;
+        }
+
         if (reviewRepository.existsByUserAndPlace(user, place)) {
             throw new IllegalAccessException("한 장소에 두개 이상의 리뷰는 작성할 수 없습니다");
         }
 
-        Review review = new Review(requestDto.getRate(), requestDto.getContent(), user, place);
+        Review newReview = new Review(requestDto.getRate(), requestDto.getContent(), user, place);
 
-        reviewRepository.save(review);
+        reviewRepository.save(newReview);
 
-        place.addReview(review);
+        place.addReview(newReview);
 
         placeRepository.save(place);
 

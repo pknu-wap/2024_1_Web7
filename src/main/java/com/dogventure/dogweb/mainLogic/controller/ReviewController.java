@@ -23,13 +23,6 @@ public class ReviewController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity update(@RequestBody ReviewUpdateRequestDto requestDto) {
-
-        service.update(requestDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/delete")
     public ResponseEntity delete(@RequestBody ReviewDeleteRequestDto requestDto) {
 
