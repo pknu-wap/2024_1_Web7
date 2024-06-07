@@ -43,7 +43,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         response.setStatus(HttpStatus.OK.value());
-        response.sendRedirect("http://dogventure.ap-northeast-2.elasticbeanstalk.com?token=" + token);
+        response.sendRedirect("http://dogventure.ap-northeast-2.elasticbeanstalk.com/login?token=" + token);
     }
 }
 
