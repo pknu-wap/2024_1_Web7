@@ -35,12 +35,15 @@ function Nav() {
               <button className="logout-btn" onClick={handleLogout}>
                 로그아웃
               </button>
-              <img
+              <button className="logout-btn" onClick={handleMypage}>
+                마이페이지
+              </button>
+              {/* <img
                 className="myPage-foot-btn"
                 src={mypage_logo}
                 onClick={handleMypage}
                 width={30}
-              />
+              /> */}
             </li>
           ) : (
             <div className="login-signup-box">
