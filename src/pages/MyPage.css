@@ -132,6 +132,7 @@
   color: #fff;
   background-color: #0075ff;
   border-radius: 100px;
+  cursor: pointer;
 }
 
 .pet-info {

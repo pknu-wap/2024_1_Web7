@@ -157,52 +157,86 @@ function Map() {
     return (
       <ul className="review-ul">
         {reviews.map((review) => {
-          const base64URL = review.user.image.data;
-          const Imgsrc = `data:image/jpeg;base64,${base64URL}`;
+          if (review.user.image) {
+            const base64URL = review.user.image.data;
+            const Imgsrc = `data:image/jpeg;base64,${base64URL}`;
 
-          return (
-            <li className="review-list" key={review.id}>
-              {review.user.image.data ? (
+            return (
+              <li className="review-list" key={review.id}>
                 <img
                   className="review-profile-img"
                   src={Imgsrc}
                   alt={`${review.user.username}'s profile`}
                 />
-              ) : (
-                <img className="review-profile-img" src={footImg} />
-              )}
 
-              <div className="review-content-box">
-                <div className="review-user-rate-update">
-                  <div className="review-user-rate">
-                    <span className="review-username">
-                      {review.user.username}
-                    </span>
-                    <span className="review-rate ">
-                      <StarRating rate={review.rate} />
-                    </span>
-                  </div>
-
-                  {review.user.username === username && (
-                    <div className="review-delete-edit">
-                      <button onClick={() => handleReviewEdit(review)}>
-                        수정
-                      </button>
-                      <button
-                        className="review-delete-btn"
-                        onClick={() => handleReviewDelete(review)}
-                      >
-                        삭제
-                      </button>
+                <div className="review-content-box">
+                  <div className="review-user-rate-update">
+                    <div className="review-user-rate">
+                      <span className="review-username">
+                        {review.user.username}
+                      </span>
+                      <span className="review-rate ">
+                        <StarRating rate={review.rate} />
+                      </span>
                     </div>
-                  )}
+
+                    {review.user.username === username && (
+                      <div className="review-delete-edit">
+                        <button onClick={() => handleReviewEdit(review)}>
+                          수정
+                        </button>
+                        <button
+                          className="review-delete-btn"
+                          onClick={() => handleReviewDelete(review)}
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="review-content">
+                    <div className="review-content-inbox">{review.content}</div>
+                  </div>
                 </div>
-                <div className="review-content">
-                  <div className="review-content-inbox">{review.content}</div>
+              </li>
+            );
+          } else {
+            return (
+              <li className="review-list" key={review.id}>
+                <img className="review-profile-img" src={footImg} />
+
+                <div className="review-content-box">
+                  <div className="review-user-rate-update">
+                    <div className="review-user-rate">
+                      <span className="review-username">
+                        {review.user.username}
+                      </span>
+                      <span className="review-rate ">
+                        <StarRating rate={review.rate} />
+                      </span>
+                    </div>
+
+                    {review.user.username === username && (
+                      <div className="review-delete-edit">
+                        <button onClick={() => handleReviewEdit(review)}>
+                          수정
+                        </button>
+                        <button
+                          className="review-delete-btn"
+                          onClick={() => handleReviewDelete(review)}
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="review-content">
+                    <div className="review-content-inbox">{review.content}</div>
+                  </div>
                 </div>
-              </div>
-            </li>
-          );
+              </li>
+            );
+          }
         })}
       </ul>
     );
@@ -472,7 +506,7 @@ function Map() {
 
       <div
         id="map"
-        style={{ width: "100%", height: "650px" }}
+        style={{ width: "100%", height: "750px" }}
         onClick={handleOverlayClick}
       />
       <div className="type-filter-container">
