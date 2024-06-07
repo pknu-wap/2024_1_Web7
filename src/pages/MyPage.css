@@ -188,22 +188,27 @@ input {
 .pet-info-2 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1%;
 }
 .pet-info-sex {
   border: 1px solid #7b7b7b;
+  text-align: center;
   border-radius: 100px;
   color: #7b7b7b;
   padding: 4% 9%;
   font-size: 20px;
+  flex-grow: 1;
 }
 .pet-info-age {
   border: 1px solid #7b7b7b;
+  text-align: center;
+
   border-radius: 100px;
   color: #7b7b7b;
   padding: 4% 8%;
   font-size: 20px;
   white-space: nowrap;
+  flex-grow: 2;
 }
 
 .pet-info-edit {
@@ -312,6 +317,8 @@ input {
   width: 40%;
   cursor: pointer;
   font-family: "Pretendard";
+  font-size: 15px;
+  font-weight: 800;
 }
 .modal .pet-info-2 input {
   width: 316px;
@@ -354,6 +361,7 @@ input {
   font-size: 48px;
   line-height: 1;
   cursor: pointer;
+  margin-bottom: 4px;
 }
 
 .image-options {
@@ -453,4 +461,5 @@ input {
   display: inline-flex;
   justify-content: center;
   margin-left: 50px;
+  cursor: pointer;
 }

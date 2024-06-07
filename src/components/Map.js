@@ -256,6 +256,10 @@ function Map() {
 
   const handleReviewSubmit = (submittedReview) => {
     setReviews((prevReviews) => {
+      if (submittedReview.rate === null) {
+        alert("별점을 등록해주세요");
+        return;
+      }
       if (!isEdit) {
         return [...prevReviews, submittedReview];
       }

@@ -6,7 +6,7 @@ function StarRating({
   size = 18,
   color = "#FF7272",
   onSetRate,
-  defaultRate = 0,
+  defaultRate = 1,
   className,
 }) {
   const [rate, setRate] = useState(defaultRate);

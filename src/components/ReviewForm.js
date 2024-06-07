@@ -54,20 +54,29 @@ function ReviewForm({
 
     let result;
 
-    try {
-      setIsSubmitting(true);
-      if (isEdit) {
-        result = await createReview(body, currentToken);
-        onSubmit(result);
-      } else {
-        result = await createReview(body, currentToken);
-        onSubmit(result);
+    if (body.rate === 0) {
+      alert("별점을 등록해주세요!");
+      return;
+    } else if (body.content === "") {
+      alert("내용을 등록해주세요!");
+      return;
+    } else {
+      try {
+        setIsSubmitting(true);
+        if (isEdit) {
+          result = await createReview(body, currentToken);
+          onSubmit(result);
+        } else {
+          result = await createReview(body, currentToken);
+          onSubmit(result);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
     }
+
     setIsEdit(false);
     setValues(INITIAL_VALUES);
     setReviewUpdate(!reviewUpdate);
