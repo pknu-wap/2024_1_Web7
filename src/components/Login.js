@@ -36,6 +36,7 @@ function Login() {
     const token = params.get("token");
     if (token) {
       localStorage.setItem("Authorization", token);
+      navigate("/");
     }
   }, []);
 
