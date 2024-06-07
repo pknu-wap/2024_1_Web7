@@ -12,17 +12,18 @@ const onGoogleLogin = () => {
   window.location.href = `${process.env.REACT_APP_API_URL}oauth2/authorization/google`;
 };
 
-const saveTokenToLocalStorage = () => {
-  const cookieString = document.cookie;
-  const cookies = cookieString.split("; ");
+// const saveTokenToLocalStorage = () => {
+//   const cookieString = document.cookie;
+//   const cookies = cookieString.split("; ");
 
-  for (let cookie of cookies) {
-    const [name, value] = cookie.split("=");
-    if (name === "Authorization") {
-      localStorage.setItem("Authorization", value);
-    }
-  }
-};
+//   for (let cookie of cookies) {
+//     const [name, value] = cookie.split("=");
+//     if (name === "Authorization") {
+//       localStorage.setItem("Authorization", value);
+//     }
+//   }
+// };
+
 function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -31,7 +32,11 @@ function Login() {
   });
 
   useEffect(() => {
-    saveTokenToLocalStorage();
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    if (token) {
+      localStorage.setItem("Authorization", token);
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -58,6 +63,7 @@ function Login() {
           }),
         }
       );
+
       if (!response.ok) {
         alert("로그인에 실패했습니다.");
       }
