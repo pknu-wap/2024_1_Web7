@@ -42,22 +42,10 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        response.addCookie(createCookie("Authorization", token));
         response.setStatus(HttpStatus.OK.value());
-        response.sendRedirect("http://localhost:3000/");
-//        response.sendRedirect("http://dogventure.ap-northeast-2.elasticbeanstalk.com");
-    }
-
-    private Cookie createCookie(String key, String token) {
-
-        Cookie cookie = new Cookie(key, token);
-        cookie.setMaxAge(60*60*60);
-        cookie.setPath("/");
-        cookie.setHttpOnly(false);
-//        cookie.setSecure(true);
-
-        return cookie;
+        response.sendRedirect("http://dogventure.ap-northeast-2.elasticbeanstalk.com?token=" + token);
     }
 }
+
 
 
