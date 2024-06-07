@@ -6,35 +6,32 @@ import backbutton from "../img/backbutton.png";
 import "./ChatbotHG.css";
 
 // TypingEffect는 데이터 출력을 보여주는 효과? 속도 지정해서 한 글자씩 보이게 함
-const TypingEffect = ({ text, speed }) => {
+// 이거 될지 안될지 모르겠음 안되면 전에꺼 써야징
+const TypingEffect = ({ text, speed, isFirstMessage }) => {
   const [displayedText, setDisplayedText] = useState("");
-  useEffect(() => {
-    let currentIndex = 0;
 
+  useEffect(() => {
     const typeText = async () => {
-      while (currentIndex < text.length) {
-        await new Promise((resolve) => setTimeout(resolve, speed)); // 글자가 씹혀서 await하고 promise를 건거임
-        setDisplayedText((prev) => {
-          if (currentIndex < text.length) {
-            const updatedText = prev + text[currentIndex];
-            currentIndex++;
-            return updatedText;
-          }
-          return prev;
-        });
+      if (isFirstMessage) {
+        setDisplayedText(text); // 첫 번째 메시지는 바로 표시
+      } else {
+        for (let i = 0; i < text.length; i++) {
+          setDisplayedText((prev) => prev + text[i]); // 이후 메시지는 타이핑 효과 적용
+          await new Promise((resolve) => setTimeout(resolve, speed));
+        }
       }
     };
 
-    setDisplayedText("");
     typeText();
 
     return () => {
       setDisplayedText("");
     };
-  }, [text, speed]);
+  }, [text, speed, isFirstMessage]);
 
   return <div>{displayedText}</div>;
 };
+
 
 const ChatbotHG = () => {
   const [messages, setMessages] = useState([]);
@@ -45,7 +42,7 @@ const ChatbotHG = () => {
   const chatEndRef = useRef(null);
   const [isLogin, setIsLogin] = useState(false);
   const [showError, setShowError] = useState(false);
-   const errorTimerRef = useRef(null);
+  const errorTimerRef = useRef(null);
 
   useEffect(() => {
     if(localStorage.getItem('Authorization') !== null){
@@ -196,7 +193,7 @@ const ChatbotHG = () => {
                 )}
                 <div className={`message ${msg.sender}`}>
                   {msg.sender === "bot" && msg.message ? (
-                    <TypingEffect text={msg.message} speed={100} />
+                    <TypingEffect text={msg.message} speed={100} isFirstMessage={index === 0}/>
                   ) : (
                     <div>{msg.message}</div>
                   )}
